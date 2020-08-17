@@ -1,9 +1,9 @@
 import { find, assign } from 'lodash'
 
 const users = [
-    { username: 'admin', password: 'admin', uuid: 'admin-uuid', name: 'Admin' },
-    { username: 'editor', password: 'editor', uuid: 'editor-uuid', name: 'Editor' },
-    { username: 'user1', password: 'user1', uuid: 'user1-uuid', name: 'User1' }
+    { username: 'admin', password: 'admin', uuid: 'admin-uuid', name: 'Admin' ,avatar:"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"},
+    { username: 'editor', password: 'editor', uuid: 'editor-uuid', name: 'Editor' ,avatar:"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"},
+    { username: 'user1', password: 'user1', uuid: 'user1-uuid', name: 'User1' ,avatar:"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"}
 ]
 
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({

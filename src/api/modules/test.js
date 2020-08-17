@@ -6,7 +6,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     DEMO_FETCH(data = {}) {
         //模拟数据
         mock
-            .onAny('/test/testApi')
+            .onAny('/api/testApi')
             .reply(config => {
                 // 您可以这样在拦截请求时获取携带的数据
                 const data = tools.parse(config.data)
@@ -20,8 +20,8 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
             // 接口请求
             //如果这个接口不需要模拟了， 请使用 request 代替 requestForMock
         return request({
-            url: '/test/testApi',
-            method: 'get',
+            url: '/api/testApi',
+            method: 'post',
             data
         })
     }

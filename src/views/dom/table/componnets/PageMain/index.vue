@@ -193,11 +193,13 @@ export default {
         ...oldValue,
         type: val
       })
+      //TODO:
       // 注意 这里并没有把修改后的数据传递出去 如果需要的话请自行修改
     },
     handleSelectionChange (val) {
       this.multipleSelection = val
     },
+    //D2项目逻辑:翻译数据为可读并返回
     downloadDataTranslate (data) {
       return data.map(row => ({
         ...row,
@@ -205,9 +207,11 @@ export default {
         used: row.used ? '已使用' : '未使用'
       }))
     },
+    //$export-导出插件;
     handleDownloadXlsx (data) {
       this.$export.excel({
         title: 'D2Admin 表格示例',
+        //D2项目逻辑:下载表格的列
         columns: this.downloadColumns,
         data: this.downloadDataTranslate(data)
       })

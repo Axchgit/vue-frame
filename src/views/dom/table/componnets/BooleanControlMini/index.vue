@@ -1,3 +1,11 @@
+<!--
+ * @Author: xch
+ * @Date: 2020-08-10 23:45:05
+ * @LastEditTime: 2020-08-17 20:07:45
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\componnets\BooleanControlMini\index.vue
+ * @Description: 改变用户状态的单一按钮
+-->
 <template>
   <span slot="reference">
     <d2-icon
@@ -48,6 +56,7 @@ export default {
         message: '正在发送请求',
         type: 'info'
       })
+      //TODO:下行
       // 请将 setTimeout 修改为您的异步请求
       setTimeout(() => {
         this.disabled = false

@@ -1,6 +1,9 @@
 import axios from 'axios'
 import Adapter from 'axios-mock-adapter'
-import {get } from 'lodash'
+import router from '@/router'
+
+// import { mapActions } from "vuex";
+import { get } from 'lodash'
 import util from '@/libs/util'
 import { errorLog, errorCreate } from './tools'
 
@@ -10,21 +13,21 @@ import { errorLog, errorCreate } from './tools'
 function createService() {
     // 创建一个 axios 实例
     const service = axios.create()
-        // 请求拦截
+    // 请求拦截
     service.interceptors.request.use(
-            config => config,
-            error => {
-                // 发送失败
-                console.log(error)
-                return Promise.reject(error)
-            }
-        )
-        // 响应拦截
+        config => config,
+        error => {
+            // 发送失败
+            console.log(error)
+            return Promise.reject(error)
+        }
+    )
+    // 响应拦截
     service.interceptors.response.use(
         response => {
             // dataAxios 是 axios 返回数据中的 data
             const dataAxios = response.data
-                // 这个状态码是和后端约定的
+            // 这个状态码是和后端约定的
             const { code } = dataAxios
             // 根据 code 进行判断
             if (code === undefined) {
@@ -36,10 +39,30 @@ function createService() {
                     case 0:
                         // [ 示例 ] code === 0 代表没有错误
                         return dataAxios.data
-                    case 'xxx':
-                        // [ 示例 ] 其它和后台约定的 code
-                        errorCreate(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`)
+                    case 200:
+                        // [ 示例 ] code === 0 代表没有错误
+                        return dataAxios.data
+                    case 201:
+                        errorCreate(`[ code: 201 ] ${dataAxios.msg}: ${response.config.url}`)
                         break
+                    case 204:
+                        // [ 示例 ] 其它和后台约定的 code
+                        errorCreate(`[ code: 204 ] ${dataAxios.msg}: ${response.config.url}`)
+                        break
+                    case 304:
+                        //FIXME:token过期后执行注销操作
+                        //验证token过期
+                        // 删除cookie
+                        async function logout() {
+
+                            util.cookies.remove('token')
+                            util.cookies.remove('uuid')
+                            // 清空 vuex 用户信息
+                            await dispatch('d2admin/user/set', {}, { root: true })
+                            // 跳转路由
+                            router.push({ name: 'login' })
+                        }
+                        logout()
                     default:
                         // 不是正确的 code
                         errorCreate(`${dataAxios.msg}: ${response.config.url}`)
@@ -100,14 +123,14 @@ function createService() {
  * @param {Object} service axios 实例
  */
 function createRequestFunction(service) {
-    return function(config) {
+    return function (config) {
         const token = util.cookies.get('token')
         const configDefault = {
             headers: {
                 Authorization: token,
                 'Content-Type': get(config, 'headers.Content-Type', 'application/json')
             },
-            timeout: 5000,
+            timeout: 10000,
             baseURL: process.env.VUE_APP_API,
             data: {}
         }

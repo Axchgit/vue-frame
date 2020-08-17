@@ -1,5 +1,27 @@
 <template>
   <d2-container>
+    <el-dropdown>
+  <el-button type="primary">
+    更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+  </el-button>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<el-dropdown split-button type="primary" >
+  更多菜单
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
   <el-row>
   <el-button>默认按钮</el-button>
 
@@ -86,8 +108,8 @@ export default {
   },
   
   created() {
-          console.log('test success');
-        this.getTableData();
+        //   console.log('test success');
+        // this.getTableData();
           },
   methods: {
       

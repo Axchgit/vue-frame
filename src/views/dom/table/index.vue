@@ -1,18 +1,23 @@
+<!--
+ * @Author: xch
+ * @Date: 2020-08-10 23:45:05
+ * @LastEditTime: 2020-08-17 23:17:05
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\index.vue
+ * @Description: 
+-->
 <template>
   <d2-container>
-    <demo-page-header
-      slot="header"
-      @submit="handleSubmit"
-      ref="header"/>
-    <demo-page-main
-      :table-data="table"
-      :loading="loading"/>
+    <!-- D2项目逻辑:ref为验证表单用值 -->
+    <demo-page-header slot="header" @submit="handleSubmit" ref="header" />
+    <demo-page-main :table-data="table" :loading="loading" />
     <demo-page-footer
       slot="footer"
       :current="page.pageCurrent"
       :size="page.pageSize"
       :total="page.pageTotal"
-      @change="handlePaginationChange"/>
+      @change="handlePaginationChange"
+    />
   </d2-container>
 </template>
 
@@ -33,6 +38,11 @@ export default {
         pageCurrent: 1,
         pageSize: 10,
         pageTotal: 0
+      },
+      paginate:{
+        page: 1,
+        list_rows: 10,
+        total: 0
       }
     }
   },
@@ -51,21 +61,32 @@ export default {
       await this.$nextTick()
       this.$refs.header.handleFormSubmit()
     },
+    //form为查询按钮提交的值
     handleSubmit (form) {
+      //D2项目逻辑:设置按钮样式
       this.loading = true
       this.$notify({
         title: '开始请求模拟表格数据'
       })
+      //知识点:改变请求参数属性名
+      this.paginate = {
+        page: this.page.pageCurrent,
+        list_rows: this.page.pageSize,
+        total: this.page.pageTotal
+      }
       this.$api.DEMO_BUSINESS_TABLE_1_LIST({
+        //根据page内变量值请求数据
         ...form,
-        ...this.page
+        ...this.paginate
       })
         .then(res => {
           this.loading = false
           this.$notify({
             title: '模拟表格数据请求完毕'
           })
-          this.table = res.list
+          //D2项目逻辑:渲染请求过来的表格数据
+          this.table = res.data
+          //D2项目逻辑:数据总条数
           this.page.pageTotal = res.page.total
         })
         .catch(err => {

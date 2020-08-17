@@ -28,7 +28,10 @@
           <d2-header-size/>
           <d2-header-locales/>
           <d2-header-color/>
-          <d2-header-user/>
+          <d2-header-avatar/>
+
+          <!-- <d2-header-user/> -->
+
         </div>
       </div>
       <!-- 下面 主体 -->
@@ -84,7 +87,10 @@ import d2HeaderLocales from './components/header-locales'
 import d2HeaderSearch from './components/header-search'
 import d2HeaderSize from './components/header-size'
 import d2HeaderTheme from './components/header-theme'
+//TODO:注销下行
 import d2HeaderUser from './components/header-user'
+import d2HeaderAvatar from './components/header-avatar'
+
 import d2HeaderLog from './components/header-log'
 import d2HeaderColor from './components/header-color'
 import { mapState, mapGetters, mapActions } from 'vuex'
@@ -103,9 +109,11 @@ export default {
     d2HeaderSearch,
     d2HeaderSize,
     d2HeaderTheme,
+    //TODO:注销下行
     d2HeaderUser,
+    d2HeaderAvatar,
     d2HeaderLog,
-    d2HeaderColor
+    d2HeaderColor,
   },
   data () {
     return {

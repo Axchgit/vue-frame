@@ -38,12 +38,28 @@ module.exports = {
     lintOnSave: true,
     devServer: {
         proxy: {
-            '/test': {
-                target: 'http://localhost/epdemo/public/index.php/test',
+            // '/api': {
+            //     target: 'http://localhost/epdemo/public/index.php/api',
+            //     ws: true,
+            //     changeOrigin: true,
+            //     pathRewrite: {
+            //         '^/api': ''
+            //     }
+            // },
+            '/sendcode': {
+                target: 'http://api.xchtzon.top:8088/login/sendcode',
                 ws: true,
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/test': ''
+                    '^/sendcode': ''
+                }
+            },
+            '/api': {
+                target: 'http://api.xchtzon.top:8088',
+                ws: true,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
                 }
             }
         },

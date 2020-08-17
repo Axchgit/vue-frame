@@ -1,3 +1,11 @@
+<!--
+ * @Author: xch
+ * @Date: 2020-08-10 23:45:05
+ * @LastEditTime: 2020-08-17 20:25:13
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\componnets\PageHeader\index.vue
+ * @Description: 表格头部,负责查询组件
+-->
 <template>
   <el-form
     :inline="true"
@@ -81,6 +89,8 @@ export default {
     handleFormSubmit () {
       this.$refs.form.validate((valid) => {
         if (valid) {
+          //D2项目逻辑:验证是否填入内容
+          //给父组件提交form内容以供查询
           this.$emit('submit', this.form)
         } else {
           this.$notify.error({

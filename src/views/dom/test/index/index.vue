@@ -1,11 +1,13 @@
 <template>
   <d2-container type="ghost">
+
+
   </d2-container>
 </template>
 
 <script>
 import menu from '@/menu/modules/dom-test'
-import { menuHeader, menuAside,adminMenuTest } from '@/menu'
+import { menuHeader, menuAside } from '@/menu'
 import util from '@/libs/util.js'
 
 // import { delete } from 'vue/types/umd'
@@ -13,7 +15,7 @@ import util from '@/libs/util.js'
 export default {
   data () {
     return {
-      adminMenuTest,
+      
       menuHeader,
       menu,
       banner: {
@@ -27,16 +29,18 @@ export default {
     // menuHeader
     // delete menuHeader[0];
     // alert(typeof(menuHeader));
-
-        console.log('test success');
-        this.getTableData();
+     //测试testApi接口
+        // console.log('test success');
+        // this.getUserInfo();
   },
   methods: {
       
       
-    async getTableData() {
+    async getUserInfo() {
       try {
-        const res = await this.$api.DEMO_FETCH(123);
+        const username = "星辰哈"
+        const password = "43rewr343"
+        const res = await this.$api.DEMO_FETCH({ username, password});
         console.log(res);
       } catch (error) {
         console.log(error);
