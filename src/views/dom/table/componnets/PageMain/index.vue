@@ -3,7 +3,7 @@
     <el-form
       :inline="true"
       size="mini">
-      <el-form-item :label="`已选数据下载 [ ${currentTableData.length} ]`">
+      <!-- <el-form-item :label="`已选数据下载 [ ${currentTableData.length} ]`">
         <el-button-group>
           <el-button
             type="primary"
@@ -20,7 +20,7 @@
             csv
           </el-button>
         </el-button-group>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item :label="`已选数据下载 [ ${multipleSelection.length} ]`">
         <el-button-group>
           <el-button
@@ -53,27 +53,34 @@
         type="selection"
         width="55">
       </el-table-column>
+      <el-table-column
+      label="序号"
+        type="index"
+        width="50">
+      </el-table-column>
 
-      <el-table-column label="卡密" :show-overflow-tooltip="true">
+      <el-table-column label="工号"  align="center">
+        <!-- D2项目逻辑:slot-scope可以接收props中的数据(该属性现已废弃,v-slot代替) -->
         <template slot-scope="scope">
-          {{scope.row.key}}
+          {{scope.row.work_num}}
         </template>
       </el-table-column>
 
-      <el-table-column label="面值" width="60" align="center">
+      <el-table-column label="姓名" align="center">
         <template slot-scope="scope">
-          <el-tag
+          <!-- D2项目逻辑:在表格内显示按钮形状 -->
+          <!-- <el-tag
             size="mini"
-            type="success">
-            {{scope.row.value}}
-          </el-tag>
+            type="success"> -->
+            {{scope.row.real_name}}
+          <!-- </el-tag> -->
         </template>
       </el-table-column>
-
-      <el-table-column label="状态" width="50" align="center">
+<!-- 
+      <el-table-column label="权限" width="50" align="center">
         <template slot-scope="scope">
           <boolean-control
-            :value="scope.row.type"
+            :value="scope.row.rule"
             @change="(val) => {
               handleSwitchChange(val, scope.$index)
             }">
@@ -87,60 +94,65 @@
               slot="inactive"/>
           </boolean-control>
         </template>
-      </el-table-column>
+      </el-table-column> -->
 
-      <el-table-column label="状态" width="50" align="center">
+      <el-table-column label="管理权限"  align="center">
         <template slot-scope="scope">
           <boolean-control-mini
-            :value="scope.row.type"
+            :value="scope.row.rule"
             @change="(val) => {
               handleSwitchChange(val, scope.$index)
             }">
             <d2-icon
               name="check-circle"
               style="font-size: 20px; line-height: 32px; color: #67C23A;"
-              slot="active"/>
+              slot="inactive"/>active
             <d2-icon
               name="times-circle"
               style="font-size: 20px; line-height: 32px; color: #F56C6C;"
-              slot="inactive"/>
+              slot="active"/>
           </boolean-control-mini>
         </template>
       </el-table-column>
 
-      <el-table-column label="管理员" width="60">
+      <el-table-column label="性别"  width="50" align="center">
         <template slot-scope="scope">
-          {{scope.row.admin}}
+        {{scope.row.sex ? '男' : '女'}}
+        </template>
+      </el-table-column>
+            <el-table-column label="权限" align="center" >
+        <template slot-scope="scope">
+          {{scope.row.rule}}
         </template>
       </el-table-column>
 
-      <el-table-column label="管理员备注" :show-overflow-tooltip="true">
+      <el-table-column label="账户状态" align="center" >
         <template slot-scope="scope">
-          {{scope.row.adminNote}}
+          {{scope.row.user_review_status}}
         </template>
       </el-table-column>
 
       <el-table-column label="创建时间" width="150" :show-overflow-tooltip="true">
         <template slot-scope="scope">
-          {{scope.row.dateTimeCreat}}
+          {{scope.row.create_time}}
         </template>
       </el-table-column>
-
+<!-- 
       <el-table-column label="使用状态" width="100" align="center">
         <template slot-scope="scope">
           <el-tag
             size="mini"
-            :type="scope.row.used ? 'info' : ''">
-            {{scope.row.used ? '已使用' : '未使用'}}
+            :type="scope.row.sex ? 'info' : ''">
+            {{scope.row.sex ? '已使用' : '未使用'}}
           </el-tag>
         </template>
       </el-table-column>
 
       <el-table-column label="使用时间" width="150" :show-overflow-tooltip="true">
         <template slot-scope="scope">
-          {{scope.row.dateTimeUse}}
+          {{scope.row.update_time}}
         </template>
-      </el-table-column>
+      </el-table-column> -->
 
     </el-table>
   </div>
@@ -149,6 +161,11 @@
 <script>
 import BooleanControl from '../BooleanControl'
 import BooleanControlMini from '../BooleanControlMini'
+// D2项目逻辑:下载插件引用
+import Vue from 'vue'
+import pluginExport from '@d2-projects/vue-table-export'
+Vue.use(pluginExport)
+
 export default {
   components: {
     BooleanControl,
@@ -156,6 +173,7 @@ export default {
   },
   props: {
     tableData: {
+      //默认为空
       default: () => []
     },
     loading: {
@@ -167,14 +185,14 @@ export default {
       currentTableData: [],
       multipleSelection: [],
       downloadColumns: [
-        { label: '卡密', prop: 'key' },
-        { label: '面值', prop: 'value' },
-        { label: '状态', prop: 'type' },
-        { label: '管理员', prop: 'admin' },
-        { label: '管理员备注', prop: 'adminNote' },
-        { label: '创建时间', prop: 'dateTimeCreat' },
-        { label: '使用状态', prop: 'used' },
-        { label: '使用时间', prop: 'dateTimeUse' }
+        { label: '工号', prop: 'work_num' },
+        { label: '姓名', prop: 'real_name' },
+        { label: '权限', prop: 'rule' },
+        { label: '性别', prop: 'sex' },
+        { label: '账户状态', prop: 'user_review_status}' },
+        { label: '创建时间', prop: 'create_time' },
+        // { label: '使用状态', prop: 'used' },
+        // { label: '使用时间', prop: 'dateTimeUse' }
       ]
     }
   },
@@ -203,8 +221,8 @@ export default {
     downloadDataTranslate (data) {
       return data.map(row => ({
         ...row,
-        type: row.type ? '禁用' : '正常',
-        used: row.used ? '已使用' : '未使用'
+        type: row.sex ? '男' : '女',
+        used: row.rule ? '员工' : '超管'
       }))
     },
     //$export-导出插件;
@@ -216,7 +234,7 @@ export default {
         data: this.downloadDataTranslate(data)
       })
         .then(() => {
-          this.$message('导出表格成功')
+          this.$message.success('导出表格成功')
         })
     },
     handleDownloadCsv (data) {

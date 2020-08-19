@@ -45,10 +45,11 @@ const frameIn = [{
             },
             {
                 path: 'table',
-                name: 'table',
+                name: 'tables',
                 component: _import('dom/table'),
 
                 meta: {
+                    cache:true,
                     auth: true,
                     title: '表格示例'
                 }

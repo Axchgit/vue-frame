@@ -1,7 +1,7 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 23:45:05
- * @LastEditTime: 2020-08-17 20:11:10
+ * @LastEditTime: 2020-08-18 18:00:23
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\componnets\PageFooter\index.vue
  * @Description: 
@@ -12,7 +12,7 @@
     background
     :page-size="size"
     :total="total"
-    :page-sizes="[10, 20, 30, 40]"
+    :page-sizes="[5,10, 20, 30, 40]"
     layout="total, sizes, prev, pager, next, jumper"
     style="margin: -10px;"
     @size-change="handleSizeChange"

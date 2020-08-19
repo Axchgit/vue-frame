@@ -1,3 +1,11 @@
+/*
+ * @Author: xch
+ * @Date: 2020-08-11 02:05:35
+ * @LastEditTime: 2020-08-18 17:52:15
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\demo.js
+ * @Description: 请求表格数据
+ */
 import { find, map, random } from 'lodash'
 
 const businessIssue142Db = [
@@ -66,8 +74,8 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
         }))
       }))
     // 接口请求
-    return requestForMock({
-      url: '/demo/business/table/1/fetch',
+    return request({
+      url: '/api/employee',
       method: 'get',
       params
     })
