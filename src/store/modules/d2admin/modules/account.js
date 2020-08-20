@@ -37,66 +37,61 @@ export default {
             await dispatch('load')
         },
         /**
- * @description 登录
- * @param {Object} context
- * @param {Object} payload username {String} 用户账号
- * @param {Object} payload password {String} 密码
- * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
- */
-        //D2项目逻辑:登录3.接收传值
+         * @description 发送登录码
+         * @param {Object} context
+         * @param {Object} payload username {String} 用户账号
+         * @param {Object} payload password {String} 密码
+         * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
+         */
+        async sendLogcode({
+            username = '呵粑粑牛',
+        } = {}) {
+            const res = await api.SYS_SA_SENDCODE({ username })
+            return res
+        },
+        /**
+         * @description 管理员登录
+         * @param {Object} context
+         * @param {Object} payload username {String} 用户账号
+         * @param {Object} payload password {String} 密码
+         * @param {Object} payload logcode {String} 登录码
+         * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
+         */
         async surperAdminLogin({ dispatch }, {
             username = '',
             password = '',
             logcode = ''
         } = {}) {
-            //D2项目逻辑:登录4.接收传值-->传值给Api
-
             const resToken = await api.SYS_SA_LOGIN({ username, password, logcode })
             util.cookies.set('uuid', resToken.uuid)
-            util.cookies.set('token', resToken.token)  
+            util.cookies.set('token', resToken.token)
             const resInfo = await api.SYS_SA_ADMININFO()
-            // 设置 cookie 一定要存 uuid 和 token 两个 cookie
-            // 整个系统依赖这两个数据进行校验和存储
-            // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
-            // token 代表用户当前登录状态 建议在网络请求中携带 token
-            // 如有必要 token 需要定时更新，默认保存一天
-            // util.cookies.set('token', resToken.token)
-            // const resInfo = await api.SYS_USER_INFO(resToken.token)
-            // util.cookies.set('uuid', resToken.uuid)
             // 设置 vuex 用户信息
-            await dispatch('d2admin/user/set', { name: resInfo.username, avatar: resInfo.avatar }, { root: true })
+            await dispatch('d2admin/user/set', { name: resInfo.admin_name, avatar: resInfo.avatar }, { root: true })
             // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
         },
         /**
-* @description 登录
-* @param {Object} context
-* @param {Object} payload username {String} 用户账号
-* @param {Object} payload password {String} 密码
-* @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
-*/
-        async sendLogcode({ dispatch }, {
-            username = '呵粑粑牛',
-            // logcode  = ''
+        * @description 员工登录
+        * @param {Object} context
+        * @param {Object} payload username {String} 用户账号
+        * @param {Object} payload password {String} 密码
+        * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
+        */
+        async empLogin({ dispatch }, {
+            username = '',
+            password = ''
         } = {}) {
-            const res = await api.SYS_SA_SENDCODE({ username })
-            // console.log(username)
-            return res
-            // 设置 cookie 一定要存 uuid 和 token 两个 cookie
-            // 整个系统依赖这两个数据进行校验和存储
-            // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
-            // token 代表用户当前登录状态 建议在网络请求中携带 token
-            // 如有必要 token 需要定时更新，默认保存一天
-            // util.cookies.set('uuid', res.uuid)
-            // util.cookies.set('token', resToken.token)
-            // const resInfo = await api.SYS_USER_INFO(resToken.token)
-            // util.cookies.set('uuid', resToken.uuid)
+            const resToken = await api.SYS_EMP_LOGIN({ username, password })
+            util.cookies.set('uuid', resToken.uuid)
+            util.cookies.set('token', resToken.token)
+            const resInfo = await api.SYS_EMP_EMPINFO()
             // 设置 vuex 用户信息
-            // await dispatch('d2admin/user/set', { name: resToken.username , avatar: resToken.avatar }, { root: true })
+            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar }, { root: true })
             // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
-            // await dispatch('load')
+            await dispatch('load')
         },
         /**
          * @description 注销用户并返回登录页面

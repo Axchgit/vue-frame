@@ -51,10 +51,11 @@ function createService() {
                         break
                     case 304:
                         //FIXME:token过期后执行注销操作
-                        //验证token过期
-                        // 删除cookie
-                        async function logout() {
-
+                        /**
+                         * @description 注销  //验证token过期 删除cookie 
+                         */
+                        async function logout({ dispatch }) {
+                            // 删除cookie
                             util.cookies.remove('token')
                             util.cookies.remove('uuid')
                             // 清空 vuex 用户信息
@@ -62,7 +63,8 @@ function createService() {
                             // 跳转路由
                             router.push({ name: 'login' })
                         }
-                        logout()
+                        logout();
+                        break
                     default:
                         // 不是正确的 code
                         errorCreate(`${dataAxios.msg}: ${response.config.url}`)

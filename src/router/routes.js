@@ -126,6 +126,11 @@ const frameOut = [
         path: '/salogin',
         name: 'salogin',
         component: _import('system/salogin/index')
+    },
+    {
+        path: '/emplogin',
+        name: 'emplogin',
+        component: _import('system/emplogin/index')
     }
 ]
 

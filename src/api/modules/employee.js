@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2020-08-19 17:32:44
+ * @LastEditTime: 2020-08-20 16:38:02
  * @LastEditors: xch
  * @Description: 
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\employee.js
@@ -28,7 +28,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
         // 接口请求
         return request({
             url: '/api/employee/selectByRule/',
-            method: 'get',
+            method: 'post',
             params
         })
     }

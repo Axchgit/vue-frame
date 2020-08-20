@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2020-08-16 19:36:12
+ * @LastEditTime: 2020-08-19 22:14:58
  * @LastEditors: xch
  * @Description: 
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\sys.sa.js
@@ -44,7 +44,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     SYS_SA_SENDCODE(data = {}) {
         // 接口请求
         return request({
-            url: '/api/login/sendCode',
+            url: '/api/login/sendadminCode',
             method: 'post',
             data
         })
@@ -52,7 +52,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     SYS_SA_ADMININFO() {
         // 接口请求
         return request({
-            url: '/api/login',
+            url: '/api/login/selectadmininfo',
             method: 'get'
         })
     }
