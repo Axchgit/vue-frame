@@ -5,9 +5,37 @@ import test from './modules/dom-test'
 const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 
 /**
+ * 在主框架之外显示
+ */
+const frameOut = [
+    // 登录
+    {
+        path: '/login',
+        name: 'login',
+        // meta: {
+        //     // title: '前端日志',
+        //     auth: true
+        // },
+        component: _import('system/login')
+    },
+    {
+        path: '/salogin',
+        name: 'salogin',
+        component: _import('system/salogin/index')
+    },
+    {
+        path: '/emplogin',
+        name: 'emplogin',
+        component: _import('system/emplogin/index')
+    }
+]
+
+
+/**
  * 在主框架内显示
  */
-const frameIn = [{
+const frameIn = [
+    {
         path: '/',
         redirect: { name: 'index' },
         component: layoutHeaderAside,
@@ -21,17 +49,6 @@ const frameIn = [{
                 },
                 component: _import('system/index')
             },
-            //测试
-            // {
-            //     path: 'test',
-            //     name: 'test',
-            //     component: _import('dom/test/index'),
-
-            //     meta: {
-            //         auth: true,
-            //         title: 'test'
-            //     }
-            // },
             //新建示例
             {
                 path: 'index/index',
@@ -49,7 +66,111 @@ const frameIn = [{
                 component: _import('dom/table'),
 
                 meta: {
-                    cache:true,
+                    cache: true,
+                    auth: true,
+                    title: '表格示例'
+                }
+            },
+            // 演示页面
+            {
+                path: 'page1',
+                name: 'page1',
+                meta: {
+                    title: '页面 1',
+                    auth: true
+                },
+                component: _import('demo/page1')
+            },
+            // 系统 前端日志
+            {
+                path: 'log',
+                name: 'log',
+                meta: {
+                    title: '前端日志',
+                    auth: true
+                },
+                component: _import('system/log')
+            },
+            // 刷新页面 必须保留
+            {
+                path: 'refresh',
+                name: 'refresh',
+                hidden: true,
+                component: _import('system/function/refresh')
+            },
+            // 页面重定向 必须保留
+            {
+                path: 'redirect/:route*',
+                name: 'redirect',
+                hidden: true,
+                component: _import('system/function/redirect')
+            }
+
+        ]
+    }
+]
+/**
+ * 错误页面
+ */
+const errorPage = [{
+    path: '*',
+    name: '404',
+    component: _import('system/error/404')
+}]
+
+//不需要权限
+export const constantRoutes = [
+    {
+        path: '/login',
+        name: 'login',
+        // meta: {
+        //     // title: '前端日志',
+        //     auth: true
+        // },
+        component: _import('system/login')
+    },
+    {
+        path: '/salogin',
+        name: 'salogin',
+        component: _import('system/salogin/index')
+    },
+    {
+        path: '/emplogin',
+        name: 'emplogin',
+        component: _import('system/emplogin/index')
+    },
+    {
+        path: '/',
+        redirect: { name: 'index' },
+        component: layoutHeaderAside,
+        children: [
+            // 首页
+            {
+                path: 'index',
+                name: 'index',
+                meta: {
+                    auth: true
+                },
+                component: _import('system/index')
+            },
+            //新建示例
+            {
+                path: 'index/index',
+                name: 'indexs',
+                component: _import('dom/index/index'),
+
+                meta: {
+                    auth: true,
+                    title: '新建示例'
+                }
+            },
+            {
+                path: 'table',
+                name: 'tables',
+                component: _import('dom/table'),
+
+                meta: {
+                    cache: true,
                     auth: true,
                     title: '表格示例'
                 }
@@ -109,46 +230,33 @@ const frameIn = [{
 
         ]
     },
-    test
+
+    // test,
+    // errorPage,
 ]
 
-/**
- * 在主框架之外显示
- */
-const frameOut = [
-    // 登录
-    {
-        path: '/login',
-        name: 'login',
-        component: _import('system/login')
-    },
-    {
-        path: '/salogin',
-        name: 'salogin',
-        component: _import('system/salogin/index')
-    },
-    {
-        path: '/emplogin',
-        name: 'emplogin',
-        component: _import('system/emplogin/index')
-    }
+//动态路由
+export const asyncRoutes = [
+    test,
 ]
-
-/**
- * 错误页面
- */
-const errorPage = [{
-    path: '*',
-    name: '404',
-    component: _import('system/error/404')
-}]
-
 // 导出需要显示菜单的
 export const frameInRoutes = frameIn
-
+//
+export const asyncIn = asyncRoutes
+// 重新组织后导出
+// export default [
+//     ...constantRoutes,
+//     ...asyncRoutes,
+//     // ...frameIn,
+//     // ...frameOut,
+//     ...errorPage
+// ]
 // 重新组织后导出
 export default [
-    ...frameIn,
-    ...frameOut,
-    ...errorPage
+    ...constantRoutes
 ]
+
+//实例化vue的时候只挂载constantRouter
+// export default new Router({
+//     routes: constantRouterMap
+// });

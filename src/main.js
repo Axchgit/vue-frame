@@ -1,3 +1,11 @@
+/*
+ * @Author: xch
+ * @Date: 2020-08-10 17:43:37
+ * @LastEditTime: 2020-08-21 20:58:39
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\main.js
+ * @Description: 
+ */
 // Vue
 import Vue from 'vue'
 import i18n from './i18n'
@@ -22,7 +30,8 @@ new Vue({
     render: h => h(App),
     created() {
         // 处理路由 得到每一级的路由设置
-        this.$store.commit('d2admin/page/init', frameInRoutes)
+        //TODO:这里改成动态路由
+        this.$store.commit('d2admin/page/init', router)
             // 设置顶栏菜单
             //删除菜单测试
             // delete menuHeader[1].children[1]
