@@ -1,6 +1,24 @@
+/*
+ * @Author: xch
+ * @Date: 2020-08-10 17:43:37
+ * @LastEditTime: 2020-08-22 13:48:56
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\index.js
+ * @Description: 
+ */
 import { uniqueId } from 'lodash'
+import util from '@/libs/util.js'
+// import store from '@/store/index'
+// import { mapState, mapActions } from 'vuex'
+
+
 
 import pagsDomTest from './modules/dom-test'
+import adminEmpData from './modules/admin-employee'
+
+import empActivity from './modules/emp-activity'
+
+
 
 /**
  * @description 给菜单数据补充上 path 字段
@@ -17,11 +35,55 @@ function supplementPath(menu) {
     }))
 }
 
-const adminMenu = [pagsDomTest]
+
+const allMenu = [adminEmpData, pagsDomTest, empActivity]
+
+// const computed = {
+//     //D2项目逻辑:主框架显示用户name
+//     ...mapState('d2admin/user', [
+//         'info'
+//     ])
+// }
+
+//     console.log(computed.avatar)
+
+
+/**
+ * 逻辑,比较菜单项的roles与用户的roles,
+ * 如果符合则放到菜单数组中
+ */
+// const res = []
+
+// routes.forEach(route => {
+//   const tmp = { ...route }
+//   if (hasPermission(roles, tmp)) {
+//     if (tmp.children) {
+//       tmp.children = filterAsyncRoutes(tmp.children, roles)
+//     }
+//     res.push(tmp)
+//   }
+// })
+
+// console.log(adminEmpData.roles)
+const addMenu = []
+
+const roles = util.cookies.get('roles')
+console.log(roles)
+allMenu.forEach((menu) => {
+    // console.log(index)
+    if (menu.roles >= roles) {
+        addMenu.push(menu)
+    }
+    if ((menu.roles > 1 && menu.roles < 6) && roles <= 1) {
+        addMenu.pop()
+    }
+})
 
 
 export const menuAside = supplementPath([
-    pagsDomTest
+    // pagsDomTest,
+    // adminEmpData
+    ...addMenu
 
 ])
 
@@ -30,7 +92,7 @@ export const menuHeader = supplementPath([
     // pagsDomTest,
     ,
 
-    adminMenu[0],
+    ...addMenu,
 
 
     {

@@ -13,6 +13,10 @@ export default {
         // 侧边栏折叠动画
         asideTransition: setting.menu.asideTransition
     },
+    // created(){
+    //         // store 赋值
+    //         this.state.header = []
+    // },
     actions: {
         /**
          * 设置侧边栏展开或者收缩

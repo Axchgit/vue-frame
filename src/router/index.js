@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-21 20:52:43
+ * @LastEditTime: 2020-08-21 21:39:27
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\index.js
  * @Description: 
@@ -82,39 +82,39 @@ router.beforeEach(async (to, from, next) => {
       next({ path: 'index' })
       NProgress.done()
     } else {
-      try {
-        // get user info
-        // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-        // const { roles } = await store.dispatch('user/getInfo')
-        // const roles = getters.roles
-        const roles = util.cookies.get('roles')
-        console.log(roles)
+      // try {
+      //   // get user info
+      //   // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
+      //   // const { roles } = await store.dispatch('user/getInfo')
+      //   // const roles = getters.roles
+      //   const roles = util.cookies.get('roles')
+      //   console.log(roles)
 
 
 
 
-        // generae accessible routes map based on roles
-        const accessRoutes = await store.dispatch('vueframe/permission/generateRoutes', roles)
+      //   // generae accessible routes map based on roles
+      //   const accessRoutes = await store.dispatch('vueframe/permission/generateRoutes', roles)
 
-        // dynamically add accessible routes
-        router.addRoutes(accessRoutes)
+      //   // dynamically add accessible routes
+      //   router.addRoutes(accessRoutes)
 
-        // hack method to ensure that addRoutes is complete
-        // set the replace: true, so the navigation will not leave a history record
-        next({ ...to, replace: true })
-      } catch (error) {
-        // remove token and go to login page to re-login
-        // await store.dispatch('user/resetToken')
-        util.cookies.remove('token')
-        errorCreate(error || 'Has Error')
+      //   // hack method to ensure that addRoutes is complete
+      //   // set the replace: true, so the navigation will not leave a history record
+      //   next({ ...to, replace: true })
+      // } catch (error) {
+      //   // remove token and go to login page to re-login
+      //   // await store.dispatch('user/resetToken')
+      //   util.cookies.remove('token')
+      //   errorCreate(error || 'Has Error')
 
 
-        // Message.error(error || 'Has Error')
-        next(`/salogin?redirect=${to.path}`)
-        NProgress.done()
-      }
-      //权限判断
-      // next()
+      //   // Message.error(error || 'Has Error')
+      //   next(`/salogin?redirect=${to.path}`)
+      //   NProgress.done()
+      // }
+      // 权限判断
+      next()
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) {

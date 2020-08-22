@@ -1,33 +1,36 @@
 /*
  * @Author: xch
- * @Date: 2020-08-12 12:37:07
- * @LastEditTime: 2020-08-22 01:25:31
+ * @Date: 2020-08-21 23:09:57
+ * @LastEditTime: 2020-08-22 00:54:04
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\dom-test.js
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-employee.js
  * @Description: 
  */
 export default {
-    path: '/dom/test',
-    title: '测试',
-    roles:5,
+    path: '/admin/employee',
+    title: '员工管理',
+    roles: 1,
     icon: 'flask',
     children: (pre => [
         { path: `${pre}index`, title: '示例', icon: 'home' },
         {
-            title: '表格',
+            title: '个人资料',
             icon: 'table',
             children: [
-                { path: `${pre}table/1`, title: '表格 1' }
+                //D2项目逻辑:menupath是项目所在目录,自动路由到index
+                { path: `${pre}info/select`, title: '查询' },
+                { path: `${pre}info/update`, title: '修改' }
             ]
         },
         {
-            title: 'ISSUES',
+            title: '账户信息',
             icon: 'github',
             children: [
-                { path: `${pre}issues/142`, title: '#142' }
+                { path: `${pre}account/select`, title: '查询' },
+                { path: `${pre}account/update`, title: '修改' }
             ]
         }
-    ])('/dom/test/')
+    ])('/admin/employee/')
 }
 
 // {

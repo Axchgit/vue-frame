@@ -1,9 +1,9 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 23:45:05
- * @LastEditTime: 2020-08-22 15:40:04
+ * @LastEditTime: 2020-08-22 15:38:22
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\index.vue
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\employee\info\select\index.vue
  * @Description: 
 -->
 <template>
@@ -30,7 +30,7 @@
 <script>
 export default {
   // name 值和本页的 $route.name 一致才可以缓存页面
-  name: "tables",
+  name: "emp-info-select",
   components: {
     DemoPageHeader: () => import("./componnets/PageHeader"),
     DemoPageMain: () => import("./componnets/PageMain"),

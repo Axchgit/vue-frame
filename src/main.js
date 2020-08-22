@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-21 20:58:39
+ * @LastEditTime: 2020-08-22 12:02:24
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\main.js
  * @Description: 
@@ -14,6 +14,10 @@ import App from './App'
 import d2Admin from '@/plugin/d2admin'
 // store
 import store from '@/store/index'
+
+
+//浏览器警告
+import 'default-passive-events'
 
 // 菜单和路由设置
 import router from './router'
@@ -30,8 +34,7 @@ new Vue({
     render: h => h(App),
     created() {
         // 处理路由 得到每一级的路由设置
-        //TODO:这里改成动态路由
-        this.$store.commit('d2admin/page/init', router)
+        this.$store.commit('d2admin/page/init', frameInRoutes)
             // 设置顶栏菜单
             //删除菜单测试
             // delete menuHeader[1].children[1]

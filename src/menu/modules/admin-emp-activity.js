@@ -1,33 +1,34 @@
 /*
  * @Author: xch
- * @Date: 2020-08-12 12:37:07
- * @LastEditTime: 2020-08-22 01:25:31
+ * @Date: 2020-08-21 23:09:57
+ * @LastEditTime: 2020-08-21 23:53:11
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\dom-test.js
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-emp-activity.js
  * @Description: 
  */
 export default {
-    path: '/dom/test',
-    title: '测试',
-    roles:5,
+    path: '/admin/emp-activity',
+    title: '人员动态管理',
     icon: 'flask',
     children: (pre => [
         { path: `${pre}index`, title: '示例', icon: 'home' },
         {
-            title: '表格',
+            title: '请假审核',
             icon: 'table',
             children: [
-                { path: `${pre}table/1`, title: '表格 1' }
+                { path: `${pre}leave/wait`, title: '待审核' },
+                { path: `${pre}leave/adopt`, title: '已通过' }
             ]
         },
         {
-            title: 'ISSUES',
+            title: '离职审核',
             icon: 'github',
             children: [
-                { path: `${pre}issues/142`, title: '#142' }
+                { path: `${pre}quit/wait`, title: '待审核' },
+                { path: `${pre}quit/adopt`, title: '已通过' }
             ]
         }
-    ])('/dom/test/')
+    ])('/admin/emp_activity/')
 }
 
 // {

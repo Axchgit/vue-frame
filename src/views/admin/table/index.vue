@@ -1,9 +1,9 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 23:45:05
- * @LastEditTime: 2020-08-19 18:32:04
+ * @LastEditTime: 2020-08-22 15:38:55
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\index.vue
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\table\index.vue
  * @Description: 
 -->
 <template>
@@ -145,7 +145,7 @@ export default {
       };
 
       this.$api
-        .EMPLOYEE_SELECT_RULE({
+        .EMPLOYEE_SELECT_ROLE({
           ...form,
           ...this.paginate,
         })
