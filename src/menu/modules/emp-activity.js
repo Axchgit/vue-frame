@@ -1,33 +1,36 @@
 /*
  * @Author: xch
- * @Date: 2020-08-12 12:37:07
- * @LastEditTime: 2020-08-22 01:25:31
+ * @Date: 2020-08-21 23:09:57
+ * @LastEditTime: 2020-08-22 12:56:11
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\dom-test.js
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\emp-activity.js
  * @Description: 
  */
 export default {
-    path: '/dom/test',
-    title: '测试',
-    roles:5,
+    path: '/employee/activity',
+    title: '人员动态申请',
+    roles: 5,
     icon: 'flask',
     children: (pre => [
         { path: `${pre}index`, title: '示例', icon: 'home' },
         {
-            title: '表格',
+            title: '请假',
             icon: 'table',
             children: [
-                { path: `${pre}table/1`, title: '表格 1' }
+                //D2项目逻辑:menupath是项目所在目录,自动路由到index
+                { path: `${pre}leave/submit`, title: '提交申请' },
+                { path: `${pre}leave/history`, title: '申请历史' }
             ]
         },
         {
-            title: 'ISSUES',
+            title: '离职申请',
             icon: 'github',
             children: [
-                { path: `${pre}issues/142`, title: '#142' }
+                { path: `${pre}quit/submit`, title: '提交申请' },
+                { path: `${pre}quit/history`, title: '申请结果' }
             ]
         }
-    ])('/dom/test/')
+    ])('/admin/employee/')
 }
 
 // {

@@ -1,3 +1,11 @@
+/*
+ * @Author: xch
+ * @Date: 2020-08-10 17:43:37
+ * @LastEditTime: 2020-08-21 21:39:27
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\index.js
+ * @Description: 
+ */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -11,13 +19,22 @@ import util from '@/libs/util.js'
 // 路由数据
 import routes from './routes'
 
+    // import { constantRoutes , errorPage } from './routes'
+
+
+// import getters from '@/store/getters'
+
+import { errorLog, errorCreate } from './tools'
+
+
+
 // fix vue-router NavigationDuplicated
 const VueRouterPush = VueRouter.prototype.push
-VueRouter.prototype.push = function push (location) {
+VueRouter.prototype.push = function push(location) {
   return VueRouterPush.call(this, location).catch(err => err)
 }
 const VueRouterReplace = VueRouter.prototype.replace
-VueRouter.prototype.replace = function replace (location) {
+VueRouter.prototype.replace = function replace(location) {
   return VueRouterReplace.call(this, location).catch(err => err)
 }
 
@@ -27,6 +44,9 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes
 })
+
+const whiteList = ['/login', '/salogin', '/emplogin', '/auth-redirect'] // no redirect whitelist
+
 
 /**
  * 路由拦截
@@ -41,31 +61,79 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start()
   // 关闭搜索面板
   store.commit('d2admin/search/set', false)
+  // 这里暂时将cookie里是否存有token作为验证是否登录的条件
+  // 请根据自身业务需要修改
+  /**
+   * 业务逻辑:
+   * 首先判断token是否存在,
+   * 存在则判断是否在登录页面,
+   *    在则跳转到主页面
+   *    不在则直接跳转(后续要判断权限)
+   * 不存在则判断是否在白名单whiteList中,
+   *    在,则直接跳转
+   *    不在,则重定向到登录界面
+   */
+  const token = util.cookies.get('token')
+
   // 验证当前路由所有的匹配中是否需要有登录验证的
-  if (to.matched.some(r => r.meta.auth)) {
-    // 这里暂时将cookie里是否存有token作为验证是否登录的条件
-    // 请根据自身业务需要修改
-    const token = util.cookies.get('token')
-    if (token && token !== 'undefined') {
+  // if (to.matched.some(r => r.meta.auth)) {
+  if (token && token !== 'undefined') {
+    if (to.path === '/salogin') {
+      next({ path: 'index' })
+      NProgress.done()
+    } else {
+      // try {
+      //   // get user info
+      //   // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
+      //   // const { roles } = await store.dispatch('user/getInfo')
+      //   // const roles = getters.roles
+      //   const roles = util.cookies.get('roles')
+      //   console.log(roles)
+
+
+
+
+      //   // generae accessible routes map based on roles
+      //   const accessRoutes = await store.dispatch('vueframe/permission/generateRoutes', roles)
+
+      //   // dynamically add accessible routes
+      //   router.addRoutes(accessRoutes)
+
+      //   // hack method to ensure that addRoutes is complete
+      //   // set the replace: true, so the navigation will not leave a history record
+      //   next({ ...to, replace: true })
+      // } catch (error) {
+      //   // remove token and go to login page to re-login
+      //   // await store.dispatch('user/resetToken')
+      //   util.cookies.remove('token')
+      //   errorCreate(error || 'Has Error')
+
+
+      //   // Message.error(error || 'Has Error')
+      //   next(`/salogin?redirect=${to.path}`)
+      //   NProgress.done()
+      // }
+      // 权限判断
+      next()
+    }
+  } else {
+    if (whiteList.indexOf(to.path) !== -1) {
+      // 不需要身份校验 直接通过
       next()
     } else {
       // 没有登录的时候跳转到登录界面
       // 携带上登陆成功之后需要跳转的页面完整路径
       next({
-        name: 'login',
+        name: 'salogin',
         query: {
           redirect: to.fullPath
         }
       })
-      // https://github.com/d2-projects/d2-admin/issues/138
       NProgress.done()
     }
-  } else {
-    // 不需要身份校验 直接通过
-    next()
+
   }
 })
-
 router.afterEach(to => {
   // 进度条
   NProgress.done()

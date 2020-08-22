@@ -30,6 +30,7 @@ export default {
             util.cookies.set('token', resToken.token)
             // const resInfo = await api.SYS_USER_INFO(resToken.token)
             util.cookies.set('uuid', resToken.uuid)
+
             // 设置 vuex 用户信息
             await dispatch('d2admin/user/set', { name: resToken.username, avatar: resToken.avatar }, { root: true })
             // await dispatch('d2admin/user/set', { name: resToken.username }, { root: true })
@@ -66,8 +67,10 @@ export default {
             util.cookies.set('uuid', resToken.uuid)
             util.cookies.set('token', resToken.token)
             const resInfo = await api.SYS_SA_ADMININFO()
+            util.cookies.set('roles', resInfo.role)
+
             // 设置 vuex 用户信息
-            await dispatch('d2admin/user/set', { name: resInfo.admin_name, avatar: resInfo.avatar }, { root: true })
+            await dispatch('d2admin/user/set', { name: resInfo.admin_name, avatar: resInfo.avatar, roles: resInfo.role }, { root: true })
             // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
@@ -86,9 +89,15 @@ export default {
             const resToken = await api.SYS_EMP_LOGIN({ username, password })
             util.cookies.set('uuid', resToken.uuid)
             util.cookies.set('token', resToken.token)
+            // util.cookies.set('roles', resToken.role)
+
             const resInfo = await api.SYS_EMP_EMPINFO()
+
+            util.cookies.set('roles', resInfo.role)
+            console.log('cookies中存储的roles是' + resInfo.role)
+
             // 设置 vuex 用户信息
-            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar }, { root: true })
+            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, roles: resInfo.role }, { root: true })
             // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
@@ -106,8 +115,11 @@ export default {
                 // 删除cookie
                 util.cookies.remove('token')
                 util.cookies.remove('uuid')
+                util.cookies.remove('roles')
                 // 清空 vuex 用户信息
                 await dispatch('d2admin/user/set', {}, { root: true })
+                // commit('d2admin/menu/headerSet', [])
+
                 // 跳转路由
                 router.push({ name: 'login' })
             }
