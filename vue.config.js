@@ -27,10 +27,10 @@ const cdn = {
 
 // 多页配置，默认未开启，如需要请参考 https://cli.vuejs.org/zh/config/#pages
 const pages = undefined
-    // const pages = {
-    //   index: './src/main.js',
-    //   subpage: './src/subpage.js'
-    // }
+// const pages = {
+//   index: './src/main.js',
+//   subpage: './src/subpage.js'
+// }
 
 module.exports = {
     // 根据你的实际情况更改这里
@@ -46,14 +46,14 @@ module.exports = {
             //         '^/api': ''
             //     }
             // },
-            '/sendcode': {
-                target: 'http://api.xchtzon.top:8088/login/sendcode',
-                ws: true,
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/sendcode': ''
-                }
-            },
+            // '/sendcode': {
+            //     target: 'http://api.xchtzon.top:8088/login/sendcode',
+            //     ws: true,
+            //     changeOrigin: true,
+            //     pathRewrite: {
+            //         '^/sendcode': ''
+            //     }
+            // },
             '/api': {
                 target: 'http://api.xchtzon.top:8088',
                 ws: true,
@@ -78,6 +78,10 @@ module.exports = {
     configureWebpack: config => {
         const configNew = {}
         if (process.env.NODE_ENV === 'production') {
+            config.optimization.minimizer[0].options.terserOptions.compress.warnings = false
+            config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+            config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
+            config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log']
             configNew.externals = externals
             configNew.plugins = [
                 // gzip
@@ -116,7 +120,7 @@ module.exports = {
         config.plugins
             .delete('prefetch')
             .delete('preload')
-            // 解决 cli3 热更新失效 https://github.com/vuejs/vue-cli/issues/1559
+        // 解决 cli3 热更新失效 https://github.com/vuejs/vue-cli/issues/1559
         config.resolve
             .symlinks(true)
         config
@@ -130,7 +134,7 @@ module.exports = {
                 changeSelector: forElementUI.changeSelector
             }])
         config
-        // 开发环境 sourcemap 不包含列信息
+            // 开发环境 sourcemap 不包含列信息
             .when(process.env.NODE_ENV === 'development',
                 config => config.devtool('cheap-source-map')
             )
@@ -141,14 +145,14 @@ module.exports = {
                     propName: process.env.VUE_APP_SOURCE_VIEWER_PROP_NAME
                 })
             )
-            // markdown
+        // markdown
         config.module
             .rule('md')
             .test(/\.md$/)
             .use('text-loader')
             .loader('text-loader')
             .end()
-            // svg
+        // svg
         const svgRule = config.module.rule('svg')
         svgRule.uses.clear()
         svgRule
@@ -161,17 +165,17 @@ module.exports = {
                 symbolId: 'd2-[name]'
             })
             .end()
-            // image exclude
+        // image exclude
         const imagesRule = config.module.rule('images')
         imagesRule
             .test(/\.(png|jpe?g|gif|webp|svg)(\?.*)?$/)
             .exclude
             .add(resolve('src/assets/svg-icons/icons'))
             .end()
-            // 重新设置 alias
+        // 重新设置 alias
         config.resolve.alias
             .set('@api', resolve('src/api'))
-            // 分析工具
+        // 分析工具
         if (process.env.npm_config_report) {
             config
                 .plugin('webpack-bundle-analyzer')

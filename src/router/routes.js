@@ -27,7 +27,7 @@ const frameIn = [
             {
                 path: 'table',
                 name: 'tables',
-                component: _import('dom/table'),
+                component: _import('admin/employee/info/select'),
 
                 meta: {
                     cache: true,
@@ -99,12 +99,12 @@ const frameIn = [
  */
 const frameOut = [
     // 登录
-    {
-        path: '/login',
-        name: 'login',
+    // {
+    //     path: '/login',
+    //     name: 'login',
 
-        component: _import('system/login')
-    },
+    //     component: _import('system/login')
+    // },
     {
         path: '/salogin',
         name: 'salogin',
@@ -114,7 +114,18 @@ const frameOut = [
         path: '/emplogin',
         name: 'emplogin',
         component: _import('system/emplogin/index')
-    }
+    },
+    {
+        path: '/emprecover',
+        name: 'emprecover',
+        component: _import('system/recover/index')
+    },
+    {
+        path: '/empactivate',
+        name: 'empactivate',
+        component: _import('system/activate/index')
+    },
+
 ]
 
 /**

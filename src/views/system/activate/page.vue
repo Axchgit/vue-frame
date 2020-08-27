@@ -13,91 +13,65 @@
         </div>
         <div class="page-login--content-main" flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo-lac.png" />
+          <!-- <img class="page-login--logo" src="./image/logo-lac.png" /> -->
           <!-- form -->
           <div class="page-login--form">
-            <el-card shadow="never">
+            <el-card shadow="always">
               <el-form
-                ref="loginForm"
+                ref="activateForm"
                 label-position="top"
                 :rules="rules"
-                :model="formLogin"
+                :model="formActivate"
                 size="default"
               >
-                <!-- ref="loginUsername" :rules="codeRules" -->
-                <el-form-item prop="username">
-                  <el-input type="text" v-model="formLogin.username" placeholder="用户名">
-                    <i slot="prepend" class="fa fa-user-circle-o"></i>
-                  </el-input>
+                <el-form-item label="昵称" prop="nick_name">
+                  <el-input v-model="formActivate.nick_name"></el-input>
                 </el-form-item>
-                <el-form-item prop="password">
-                  <el-input type="password" v-model="formLogin.password" placeholder="密码">
-                    <i slot="prepend" class="fa fa-keyboard-o"></i>
-                  </el-input>
+                <el-form-item label="自我介绍" prop="profile">
+                  <el-input type="textarea" v-model="formActivate.profile"></el-input>
                 </el-form-item>
-                <el-form-item prop="code">
-                  <el-input id="sendcode" type="text" v-model="formLogin.code" placeholder="登陆码">
-                    <i slot="prepend" class="fa fa-envelope-square"></i>
-                    <template  slot="append">
-                      <div @click="sendCode">
-                      <span >{{timer ? timer : '发送' }}</span>
-
-                      </div>
-                      <!-- <el-button size="default"  @click="sendCode" v-model = "timer" plain class="button-send">{{timer ? timer : '发送' }}</el-button> -->
-                    </template>
-                  </el-input>
-
-                  <!-- 知识点:控制元素属性 :disabled="isAble" -->
+                <el-form-item label="密码" prop="pass">
+                  <el-input type="password" v-model="formActivate.pass" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-button size="default" @click="submit" type="success" class="button-login">登录</el-button>
+                <el-form-item label="确认密码" prop="checkPass">
+                  <el-input type="password" v-model="formActivate.checkPass" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-button size="default" @click="submit" type="primary" class="button-login">提交</el-button>
               </el-form>
             </el-card>
-            <!-- <p class="page-login--options" flex="main:justify cross:center">
-              <span>
-                <d2-icon name="question-circle" />忘记密码
-              </span>
-              <span>注册用户</span>
-            </p>-->
-            <!-- quick login -->
-            <!-- <el-button
-              class="page-login--quick"
-              size="default"
-              type="info"
-              @click="dialogVisible = true"
-            >快速选择用户（测试功能）</el-button>-->
           </div>
         </div>
-        <div class="page-login--content-footer">
-          <!-- <p class="page-login--content-footer-locales">
-            <a
-              v-for="language in $languages"
-              :key="language.value"
-              @click="onChangeLocale(language.value)"
-            >{{ language.label }}</a>
-          </p>
-          <p class="page-login--content-footer-copyright">
-            Copyright
-            <d2-icon name="copyright" />2018 D2 Projects 开源组织出品
-            <a href="https://github.com/FairyEver">@FairyEver</a>
-          </p>
-          <p class="page-login--content-footer-options">
-            <a href="#">帮助</a>
-            <a href="#">隐私</a>
-            <a href="#">条款</a>
-          </p>-->
-        </div>
+        <div class="page-login--content-footer"></div>
       </div>
     </div>
-    <!-- <el-dialog title="快速选择用户" :visible.sync="dialogVisible" width="400px">
-      <el-row :gutter="10" style="margin: -20px 0px -10px 0px;">
-        <el-col v-for="(user, index) in users" :key="index" :span="8">
-          <div class="page-login--quick-user" @click="handleUserBtnClick(user)">
-            <d2-icon name="user-circle-o" />
-            <span>{{user.name}}</span>
-          </div>
-        </el-col>
-      </el-row>
-    </el-dialog>-->
+    <el-dialog
+      :title="dialog_title"
+      :visible.sync="dialogActivateVisible"
+      :before-close="closeDialogActivateVisible"
+    >
+      <el-form :model="formCode" :rules="dialogRule" ref="checkCode">
+        <el-form-item prop="work_num" label="工号">
+          <el-input type="text" v-model="formCode.work_num" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item prop="email" label="邮箱">
+          <el-input type="text" v-model="formCode.email"></el-input>
+        </el-form-item>
+        <el-form-item prop="code">
+          <el-input id="sendcode" type="text" v-model="formCode.code" placeholder="验证码">
+            <!-- <i slot="prepend" class="fa fa-envelope-square"></i> -->
+            <template slot="append">
+              <div @click="sendCode">
+                <span>{{timer ? timer : '发送' }}</span>
+              </div>
+            </template>
+          </el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogActivateVisible = false">取 消</el-button>
+        <el-button type="primary" @click="checkInfo('formCode')">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -105,52 +79,83 @@
 import dayjs from "dayjs";
 import { mapActions } from "vuex";
 import localeMixin from "@/locales/mixin.js";
+import api from "@/api";
 export default {
   mixins: [localeMixin],
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.formActivate.checkPass !== "") {
+          this.$refs.activateForm.validateField("checkPass");
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.formActivate.pass) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
     return {
-      isAble: false,
+      uuid: "",
+      //   isAble: false,
       timeRan: null,
       timeInterval: null,
       time: dayjs().format("HH:mm:ss"),
-      // 快速选择用户
-      dialogVisible: false,
+      dialogActivateVisible: false,
       timer: 0,
       // 表单
-      formLogin: {
-        username: "",
-        password: "",
+      formActivate: {
+        nick_name: "",
+        pass: "",
+        checkPass: "",
+        // avatar: "",
+        profile: "",
+      },
+      //模态框
+      dialog_title: "",
+      formCode: {
+        work_num: "",
+        email: "",
         code: "",
       },
       // 表单校验
       rules: {
-        username: [
+        nick_name: [
           {
             required: true,
-            message: "请输入用户名",
+            message: "请输入昵称",
             trigger: "blur",
           },
         ],
-        password: [
+        pass: [{ validator: validatePass, trigger: "blur" }],
+        checkPass: [{ validator: validatePass2, trigger: "blur" }],
+      },
+      dialogRule: {
+        work_num: [
           {
             required: true,
-            message: "请输入密码",
+            message: "请输入工号",
+            trigger: "blur",
+          },
+        ],
+        email: [
+          {
+            required: true,
+            message: "请输入邮箱",
             trigger: "blur",
           },
         ],
         code: [
           {
             required: true,
-            message: "请输入登录码",
-            trigger: "blur",
-          },
-        ],
-      },
-      codeRules: {
-        username: [
-          {
-            required: true,
-            message: "请输入用户名",
+            message: "请输入验证码",
             trigger: "blur",
           },
         ],
@@ -166,58 +171,98 @@ export default {
     clearInterval(this.timeInterval);
   },
   methods: {
-    //D2项目逻辑:登录2.接收用户输入并传给store/modules...
-    ...mapActions("d2admin/account", ["surperAdminLogin"]),
-    ...mapActions("d2admin/account", ["sendLogcode"]),
-
+    //验证提交信息
+    // ...mapActions("d2admin/account", ["empRecover"]),
+    //发送验证码
+    async sendActivateCode({ work_num = "", email = "" } = {}) {
+      const res = await api.SYS_EMP_SENDACTIVATECODE({ work_num, email });
+      return res;
+    },
+    //验证信息,返回用户标识
+    async createEmpAccount({
+      uuid = "",
+      code = "",
+      nick_name = "",
+      password = "",
+      profile = "",
+    } = {}) {
+      const res = await api.SYS_EMP_CREATE({
+        uuid,
+        code,
+        nick_name,
+        password,
+        profile,
+      });
+      return res;
+    },
+    //更新密码
+    // async updatePassword({ uuid = "", password = "" } = {}) {
+    //   const res = await api.EMPACCOUNT_UPDATE_PASSWORD({ uuid, password });
+    //   return res;
+    // },
+    //背景时间显示
     refreshTime() {
       this.time = dayjs().format("HH:mm:ss");
     },
-    // /**
-    //  * @description 接收选择一个用户快速登录的事件
-    //  * @param {Object} user 用户信息
-    //  */
-    // handleUserBtnClick(user) {
-    //   this.formLogin.username = user.username;
-    //   this.formLogin.password = user.password;
-    //   this.submit();
-    // },
     /**
      * @description 提交表单
      */
-    // 提交登录信息
     submit() {
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.activateForm.validate((valid) => {
         if (valid) {
-          // 登录
-          // 注意 这里的演示没有传验证码
-          // 具体需要传递的数据请自行修改代码
-          //D2项目逻辑:登录1.提交用户输入
-          this.surperAdminLogin({
-            username: this.formLogin.username,
-            password: this.formLogin.password,
-            logcode: this.formLogin.code,
-          }).then(() => {
-            // 重定向对象不存在则返回顶层路径
-            this.$router.replace(this.$route.query.redirect || "/");
-          });
+          this.dialogActivateVisible = true;
+          this.dialog_title = "身份认证";
         } else {
-          // 登录表单校验失败
           this.$message.error("表单校验失败，请检查");
         }
       });
     },
+    //提交验证信息
+    checkInfo(formCode) {
+      this.$refs.checkCode.validate((valid) => {
+        if (valid) {
+          this.createEmpAccount({
+            uuid: this.uuid,
+            code:this.formCode.code,
+            nick_name: this.formActivate.nick_name,
+            password: this.formActivate.pass,
+            profile: this.formActivate.profile,
+          }).then((res) => {
+            if (res === undefined) {
+              this.$message.error("失败");
+            } else {
+              this.$message.success("成功");
+              // 重定向对象不存在则返回顶层路径
+              this.$router.replace(this.$route.query.redirect || "/");
+            }
+          });
+        }
+      });
+    },
+    //取消模态框,清空数据
+    closeDialogActivateVisible() {
+      this.$confirm("确认关闭？")
+        .then(_ => {          
+          // this.$refs.formCode.resetFields(); //element封装的方法,清空模态框的值
+          // this.dialog_title = ""; //初始化title的值
+          // this.formCode = {
+          //   //初始化formCode中的值
+          //   work_num: "",
+          //   email: "",
+          //   code: "",
+          // };
+          this.dialogActivateVisible = false;
+        })
+        .catch(_ => {
+          // this.dialogActivateVisible = true;
+        });
+    },
 
+    //验证码
     sendCode() {
-      // console.log(this.formLogin.username)
-      // console.log(this.$refs.loginForm.validate(formLogin.username))
-
-      // this.$refs.loginUsername.validate((valid) => {
-      //   if (valid) {
-      // console.log(this.$refs.loginUsername);
-      if(!this.formLogin.username){
-        this.$message.error("请输入用户名");
-        return false; 
+      if (!this.formCode.work_num || !this.formCode.email) {
+        this.$message.error("请输入信息");
+        return false;
       }
       if (this.timer > 0) {
         //知识点:上方弹出提示行
@@ -225,8 +270,8 @@ export default {
         //知识点:阻止函数继续向下执行
         return false;
       }
-      this.timer = 5;
-      this.isAble = true;
+      this.timer = 60;
+      //   this.isAble = true;
       //知识点:计时器
       this.timeRan = setInterval(() => {
         this.timer--;
@@ -234,32 +279,43 @@ export default {
       setTimeout(() => {
         clearInterval(this.timeRan);
         this.timer = null;
-        // this.isAble = false;
-      }, 5000);
-      this.sendLogcode({
-        username: this.formLogin.username,
+      }, 60000);
+      this.sendActivateCode({
+        work_num: this.formCode.work_num,
+        email: this.formCode.email,
       }).then((res) => {
-        // console.log('chengong 123');
-        console.log(res);
-        if(res === undefined){
-          this.$message.error('失败');
-        }else{
+        if (res === undefined) {
+          this.$message.error("失败");
+        } else {
+          this.uuid = res.uuid;
           this.$message.success("发送成功");
-  
         }
       });
-      //   } else {
-      //     console.log("失败");
-      //     // 登录表单校验失败
-      //     this.$message.error("表单校验失败，请检查");
-      //   }
-      // });
     },
   },
 };
 </script>
 
 <style lang="scss">
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+  position: absolute;
+  height: 40px;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
 .page-login {
   @extend %unable-select;
   $backgroundColor: #f0f2f5;
@@ -277,7 +333,7 @@ export default {
   }
   // 时间
   .page-login--layer-time {
-    font-size: 24em;
+    font-size: 22em;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.03);
     overflow: hidden;
@@ -314,18 +370,10 @@ export default {
     // 登录按钮
     .button-login {
       width: 100%;
+      // width: 100%;
       background: #4d3d3e;
       border: #4d3d3e;
     }
-    // #sendcode{
-    //   width: 30%;
-    // }
-    // 发送按钮
-    // .button-send {
-    // width: 20%;
-    // background: #4D3D3E;
-    // border:#4D3D3E;
-    // }
     // 输入框左边的图表区域缩窄
     .el-input-group__prepend {
       padding: 0px 14px;

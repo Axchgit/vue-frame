@@ -1,10 +1,22 @@
+<!--
+ * @Author: xch
+ * @Date: 2020-08-10 17:43:37
+ * @LastEditTime: 2020-08-23 21:14:05
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\system\index\page.vue
+ * @Description: 
+-->
 <template>
   <d2-container class="page">
     <d2-page-cover>
-      <d2-icon-svg class="logo" name="d2-admin" />
+            <!-- <img src="./image/icon.png" style="width: 500px;" /> -->
+
+      <d2-icon-svg class="logo" name="logo" style="width:625px;height:167px"/>
+      <br>
+      <br>
       <template slot="footer">
         <div class="btn-group">
-          <span class="btn-group__btn" @click="$open('https://github.com/d2-projects')">开源组织</span> |
+          <!-- <span class="btn-group__btn" @click="$open('https://github.com/d2-projects')">开源组织</span> |
           <span class="btn-group__btn" @click="$open('https://d2.pub/zh/doc/d2-admin')">文档</span> |
           <span
             class="btn-group__btn"
@@ -13,16 +25,16 @@
           <span
             class="btn-group__btn"
             @click="$open('https://juejin.im/user/57a48b632e958a006691b946/posts')"
-          >掘金</span> |
+          >掘金</span> | -->
           <el-popover :width="172" trigger="hover">
-            <p class="d2-mt-0 d2-mb-10">今日前端</p>
-            <img src="./image/qr@2x.png" style="width: 172px;" />
+            <!-- <p class="d2-mt-0 d2-mb-10">今日前端</p> -->
+            <img src="./image/weixin_light.png" style="width: 172px;" />
             <span slot="reference" class="btn-group__btn btn-group__btn--link">
-              <d2-icon name="weixin" />微信公众号
+              <d2-icon name="weixin" />开发者微信
             </span>
-            <p
+            <!-- <p
               style="font-size: 12px; margin-top: 0px; margin-bottom: 0px;"
-            >官方公众号，主要推送前端技术类文章、框架资源、学习教程，以及 D2 系列项目更新信息</p>
+            >官方公众号，主要推送前端技术类文章、框架资源、学习教程，以及 D2 系列项目更新信息</p> -->
           </el-popover>
         </div>
         <!-- <d2-badge/> -->

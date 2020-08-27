@@ -99,7 +99,7 @@
       <el-table-column label="管理权限"  align="center">
         <template slot-scope="scope">
           <boolean-control-mini
-            :value="scope.row.rule"
+            :value="scope.row.role"
             @change="(val) => {
               handleSwitchChange(val, scope.$index)
             }">
@@ -122,7 +122,7 @@
       </el-table-column>
             <el-table-column label="权限" align="center" >
         <template slot-scope="scope">
-          {{scope.row.rule}}
+          {{scope.row.role}}
         </template>
       </el-table-column>
 
@@ -187,7 +187,7 @@ export default {
       downloadColumns: [
         { label: '工号', prop: 'work_num' },
         { label: '姓名', prop: 'real_name' },
-        { label: '权限', prop: 'rule' },
+        { label: '权限', prop: 'role' },
         { label: '性别', prop: 'sex' },
         { label: '账户状态', prop: 'user_review_status}' },
         { label: '创建时间', prop: 'create_time' },
@@ -228,7 +228,7 @@ export default {
     //$export-导出插件;
     handleDownloadXlsx (data) {
       this.$export.excel({
-        title: 'D2Admin 表格示例',
+        title: 'vue-frame表格示例',
         //D2项目逻辑:下载表格的列
         columns: this.downloadColumns,
         data: this.downloadDataTranslate(data)
@@ -239,7 +239,7 @@ export default {
     },
     handleDownloadCsv (data) {
       this.$export.csv({
-        title: 'D2Admin 表格示例',
+        title: 'vue-frame表格示例',
         columns: this.downloadColumns,
         data: this.downloadDataTranslate(data)
       })

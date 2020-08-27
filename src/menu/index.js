@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-22 13:48:56
+ * @LastEditTime: 2020-08-23 15:49:18
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\index.js
  * @Description: 
@@ -36,7 +36,6 @@ function supplementPath(menu) {
 }
 
 
-const allMenu = [adminEmpData, pagsDomTest, empActivity]
 
 // const computed = {
 //     //D2项目逻辑:主框架显示用户name
@@ -65,10 +64,25 @@ const allMenu = [adminEmpData, pagsDomTest, empActivity]
 // })
 
 // console.log(adminEmpData.roles)
+
+//所有的需要判断权限的菜单项
+const allMenu = [adminEmpData, pagsDomTest, empActivity]
+//加入到顶部菜单数组中的菜单项
 const addMenu = []
 
+
+// var fontUrl = ''
+// console.log(process.env.VUE_APP_AJAX_URL+'api')
+// console.log(fontUrl+'api')
+
+/**
+ * 项目逻辑:
+ * 如果用户权限符合菜单项权限,则添加到菜单数组中
+ *      如果菜单项的权限要求在(1,6)之间(员工独有),且当前用户为管理员权限
+ *      则不添加到菜单数组中
+ */
 const roles = util.cookies.get('roles')
-console.log(roles)
+// console.log(roles)
 allMenu.forEach((menu) => {
     // console.log(index)
     if (menu.roles >= roles) {

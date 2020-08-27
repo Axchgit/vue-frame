@@ -1,9 +1,9 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 23:45:05
- * @LastEditTime: 2020-08-19 18:07:36
+ * @LastEditTime: 2020-08-23 21:26:49
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\componnets\PageHeader\index.vue
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\employee\info\select\componnets\PageHeader\index.vue
  * @Description: 表格头部,负责查询组件
 -->
 <template>
@@ -59,14 +59,14 @@
 <el-form-item>
   <el-form
     :model="form"
-    :rules="rule_rules"
-    ref="rule_form"
+    :rules="role"
+    ref="role_form"
     size="mini"
     style="margin-bottom: -18px;">
 
-    <el-form-item  label="权限" prop="rule">
+    <el-form-item  label="权限" prop="role">
       <el-input
-        v-model="form.rule"
+        v-model="form.role"
         placeholder="权限等级"
         style="width: 120px;"/>
     </el-form-item>
@@ -74,7 +74,7 @@
     <el-form-item>
       <el-button
         type="primary"
-        @click="handleFormSubmitRule">
+        @click="handleFormSubmitRole">
         <d2-icon name="searchbyrule"/>
         查询
       </el-button>
@@ -110,15 +110,15 @@ export default {
       form: {
         work_num: '',
         real_name: '',
-        rule: ''
+        role: ''
         // note: ''
       },
       // rules: {
       //   work_num: [{ required: true, message: '请选择一个状态', trigger: 'change' }],
       //   real_name: [{ required: true, message: '请输入用户', trigger: 'change' }]
       // },
-      rule_rules: {
-        rule: [{ required: true, message: '请填入权限', trigger: 'change' }],
+      role: {
+        role: [{ required: true, message: '请填入权限', trigger: 'change' }],
         // real_name: [{ required: true, message: '请输入用户', trigger: 'change' }]
       }
     }
@@ -143,13 +143,13 @@ export default {
         // }
       // })
     },
-    handleFormSubmitRule () {
-      this.$refs.rule_form.validate((valid) => {
+    handleFormSubmitRole () {
+      this.$refs.role_form.validate((valid) => {
         if (valid) {
           //D2项目逻辑:验证是否填入内容
           //给父组件提交form内容以供查询
-          console.log(this.form.rule)
-          this.$emit('submitRule', {rule:this.form.rule})
+          console.log(this.form.role)
+          this.$emit('submitRule', {role:this.form.role})
         } else {
           this.$notify.error({
             title: '错误',

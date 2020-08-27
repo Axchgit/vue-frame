@@ -13,97 +13,63 @@
         </div>
         <div class="page-login--content-main" flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo-lac.png" />
+          <!-- <img class="page-login--logo" src="./image/logo-lac.png" /> -->
           <!-- form -->
           <div class="page-login--form">
-            <el-card shadow="never">
+            <el-card shadow="always">
               <el-form
-                ref="loginForm"
+                ref="recoverForm"
                 label-position="top"
                 :rules="rules"
-                :model="formLogin"
+                :model="formRecover"
                 size="default"
               >
-                <el-form-item prop="username">
-                  <el-input type="text" v-model="formLogin.username" placeholder="用户名">
-                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                <el-form-item prop="work_num">
+                  <el-input type="text" v-model="formRecover.work_num" placeholder="工号">
+                    <!-- <i slot="prepend" class="fa fa-user-circle-o"></i> -->
                   </el-input>
                 </el-form-item>
-                <el-form-item prop="password">
-                  <el-input type="password" v-model="formLogin.password" placeholder="密码">
-                    <i slot="prepend" class="fa fa-keyboard-o"></i>
+                <el-form-item prop="email">
+                  <el-input type="text" v-model="formRecover.email" placeholder="邮箱">
+                    <!-- <i slot="prepend" class="fa fa-keyboard-o"></i> -->
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="code">
-                  <!-- <el-input type="text" v-model="formLogin.code" placeholder="验证码"> -->
-                  <!-- <template style="width:70px" slot="append"></template> -->
-                  <!-- </el-input> -->
-                  <!-- <div style="width:70px;height:38px;" @click="refreshCode">
-                    <Sidentify :identifyCode="identifyCode"></Sidentify>
-                  </div>-->
-                  <el-row>
-                    <el-col :span="14">
-                      <div class="grid-content bg-purple">
-                        <el-input type="text" v-model="formLogin.code" placeholder="验证码">
-                          <!-- <template style="width:70px" slot="append"></template> -->
-                        </el-input>
+                  <el-input id="sendcode" type="text" v-model="formRecover.code" placeholder="验证码">
+                    <!-- <i slot="prepend" class="fa fa-envelope-square"></i> -->
+                    <template slot="append">
+                      <div @click="sendCode">
+                        <span>{{timer ? timer : '发送' }}</span>
                       </div>
-                    </el-col>
-                    <el-col :span="10">
-                      <div @click="refreshCode" class="grid-content bg-purple-light">
-                        <div>
-                          <Sidentify :identifyCode="identifyCode"></Sidentify>
-                        </div>
-                      </div>
-                    </el-col>
-                  </el-row>
+                    </template>
+                  </el-input>
                 </el-form-item>
-                <el-button size="default" @click="submit" type="primary" class="button-login">登录</el-button>
+                <el-button size="default" @click="submit" type="primary" class="button-login">提交</el-button>
               </el-form>
             </el-card>
-            <p class="page-login--options" flex="main:justify cross:center">
-             
-                <router-link to='emprecover'> <span><d2-icon name="question-circle" />忘记密码</span></router-link>
-                <!-- <a href="emprecover">
-                  <d2-icon name="question-circle" />忘记密码
-                </a> -->
-                <router-link to='empactivate'> <span><d2-icon name="" />激活账户</span></router-link>
-              
-              <!-- <span>注册用户</span> -->
-            </p>
           </div>
         </div>
-        <div class="page-login--content-footer">
-          <p class="page-login--content-footer-locales">
-            <a href="http://www.beian.miit.gov.cn" target="_blank">互联网ICP备案：桂ICP备20004453号</a>
-            <a
-              target="_blank"
-              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45128102451350"
-              style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"
-            >
-              <img src="./image/备案图标.png" style="float:left;" />
-              桂公网安备 45128102451350号
-            </a>
-
-            <!-- <a
-              v-for="language in $languages"
-              :key="language.value"
-              @click="onChangeLocale(language.value)"
-            >{{ language.label }}</a>-->
-          </p>
-          <p class="page-login--content-footer-copyright">
-            Copyright
-            <d2-icon name="copyright" />2020 邢晨浩
-            <a href="https://github.com/Axchgit">@Axchgit</a>
-          </p>
-          <!-- <p class="page-login--content-footer-options">
-            <a href="#">帮助</a>
-            <a href="#">隐私</a>
-            <a href="#">条款</a>
-          </p>-->
-        </div>
+        <div class="page-login--content-footer"></div>
       </div>
     </div>
+    <el-dialog
+      :title="re_title"
+      :visible.sync="dialogRecoverVisible"
+      @close="closeDialogRecoverVisible"
+    >
+      <el-form :model="recover" :rules="re_rules" ref="password">
+        <el-form-item prop='password1' label="新密码">
+          <el-input type="password" v-model="recover.password1" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item prop='password2' label="确认密码">
+          <el-input type="password" v-model="recover.password2"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogRecoverVisible = false">取 消</el-button>
+        <el-button type="primary" @click="savePWForm('recover')">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -111,33 +77,43 @@
 import dayjs from "dayjs";
 import { mapActions } from "vuex";
 import localeMixin from "@/locales/mixin.js";
+import api from "@/api";
 export default {
   mixins: [localeMixin],
   data() {
     return {
-      identifyCode: " ",
-      identifyCodeKey: "qwertyuiopasdfghjklzxcvbnm1234567890",
+      uuid: "",
+      //   isAble: false,
+      timeRan: null,
       timeInterval: null,
       time: dayjs().format("HH:mm:ss"),
+      dialogRecoverVisible: false,
+      timer: 0,
       // 表单
-      formLogin: {
-        username: "",
-        password: "",
+      formRecover: {
+        work_num: "",
+        email: "",
         code: "",
+      },
+      //模态框
+      re_title: "",
+      recover: {
+        password1: "",
+        password2: "",
       },
       // 表单校验
       rules: {
-        username: [
+        work_num: [
           {
             required: true,
-            message: "请输入用户名",
+            message: "请输入工号",
             trigger: "blur",
           },
         ],
-        password: [
+        email: [
           {
             required: true,
-            message: "请输入密码",
+            message: "请输入邮箱",
             trigger: "blur",
           },
         ],
@@ -145,6 +121,22 @@ export default {
           {
             required: true,
             message: "请输入验证码",
+            trigger: "blur",
+          },
+        ],
+      },
+      re_rules: {
+        password1: [
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: "blur",
+          },
+        ],
+        password2: [
+          {
+            required: true,
+            message: "请输入确认密码",
             trigger: "blur",
           },
         ],
@@ -160,72 +152,124 @@ export default {
     clearInterval(this.timeInterval);
   },
   methods: {
-    /**验证码**** */
-    randomNum(min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
+    //验证提交信息
+    ...mapActions("d2admin/account", ["empRecover"]),
+    //发送验证码
+    async sendRecoverCode({ work_num = "", email = "" } = {}) {
+      const res = await api.SYS_EMP_SENDRECOVERCODE({ work_num, email });
+      return res;
     },
-    refreshCode() {
-      //刷新验证码前清空之前的
-      this.identifyCode = "";
-      this.makeCode(4);
-      console.log("当前验证码==" + this.identifyCode);
+    //验证信息,返回用户标识
+    async empRecover({ work_num = "", email = "", code = "" } = {}) {
+      const res = await api.SYS_EMP_RECOVER({ work_num, email, code });
+      return res;
     },
-    makeCode(l) {
-      for (let i = 0; i < l; i++) {
-        this.identifyCode += this.identifyCodeKey[
-          this.randomNum(0, this.identifyCodeKey.length)
-        ];
-      }
+    //更新密码
+    async updatePassword({ uuid = "", password = "" } = {}) {
+      const res = await api.EMPACCOUNT_UPDATE_PASSWORD({ uuid, password });
+      return res;
     },
-    ...mapActions("d2admin/account", ["empLogin"]),
+    //背景时间显示
     refreshTime() {
       this.time = dayjs().format("HH:mm:ss");
     },
     /**
      * @description 提交表单
      */
-    // 提交登录信息
     submit() {
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.recoverForm.validate((valid) => {
         if (valid) {
-          if (this.formLogin.code == this.identifyCode) {
-            this.$message.success("表单验证成功,正在登录");
+          // 登录
+          this.empRecover({
+            work_num: this.formRecover.work_num,
+            email: this.formRecover.email,
+            code: this.formRecover.code,
+            // uuid:this.uuid
+          }).then((res) => {
+            console.log(res.uuid);
+            this.uuid = res.uuid;
 
-            // 登录
-            this.empLogin({
-              username: this.formLogin.username,
-              password: this.formLogin.password,
-            }).then(() => {
-              // 重定向对象不存在则返回顶层路径
-              this.$router.replace(this.$route.query.redirect || "/");
-            });
-          } else {
-            this.$message.error("验证码错误,请重新输入");
-          }
+            this.dialogRecoverVisible = true;
+            this.re_title = "修改密码";
+            // 重定向对象不存在则返回顶层路径
+            // this.$router.replace(this.$route.query.redirect || "/");
+          });
         } else {
           // 登录表单校验失败
           this.$message.error("表单校验失败，请检查");
         }
-        this.refreshCode();
       });
     },
-  },
-  created() {
-    this.refreshCode();
+    //提交修改后的密码
+    savePWForm(password) {
+      this.$refs.password.validate((valid) => {
+        if (valid) {
+          if (this.recover.password1 === this.recover.password2) {
+            this.updatePassword({
+              uuid: this.uuid,
+              password: this.recover.password1,
+            }).then((res) => {
+              if (res === undefined) {
+                this.$message.error("失败");
+              } else {
+                this.$message.success("成功");
+                // 重定向对象不存在则返回顶层路径
+                this.$router.replace(this.$route.query.redirect || "/");
+              }
+            });
+          }
+        }
+      });
+    },
+    //取消模态框,清空数据
+    closeDialogRecoverVisible() {
+      this.$refs.password.resetFields(); //element封装的方法,清空模态框的值
+      this.title = ""; //初始化title的值
+      this.recover = {
+        //初始化addForm中的值
+        password1: "",
+        password2: "",
+      };
+    },
+
+    //验证码
+    sendCode() {
+      if (!this.formRecover.work_num || !this.formRecover.email) {
+        this.$message.error("请输入验证信息");
+        return false;
+      }
+      if (this.timer > 0) {
+        //知识点:上方弹出提示行
+        this.$message.error(this.timer + "s后再发送");
+        //知识点:阻止函数继续向下执行
+        return false;
+      }
+      this.timer = 60;
+      //   this.isAble = true;
+      //知识点:计时器
+      this.timeRan = setInterval(() => {
+        this.timer--;
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(this.timeRan);
+        this.timer = null;
+      }, 5000);
+      this.sendRecoverCode({
+        work_num: this.formRecover.work_num,
+        email: this.formRecover.email,
+      }).then((res) => {
+        if (res === undefined) {
+          this.$message.error("失败");
+        } else {
+          this.$message.success("发送成功");
+        }
+      });
+    },
   },
 };
 </script>
 
 <style lang="scss">
-.el-row {
-  margin-bottom: 20px;
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-.el-col {
-  border-radius: 4px;
-}
 .bg-purple-dark {
   background: #99a9bf;
 }
@@ -262,7 +306,7 @@ export default {
   }
   // 时间
   .page-login--layer-time {
-    font-size: 24em;
+    font-size: 22em;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.03);
     overflow: hidden;

@@ -1,13 +1,12 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2020-08-19 22:14:58
+ * @LastEditTime: 2020-08-24 01:41:48
  * @LastEditors: xch
  * @Description: 
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\sys.sa.js
  */
 import { find, assign } from 'lodash'
-
 const users = [
     { username: 'surperadmin', password: 'admin', uuid: 'admin-uuid', name: 'surperAdmin', avatar: "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif" },
 ]
@@ -31,7 +30,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
             })
         // 接口请求
         return request({
-            url: '/api/login/checkAdminLogin',
+            url: process.env.VUE_APP_AJAX_URL+'login/checkAdminLogin',
             method: 'post',
             data
         })
@@ -44,7 +43,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     SYS_SA_SENDCODE(data = {}) {
         // 接口请求
         return request({
-            url: '/api/login/sendadminCode',
+            url: process.env.VUE_APP_AJAX_URL+'/login/sendadminCode',
             method: 'post',
             data
         })
@@ -52,7 +51,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     SYS_SA_ADMININFO() {
         // 接口请求
         return request({
-            url: '/api/login/selectadmininfo',
+            url: process.env.VUE_APP_AJAX_URL+'/login/selectadmininfo',
             method: 'get'
         })
     }

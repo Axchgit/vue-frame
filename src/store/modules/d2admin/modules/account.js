@@ -1,4 +1,6 @@
 import { Message, MessageBox } from 'element-ui'
+import NProgress from 'nprogress'
+
 import util from '@/libs/util.js'
 import router from '@/router'
 import api from '@/api'
@@ -63,6 +65,8 @@ export default {
             password = '',
             logcode = ''
         } = {}) {
+            NProgress.start()
+
             const resToken = await api.SYS_SA_LOGIN({ username, password, logcode })
             util.cookies.set('uuid', resToken.uuid)
             util.cookies.set('token', resToken.token)
@@ -74,6 +78,8 @@ export default {
             // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
+            NProgress.done()
+
         },
         /**
         * @description 员工登录
@@ -86,21 +92,25 @@ export default {
             username = '',
             password = ''
         } = {}) {
+            NProgress.start()
+
             const resToken = await api.SYS_EMP_LOGIN({ username, password })
             util.cookies.set('uuid', resToken.uuid)
             util.cookies.set('token', resToken.token)
-            // util.cookies.set('roles', resToken.role)
+            util.cookies.set('roles', resToken.role)
 
             const resInfo = await api.SYS_EMP_EMPINFO()
 
-            util.cookies.set('roles', resInfo.role)
-            console.log('cookies中存储的roles是' + resInfo.role)
+            // util.cookies.set('roles', resInfo.role)
+            console.log('cookies中存储的roles是' + resToken.role)
 
             // 设置 vuex 用户信息
-            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, roles: resInfo.role }, { root: true })
+            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, roles: resToken.role }, { root: true })
             // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
+            NProgress.done()
+
         },
         /**
          * @description 注销用户并返回登录页面
@@ -121,7 +131,7 @@ export default {
                 // commit('d2admin/menu/headerSet', [])
 
                 // 跳转路由
-                router.push({ name: 'login' })
+                router.push({ name: 'emplogin' })
             }
             // 判断是否需要确认
             if (confirm) {

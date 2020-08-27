@@ -1,24 +1,26 @@
-[D2Admin](https://github.com/d2-projects/d2-admin) is a fully open source and free enterprise back-end product front-end integration solution, using the latest front-end technology stack, javascript files loading of local first screen less than 60kb, has prepared most of the project preparations, and with a lot of sample code to help the management system agile development.
+[D2Admin](https://github.com/d2-projects/d2-admin) 是一个完全 **开源免费** 的企业中后台产品前端集成方案，使用最新的前端技术栈，小于 60kb 的本地首屏 js 加载，已经做好大部分项目前期准备工作，并且带有大量示例代码，助力管理系统敏捷开发。
 
-[中文](https://github.com/d2-projects/d2-admin-start-kit/blob/master/README.zh.md) | **English**
+**中文** | [English](https://github.com/d2-projects/d2-admin-start-kit)
 
-## Preview
+## 预览
 
 ![Deploy preview](https://github.com/d2-projects/d2-admin-start-kit/workflows/Deploy%20preview/badge.svg)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/08ff8c93-f0a8-497a-a081-440b31fb3aa4/deploy-status)](https://app.netlify.com/sites/d2-admin-start-kit/deploys)
 
-The following access addresses are built and deployed by the latest master branch code at the same time. The access effect is completely consistent. Please select the appropriate access link according to your own network situation.
+下列访问地址均由最新的 master 分支代码同时构建部署，访问效果完全一致，请根据自身网络情况选择合适的访问链接。
 
-| server | link | server |
+| 位置 | 链接 | 部署位置 |
 | --- | --- | --- |
-| d2.pub | [d2.pub/d2-admin-start-kit/preview](https://d2.pub/d2-admin-start-kit/preview) | China server |
-| cdn.d2.pub | [cdn.d2.pub/d2-admin-start-kit/preview](https://cdn.d2.pub/d2-admin-start-kit/preview) | qiniu CDN |
-| github | [d2-projects.github.io/d2-admin-start-kit](https://d2-projects.github.io/d2-admin-start-kit) | GitHub pages |
-| netlify | [d2-admin-start-kit.netlify.com](https://d2-admin-start-kit.netlify.com) | Netlify CDN |
+| d2.pub | [preview](https://d2.pub/d2-admin-start-kit/preview) | 中国服务器 |
+| cdn.d2.pub | [preview](https://cdn.d2.pub/d2-admin-start-kit/preview) | 七牛云 CDN |
+| github | [preview](https://d2-projects.github.io/d2-admin-start-kit) | GitHub pages |
+| netlify | [preview](https://d2-admin-start-kit.netlify.com) | Netlify CDN |
 
-## Other synchronous repositories
+## 其它同步仓库
 
-| type | link |
+| 位置 | 链接 |
 | --- | --- |
-| gitee | [https://gitee.com/d2-projects/d2-admin](https://gitee.com/d2-projects/d2-admin) |
-| coding | [https://d2-projects.coding.net/p/d2-projects/d/d2-admin/git](https://d2-projects.coding.net/p/d2-projects/d/d2-admin/git) |
+| 码云 | [https://gitee.com/d2-projects/d2-admin-start-kit](https://gitee.com/d2-projects/d2-admin-start-kit) |
+| coding | [https://d2-projects.coding.net/p/d2-projects/d/d2-admin-start-kit/git](https://d2-projects.coding.net/p/d2-projects/d/d2-admin-start-kit/git) |
+
+> 如果您在 github 仓库下载很慢，可以尝试使用我们的码云仓库克隆代码

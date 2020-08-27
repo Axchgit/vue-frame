@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-21 21:39:27
+ * @LastEditTime: 2020-08-23 21:48:35
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\index.js
  * @Description: 
@@ -45,7 +45,7 @@ const router = new VueRouter({
   routes
 })
 
-const whiteList = ['/login', '/salogin', '/emplogin', '/auth-redirect'] // no redirect whitelist
+const whiteList = ['/login', '/salogin', '/emplogin', '/auth-redirect','/emprecover','/empactivate'] // no redirect whitelist
 
 
 /**
@@ -78,7 +78,7 @@ router.beforeEach(async (to, from, next) => {
   // 验证当前路由所有的匹配中是否需要有登录验证的
   // if (to.matched.some(r => r.meta.auth)) {
   if (token && token !== 'undefined') {
-    if (to.path === '/salogin') {
+    if (to.path === '/salogin' || to.path === '/emplogin' ) {
       next({ path: 'index' })
       NProgress.done()
     } else {
@@ -124,7 +124,7 @@ router.beforeEach(async (to, from, next) => {
       // 没有登录的时候跳转到登录界面
       // 携带上登陆成功之后需要跳转的页面完整路径
       next({
-        name: 'salogin',
+        name: 'emplogin',
         query: {
           redirect: to.fullPath
         }

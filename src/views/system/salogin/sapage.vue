@@ -146,15 +146,6 @@ export default {
           },
         ],
       },
-      codeRules: {
-        username: [
-          {
-            required: true,
-            message: "请输入用户名",
-            trigger: "blur",
-          },
-        ],
-      },
     };
   },
   mounted() {
@@ -225,7 +216,7 @@ export default {
         //知识点:阻止函数继续向下执行
         return false;
       }
-      this.timer = 5;
+      this.timer = 60;
       this.isAble = true;
       //知识点:计时器
       this.timeRan = setInterval(() => {
@@ -240,7 +231,7 @@ export default {
         username: this.formLogin.username,
       }).then((res) => {
         // console.log('chengong 123');
-        console.log(res);
+        // console.log(res);
         if(res === undefined){
           this.$message.error('失败');
         }else{

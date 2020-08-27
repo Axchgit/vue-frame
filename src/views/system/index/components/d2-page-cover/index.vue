@@ -1,13 +1,21 @@
+<!--
+ * @Author: xch
+ * @Date: 2020-08-10 17:43:37
+ * @LastEditTime: 2020-08-23 16:54:32
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\system\index\components\d2-page-cover\index.vue
+ * @Description: 
+-->
 <template>
   <div class="d2-page-cover">
     <div class="d2-page-cover__logo">
       <slot/>
     </div>
-    <p class="d2-page-cover__title">D2 Admin {{$version}}</p>
-    <p class="d2-page-cover__sub-title">优雅的中后台集成方案</p>
-    <p class="d2-page-cover__build-time">FINAL BUILD TIME {{$buildTime}}</p>
+    <p class="d2-page-cover__title">vue-frame {{$version}}</p>
+    <p class="d2-page-cover__sub-title">学创网络科技有限公司后台管理系统-测试项目</p>
+    <p class="d2-page-cover__build-time">最后编辑时间 {{$buildTime}}</p>
     <slot name="footer"/>
-    <a target="blank" href="https://github.com/d2-projects/d2-admin">
+    <a target="blank" href="https://github.com/Axchgit/vue-frame">
       <img
         style="position: absolute; top: 0; right: 0; border: 0; width: 150px;"
         src="./image/darkblue@2x.png"
