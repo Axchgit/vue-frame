@@ -1,12 +1,12 @@
 <template>
   <svg aria-hidden="true">
-    <use :xlink:href="icon"></use>
+    <use :xlink:href="icon"/>
   </svg>
 </template>
 
 <script>
 export default {
-  name: 'd2-icon-svg',
+  name: 'D2IconSvg',
   props: {
     name: {
       type: String,
@@ -14,7 +14,7 @@ export default {
     }
   },
   computed: {
-    icon () {
+    icon() {
       return `#d2-${this.name}`
     }
   }

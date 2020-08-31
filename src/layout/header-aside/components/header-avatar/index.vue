@@ -52,11 +52,11 @@ import { mapState, mapActions } from 'vuex'
 export default {
 
   computed: {
-    //D2项目逻辑:主框架显示用户name
+    // D2项目逻辑:主框架显示用户name
     ...mapState('d2admin/user', [
       'info'
     ])
-  },    
+  },
   methods: {
     ...mapActions('d2admin/account', [
       'logout'
@@ -64,7 +64,7 @@ export default {
     /**
      * @description 登出
      */
-    logOff () {
+    logOff() {
       this.logout({
         confirm: true
       })
@@ -77,7 +77,7 @@ export default {
 a {
   text-decoration: none;
 }
- 
+
 .router-link-active {
   text-decoration: none;
 }
@@ -145,7 +145,7 @@ a {
         position: relative;
 //VueAdmin项目逻辑:用户头像样式
         .user-avatar {
-            
+
           cursor: pointer;
           width: 40px;
           height: 40px;

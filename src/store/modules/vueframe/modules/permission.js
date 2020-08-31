@@ -4,11 +4,10 @@
  * @LastEditTime: 2020-08-21 20:29:39
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\store\modules\vueframe\modules\permission.js
- * @Description: 
+ * @Description:
  */
 // import { asyncRoutes, constantRoutes } from '@/router'
 import { asyncRoutes, constantRoutes } from '@/router/routes'
-
 
 /**
  * Use meta.role to determine if the current user has permission

@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-08-23 16:54:32
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\system\index\components\d2-page-cover\index.vue
- * @Description: 
+ * @Description:
 -->
 <template>
   <div class="d2-page-cover">

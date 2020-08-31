@@ -30,7 +30,7 @@ export default {
       default: false
     }
   },
-  data () {
+  data() {
     return {
       currentValue: false,
       disabled: false
@@ -38,25 +38,25 @@ export default {
   },
   watch: {
     value: {
-      handler (val) {
+      handler(val) {
         this.currentValue = val
       },
       immediate: true
     }
   },
   methods: {
-    handleClick () {
+    handleClick() {
       // 这里先赋值是为了和 TypeControl 使用一样的 handleChange
       this.currentValue = !this.currentValue
       this.handleChange(this.currentValue)
     },
-    handleChange (val) {
+    handleChange(val) {
       this.disabled = true
       this.$message({
         message: '正在发送请求',
         type: 'info'
       })
-      //TODO:下行
+      // TODO:下行
       // 请将 setTimeout 修改为您的异步请求
       setTimeout(() => {
         this.disabled = false

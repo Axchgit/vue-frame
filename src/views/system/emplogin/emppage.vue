@@ -2,7 +2,7 @@
   <div class="page-login">
     <div class="page-login--layer page-login--layer-area">
       <ul class="circles">
-        <li v-for="n in 10" :key="n"></li>
+        <li v-for="n in 10" :key="n"/>
       </ul>
     </div>
     <div class="page-login--layer page-login--layer-time" flex="main:center cross:center">{{time}}</div>
@@ -13,7 +13,7 @@
         </div>
         <div class="page-login--content-main" flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo-lac.png" />
+          <img class="page-login--logo" src="./image/logo-lac.png" >
           <!-- form -->
           <div class="page-login--form">
             <el-card shadow="never">
@@ -26,12 +26,12 @@
               >
                 <el-form-item prop="username">
                   <el-input type="text" v-model="formLogin.username" placeholder="用户名">
-                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                    <i slot="prepend" class="fa fa-user-circle-o"/>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="password">
                   <el-input type="password" v-model="formLogin.password" placeholder="密码">
-                    <i slot="prepend" class="fa fa-keyboard-o"></i>
+                    <i slot="prepend" class="fa fa-keyboard-o"/>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="code">
@@ -52,7 +52,7 @@
                     <el-col :span="10">
                       <div @click="refreshCode" class="grid-content bg-purple-light">
                         <div>
-                          <Sidentify :identifyCode="identifyCode"></Sidentify>
+                          <Sidentify :identifyCode="identifyCode"/>
                         </div>
                       </div>
                     </el-col>
@@ -62,13 +62,13 @@
               </el-form>
             </el-card>
             <p class="page-login--options" flex="main:justify cross:center">
-             
+
                 <router-link to='emprecover'> <span><d2-icon name="question-circle" />忘记密码</span></router-link>
                 <!-- <a href="emprecover">
                   <d2-icon name="question-circle" />忘记密码
                 </a> -->
                 <router-link to='empactivate'> <span><d2-icon name="" />激活账户</span></router-link>
-              
+
               <!-- <span>注册用户</span> -->
             </p>
           </div>
@@ -81,7 +81,7 @@
               href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45128102451350"
               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"
             >
-              <img src="./image/备案图标.png" style="float:left;" />
+              <img src="./image/beian@2x.png" style="float:left;" >
               桂公网安备 45128102451350号
             </a>
 
@@ -108,78 +108,78 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
-import { mapActions } from "vuex";
-import localeMixin from "@/locales/mixin.js";
+import dayjs from 'dayjs'
+import { mapActions } from 'vuex'
+import localeMixin from '@/locales/mixin.js'
 export default {
   mixins: [localeMixin],
   data() {
     return {
-      identifyCode: " ",
-      identifyCodeKey: "qwertyuiopasdfghjklzxcvbnm1234567890",
+      identifyCode: ' ',
+      identifyCodeKey: 'qwertyuiopasdfghjklzxcvbnm1234567890',
       timeInterval: null,
-      time: dayjs().format("HH:mm:ss"),
+      time: dayjs().format('HH:mm:ss'),
       // 表单
       formLogin: {
-        username: "",
-        password: "",
-        code: "",
+        username: '',
+        password: '',
+        code: ''
       },
       // 表单校验
       rules: {
         username: [
           {
             required: true,
-            message: "请输入用户名",
-            trigger: "blur",
-          },
+            message: '请输入用户名',
+            trigger: 'blur'
+          }
         ],
         password: [
           {
             required: true,
-            message: "请输入密码",
-            trigger: "blur",
-          },
+            message: '请输入密码',
+            trigger: 'blur'
+          }
         ],
         code: [
           {
             required: true,
-            message: "请输入验证码",
-            trigger: "blur",
-          },
-        ],
-      },
-    };
+            message: '请输入验证码',
+            trigger: 'blur'
+          }
+        ]
+      }
+    }
   },
   mounted() {
     this.timeInterval = setInterval(() => {
-      this.refreshTime();
-    }, 1000);
+      this.refreshTime()
+    }, 1000)
   },
   beforeDestroy() {
-    clearInterval(this.timeInterval);
+    clearInterval(this.timeInterval)
   },
   methods: {
-    /**验证码**** */
+    /** 验证码**** */
     randomNum(min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
+      return Math.floor(Math.random() * (max - min) + min)
     },
     refreshCode() {
-      //刷新验证码前清空之前的
-      this.identifyCode = "";
-      this.makeCode(4);
-      console.log("当前验证码==" + this.identifyCode);
+      // 刷新验证码前清空之前的
+      this.identifyCode = ''
+      this.makeCode(4)
+      console.log('当前验证码==' + this.identifyCode)
     },
     makeCode(l) {
       for (let i = 0; i < l; i++) {
         this.identifyCode += this.identifyCodeKey[
           this.randomNum(0, this.identifyCodeKey.length)
-        ];
+        ]
       }
     },
-    ...mapActions("d2admin/account", ["empLogin"]),
+    ...mapActions('d2admin/account', ['empLogin']),
     refreshTime() {
-      this.time = dayjs().format("HH:mm:ss");
+      this.time = dayjs().format('HH:mm:ss')
     },
     /**
      * @description 提交表单
@@ -188,32 +188,32 @@ export default {
     submit() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          if (this.formLogin.code == this.identifyCode) {
-            this.$message.success("表单验证成功,正在登录");
+          if (this.formLogin.code === this.identifyCode) {
+            this.$message.success('表单验证成功,正在登录')
 
             // 登录
             this.empLogin({
               username: this.formLogin.username,
-              password: this.formLogin.password,
+              password: this.formLogin.password
             }).then(() => {
               // 重定向对象不存在则返回顶层路径
-              this.$router.replace(this.$route.query.redirect || "/");
-            });
+              this.$router.replace(this.$route.query.redirect || '/')
+            })
           } else {
-            this.$message.error("验证码错误,请重新输入");
+            this.$message.error('验证码错误,请重新输入')
           }
         } else {
           // 登录表单校验失败
-          this.$message.error("表单校验失败，请检查");
+          this.$message.error('表单校验失败，请检查')
         }
-        this.refreshCode();
-      });
-    },
+        this.refreshCode()
+      })
+    }
   },
   created() {
-    this.refreshCode();
-  },
-};
+    this.refreshCode()
+  }
+}
 </script>
 
 <style lang="scss">

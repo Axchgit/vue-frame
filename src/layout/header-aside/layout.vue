@@ -1,7 +1,7 @@
 <template>
   <div class="d2-layout-header-aside-group" :style="styleLayoutMainGroup" :class="{grayMode: grayActive}">
     <!-- 半透明遮罩 -->
-    <div class="d2-layout-header-aside-mask"></div>
+    <div class="d2-layout-header-aside-mask"/>
     <!-- 主体内容 -->
     <div class="d2-layout-header-aside-content" flex="dir:top">
       <!-- 顶栏 -->
@@ -87,7 +87,7 @@ import d2HeaderLocales from './components/header-locales'
 import d2HeaderSearch from './components/header-search'
 import d2HeaderSize from './components/header-size'
 import d2HeaderTheme from './components/header-theme'
-//TODO:注销下行
+// TODO:注销下行
 import d2HeaderUser from './components/header-user'
 import d2HeaderAvatar from './components/header-avatar'
 
@@ -96,7 +96,7 @@ import d2HeaderColor from './components/header-color'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import mixinSearch from './mixins/search'
 export default {
-  name: 'd2-layout-header-aside',
+  name: 'D2LayoutHeaderAside',
   mixins: [
     mixinSearch
   ],
@@ -109,13 +109,13 @@ export default {
     d2HeaderSearch,
     d2HeaderSize,
     d2HeaderTheme,
-    //TODO:注销下行
+    // TODO:注销下行
     d2HeaderUser,
     d2HeaderAvatar,
     d2HeaderLog,
-    d2HeaderColor,
+    d2HeaderColor
   },
-  data () {
+  data() {
     return {
       // [侧边栏宽度] 正常状态
       asideWidth: '200px',
@@ -137,7 +137,7 @@ export default {
     /**
      * @description 最外层容器的背景图片样式
      */
-    styleLayoutMainGroup () {
+    styleLayoutMainGroup() {
       return this.themeActiveSetting.backgroundImage
         ? { backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')` }
         : {}
@@ -150,7 +150,7 @@ export default {
     /**
      * 接收点击切换侧边栏的按钮
      */
-    handleToggleAside () {
+    handleToggleAside() {
       this.asideCollapseToggle()
     }
   }

@@ -20,7 +20,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
    * @description https://d2.pub/d2-admin/preview/#/demo/business/issues/142
    * @description 列表
    */
-  DEMO_BUSINESS_ISSUE_142_LIST () {
+  DEMO_BUSINESS_ISSUE_142_LIST() {
     // 模拟数据
     mock
       .onAny('/demo/business/issues/142/fetch')
@@ -36,7 +36,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
    * @description 详情
    * @param {String} id 项目 ID
    */
-  DEMO_BUSINESS_ISSUE_142_DETAIL (id) {
+  DEMO_BUSINESS_ISSUE_142_DETAIL(id) {
     // 模拟数据
     mock
       .onAny('/demo/business/issues/142/detail')
@@ -54,7 +54,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
    * @description https://d2.pub/d2-admin/preview/#/demo/business/table/1
    * @description 列表
    */
-  DEMO_BUSINESS_TABLE_1_LIST (params = {}) {
+  DEMO_BUSINESS_TABLE_1_LIST(params = {}) {
     // 模拟数据
     mock
       .onAny('/demo/business/table/1/fetch')
@@ -83,7 +83,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
   /**
    * @description 错误日志示例 请求一个不存在的地址
    */
-  DEMO_LOG_AJAX () {
+  DEMO_LOG_AJAX() {
     // 接口请求
     return requestForMock({
       url: '/invalid-url',

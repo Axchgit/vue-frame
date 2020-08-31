@@ -10,23 +10,23 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex'
 export default {
   computed: {
-    //D2项目逻辑:主框架显示用户name
-    ...mapState("d2admin/user", ["info"]),
+    // D2项目逻辑:主框架显示用户name
+    ...mapState('d2admin/user', ['info'])
   },
 
   methods: {
-    ...mapActions("d2admin/account", ["logout"]),
+    ...mapActions('d2admin/account', ['logout']),
     /**
      * @description 登出
      */
     logOff() {
       this.logout({
-        confirm: true,
-      });
-    },
-  },
-};
+        confirm: true
+      })
+    }
+  }
+}
 </script>

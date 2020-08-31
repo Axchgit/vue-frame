@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-08-21 14:40:22
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\store\modules\vue-frame\index.js
- * @Description: 
+ * @Description:
  */
 /**
  * The file enables `@/store/index.js` to import all vuex modules
@@ -15,10 +15,10 @@ const files = require.context('./modules', false, /\.js$/)
 const modules = {}
 
 files.keys().forEach(key => {
-    modules[key.replace(/(\.\/|\.js)/g, '')] = files(key).default
+  modules[key.replace(/(\.\/|\.js)/g, '')] = files(key).default
 })
 
 export default {
-    namespaced: true,
-    modules
+  namespaced: true,
+  modules
 }

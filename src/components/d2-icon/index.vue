@@ -1,11 +1,11 @@
 <template>
-  <i class="fa" :class="`fa-${name}`" aria-hidden="true"></i>
+  <i class="fa" :class="`fa-${name}`" aria-hidden="true"/>
 </template>
 
 <script>
 import './font-awesome-4.7.0/css/font-awesome.min.css'
 export default {
-  name: 'd2-icon',
+  name: 'D2Icon',
   props: {
     name: {
       type: String,

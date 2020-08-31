@@ -3,8 +3,8 @@ import store from '@/store'
 import util from '@/libs/util'
 
 export default {
-  install (Vue, options) {
-    function writeLog (logType) {
+  install(Vue, options) {
+    function writeLog(logType) {
       return (error, vm, info = '') => {
         Vue.nextTick(() => {
           store.dispatch('d2admin/log/push', {

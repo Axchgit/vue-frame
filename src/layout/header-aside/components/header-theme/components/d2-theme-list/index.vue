@@ -16,8 +16,8 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'd2-theme-list',
-  data () {
+  name: 'D2ThemeList',
+  data() {
     return {
       table: {
         showHeader: false,
@@ -35,7 +35,7 @@ export default {
     ...mapActions('d2admin/theme', [
       'set'
     ]),
-    handleSelectTheme (name) {
+    handleSelectTheme(name) {
       this.set(name)
     }
   }

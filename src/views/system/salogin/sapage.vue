@@ -2,7 +2,7 @@
   <div class="page-login">
     <div class="page-login--layer page-login--layer-area">
       <ul class="circles">
-        <li v-for="n in 10" :key="n"></li>
+        <li v-for="n in 10" :key="n"/>
       </ul>
     </div>
     <div class="page-login--layer page-login--layer-time" flex="main:center cross:center">{{time}}</div>
@@ -13,7 +13,7 @@
         </div>
         <div class="page-login--content-main" flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo-lac.png" />
+          <img class="page-login--logo" src="./image/logo-lac.png" >
           <!-- form -->
           <div class="page-login--form">
             <el-card shadow="never">
@@ -27,17 +27,17 @@
                 <!-- ref="loginUsername" :rules="codeRules" -->
                 <el-form-item prop="username">
                   <el-input type="text" v-model="formLogin.username" placeholder="用户名">
-                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                    <i slot="prepend" class="fa fa-user-circle-o"/>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="password">
                   <el-input type="password" v-model="formLogin.password" placeholder="密码">
-                    <i slot="prepend" class="fa fa-keyboard-o"></i>
+                    <i slot="prepend" class="fa fa-keyboard-o"/>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="code">
                   <el-input id="sendcode" type="text" v-model="formLogin.code" placeholder="登陆码">
-                    <i slot="prepend" class="fa fa-envelope-square"></i>
+                    <i slot="prepend" class="fa fa-envelope-square"/>
                     <template  slot="append">
                       <div @click="sendCode">
                       <span >{{timer ? timer : '发送' }}</span>
@@ -102,9 +102,9 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
-import { mapActions } from "vuex";
-import localeMixin from "@/locales/mixin.js";
+import dayjs from 'dayjs'
+import { mapActions } from 'vuex'
+import localeMixin from '@/locales/mixin.js'
 export default {
   mixins: [localeMixin],
   data() {
@@ -112,57 +112,57 @@ export default {
       isAble: false,
       timeRan: null,
       timeInterval: null,
-      time: dayjs().format("HH:mm:ss"),
+      time: dayjs().format('HH:mm:ss'),
       // 快速选择用户
       dialogVisible: false,
       timer: 0,
       // 表单
       formLogin: {
-        username: "",
-        password: "",
-        code: "",
+        username: '',
+        password: '',
+        code: ''
       },
       // 表单校验
       rules: {
         username: [
           {
             required: true,
-            message: "请输入用户名",
-            trigger: "blur",
-          },
+            message: '请输入用户名',
+            trigger: 'blur'
+          }
         ],
         password: [
           {
             required: true,
-            message: "请输入密码",
-            trigger: "blur",
-          },
+            message: '请输入密码',
+            trigger: 'blur'
+          }
         ],
         code: [
           {
             required: true,
-            message: "请输入登录码",
-            trigger: "blur",
-          },
-        ],
-      },
-    };
+            message: '请输入登录码',
+            trigger: 'blur'
+          }
+        ]
+      }
+    }
   },
   mounted() {
     this.timeInterval = setInterval(() => {
-      this.refreshTime();
-    }, 1000);
+      this.refreshTime()
+    }, 1000)
   },
   beforeDestroy() {
-    clearInterval(this.timeInterval);
+    clearInterval(this.timeInterval)
   },
   methods: {
-    //D2项目逻辑:登录2.接收用户输入并传给store/modules...
-    ...mapActions("d2admin/account", ["surperAdminLogin"]),
-    ...mapActions("d2admin/account", ["sendLogcode"]),
+    // D2项目逻辑:登录2.接收用户输入并传给store/modules...
+    ...mapActions('d2admin/account', ['surperAdminLogin']),
+    ...mapActions('d2admin/account', ['sendLogcode']),
 
     refreshTime() {
-      this.time = dayjs().format("HH:mm:ss");
+      this.time = dayjs().format('HH:mm:ss')
     },
     // /**
     //  * @description 接收选择一个用户快速登录的事件
@@ -183,20 +183,20 @@ export default {
           // 登录
           // 注意 这里的演示没有传验证码
           // 具体需要传递的数据请自行修改代码
-          //D2项目逻辑:登录1.提交用户输入
+          // D2项目逻辑:登录1.提交用户输入
           this.surperAdminLogin({
             username: this.formLogin.username,
             password: this.formLogin.password,
-            logcode: this.formLogin.code,
+            logcode: this.formLogin.code
           }).then(() => {
             // 重定向对象不存在则返回顶层路径
-            this.$router.replace(this.$route.query.redirect || "/");
-          });
+            this.$router.replace(this.$route.query.redirect || '/')
+          })
         } else {
           // 登录表单校验失败
-          this.$message.error("表单校验失败，请检查");
+          this.$message.error('表单校验失败，请检查')
         }
-      });
+      })
     },
 
     sendCode() {
@@ -206,48 +206,47 @@ export default {
       // this.$refs.loginUsername.validate((valid) => {
       //   if (valid) {
       // console.log(this.$refs.loginUsername);
-      if(!this.formLogin.username){
-        this.$message.error("请输入用户名");
-        return false; 
+      if (!this.formLogin.username) {
+        this.$message.error('请输入用户名')
+        return false
       }
       if (this.timer > 0) {
-        //知识点:上方弹出提示行
-        this.$message.error(this.timer + "s后再发送");
-        //知识点:阻止函数继续向下执行
-        return false;
+        // 知识点:上方弹出提示行
+        this.$message.error(this.timer + 's后再发送')
+        // 知识点:阻止函数继续向下执行
+        return false
       }
-      this.timer = 60;
-      this.isAble = true;
-      //知识点:计时器
+      this.timer = 60
+      this.isAble = true
+      // 知识点:计时器
       this.timeRan = setInterval(() => {
-        this.timer--;
-      }, 1000);
+        this.timer--
+      }, 1000)
       setTimeout(() => {
-        clearInterval(this.timeRan);
-        this.timer = null;
+        clearInterval(this.timeRan)
+        this.timer = null
         // this.isAble = false;
-      }, 5000);
+      }, 5000)
       this.sendLogcode({
-        username: this.formLogin.username,
+        username: this.formLogin.username
       }).then((res) => {
         // console.log('chengong 123');
         // console.log(res);
-        if(res === undefined){
-          this.$message.error('失败');
-        }else{
-          this.$message.success("发送成功");
-  
+        if (res === undefined) {
+          this.$message.error('失败')
+        } else {
+          this.$message.success('发送成功')
         }
-      });
+      })
       //   } else {
       //     console.log("失败");
       //     // 登录表单校验失败
       //     this.$message.error("表单校验失败，请检查");
       //   }
       // });
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="scss">

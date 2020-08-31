@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'd2-contextmenu-list',
+  name: 'D2ContextmenuList',
   props: {
     menulist: {
       type: Array,
@@ -19,7 +19,7 @@ export default {
     }
   },
   methods: {
-    rowClick (event) {
+    rowClick(event) {
       let target = event.target
       while (!target.dataset.value) {
         target = target.parentNode

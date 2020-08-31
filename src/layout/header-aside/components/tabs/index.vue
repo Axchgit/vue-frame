@@ -65,7 +65,7 @@ export default {
     D2Contextmenu: () => import('../contextmenu'),
     D2ContextmenuList: () => import('../contextmenu/components/contentmenuList')
   },
-  data () {
+  data() {
     return {
       contextmenuFlag: false,
       contentmenuX: 0,
@@ -101,14 +101,14 @@ export default {
      * @description 计算某个标签页是否可关闭
      * @param {Object} page 其中一个标签页
      */
-    isTabClosable (page) {
+    isTabClosable(page) {
       return page.name !== 'index'
     },
     /**
      * @description 右键菜单功能点击
      * @param {Object} event 事件
      */
-    handleContextmenu (event) {
+    handleContextmenu(event) {
       let target = event.target
       // fix https://github.com/d2-projects/d2-admin/issues/54
       let flag = false
@@ -130,7 +130,7 @@ export default {
      * @description 右键菜单的 row-click 事件
      * @param {String} command 事件类型
      */
-    contextmenuClick (command) {
+    contextmenuClick(command) {
       this.handleControlItemClick(command, this.tagName)
     },
     /**
@@ -138,7 +138,7 @@ export default {
      * @param {String} command 事件类型
      * @param {String} tagName tab 名称
      */
-    handleControlItemClick (command, tagName = null) {
+    handleControlItemClick(command, tagName = null) {
       if (tagName) this.contextmenuFlag = false
       const params = { pageSelect: tagName }
       switch (command) {
@@ -154,7 +154,7 @@ export default {
      * @param {object} tab 标签
      * @param {object} event 事件
      */
-    handleClick (tab, event) {
+    handleClick(tab, event) {
       // 找到点击的页面在 tag 列表里是哪个
       const page = this.opened.find(page => page.fullPath === tab.name)
       if (page) {
@@ -162,12 +162,12 @@ export default {
         this.$router.push({ name, params, query })
       }
     },
-        /**
+    /**
      * @description 接收鼠标中键点击 tab 标签的事件
      * @param {object} tab 标签
      * @param {object} event 事件
      */
-    handleClick (tab, event) {
+    handleClick(tab, event) {
       // 找到点击的页面在 tag 列表里是哪个
       const page = this.opened.find(page => page.fullPath === tab.name)
       if (page) {
@@ -179,11 +179,11 @@ export default {
      * @description 点击 tab 上的删除按钮触发这里
      * @param {String} tagName tab 名称
      */
-    handleTabRemove (tagName) {
+    handleTabRemove(tagName) {
       this.close({ tagName })
     }
   },
-  mounted () {
+  mounted() {
     const el = document.querySelectorAll('.d2-multiple-page-sort .el-tabs__nav')[0]
     Sortable.create(el, {
       onEnd: (evt) => {

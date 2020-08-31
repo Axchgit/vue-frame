@@ -15,15 +15,15 @@
 <script>
 import scroll from './mixins/normal'
 export default {
-  name: 'd2-container-ghost',
+  name: 'D2ContainerGhost',
   mixins: [
     scroll
   ],
-  mounted () {
+  mounted() {
     // 增加滚动事件监听
     this.addScrollListener()
   },
-  beforeDestroy () {
+  beforeDestroy() {
     // 移除滚动事件监听
     this.removeScrollListener()
   }

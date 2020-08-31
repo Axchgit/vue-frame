@@ -2,7 +2,7 @@
   <d2-container>
     <el-dropdown>
   <el-button type="primary">
-    更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+    更多菜单<i class="el-icon-arrow-down el-icon--right"/>
   </el-button>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -29,7 +29,7 @@
       <button>
           测试
       </button>
-      
+
     <!-- <template slot="header">图标选择器</template>
     <div class="title-group">
       <p class="title">一般用法</p>
@@ -65,13 +65,9 @@
     </p>
     <el-alert
       :title="$t('page.demo.playground.locales.text')"
-      type="success">
-    </el-alert>
+      type="success"/>
   </d2-container>
 </template>
-
-
-
 
 <script>
 
@@ -86,7 +82,7 @@ const store = new Vuex.Store({
     count: 0
   },
   mutations: {
-    increment (state) {
+    increment(state) {
       state.count++
     }
   }
@@ -99,31 +95,29 @@ console.log(store.state.count) // -> 1
 export default {
 
   data() {
-    
     return {
-      menu,      
-      icon: "",
-      icon2: "",
-    };
+      menu,
+      icon: '',
+      icon2: ''
+    }
   },
-  
+
   created() {
-        //   console.log('test success');
-        // this.getTableData();
-          },
+    //   console.log('test success');
+    // this.getTableData();
+  },
   methods: {
-      
-      
+
     async getTableData() {
       try {
-        const res = await this.$api.DEMO_FETCH(123);
-        console.log(res);
+        const res = await this.$api.DEMO_FETCH(123)
+        console.log(res)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

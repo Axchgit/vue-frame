@@ -20,13 +20,12 @@
         v-model="searchText"
         :clearable="true"
         placeholder="搜索 比如 'plus'"
-        prefix-icon="el-icon-search">
-      </el-input>
+        prefix-icon="el-icon-search"/>
       <el-collapse v-if="!searchMode" class="d2-icon-select--group" v-model="collapseActive">
         <el-collapse-item v-for="(item, index) in icon" :key="index" :title="item.title" :name="index" class="d2-icon-select--class">
           <el-row class="d2-icon-select--class-row">
             <el-col class="d2-icon-select--class-col" v-for="(iconName, iconIndex) in item.icon" :key="iconIndex" :span="4" @click.native="selectIcon(iconName)">
-              <i :class="'fa fa-' + iconName"></i>
+              <i :class="'fa fa-' + iconName"/>
             </el-col>
           </el-row>
         </el-collapse-item>
@@ -36,7 +35,7 @@
           <div class="d2-icon-select--class-title">{{item.title}}</div>
           <el-row class="d2-icon-select--class-row">
             <el-col class="d2-icon-select--class-col" v-for="(iconName, iconIndex) in item.icon" :key="iconIndex" :span="4" @click.native="selectIcon(iconName)">
-              <i :class="'fa fa-' + iconName"></i>
+              <i :class="'fa fa-' + iconName"/>
             </el-col>
           </el-row>
         </div>
@@ -49,16 +48,16 @@
       v-bind="bind"
       style="max-width: 240px;">
       <template v-if="value" slot="prepend">
-        <i :class="'fa fa-' + value"></i>
+        <i :class="'fa fa-' + value"/>
       </template>
       <el-button v-popover:pop slot="append">
-        <i class="fa fa-list"></i>
+        <i class="fa fa-list"/>
       </el-button>
     </el-input>
     <!-- 不允许用户输入 -->
     <el-button v-popover:pop v-if="!userInput">
       <template v-if="value">
-        <i :class="'fa fa-' + value"></i>
+        <i :class="'fa fa-' + value"/>
       </template>
       {{value ? value : placeholder}}
     </el-button>
@@ -68,7 +67,7 @@
 <script>
 import icon from './data/index'
 export default {
-  name: 'd2-icon-select',
+  name: 'D2IconSelect',
   props: {
     // 值
     value: {
@@ -107,7 +106,7 @@ export default {
       default: true
     }
   },
-  data () {
+  data() {
     return {
       // 绑定弹出框
       pop: false,
@@ -124,7 +123,7 @@ export default {
   },
   computed: {
     // 输入框上绑定的设置
-    bind () {
+    bind() {
       return {
         placeholder: this.placeholder,
         clearable: this.clearable,
@@ -132,11 +131,11 @@ export default {
       }
     },
     // 是否在搜索
-    searchMode () {
+    searchMode() {
       return !!this.searchText
     },
     // 过滤后的图标
-    iconFilted () {
+    iconFilted() {
       return this.icon.map(iconClass => ({
         title: iconClass.title,
         icon: iconClass.icon.filter(icon => icon.indexOf(this.searchText) >= 0)
@@ -144,15 +143,15 @@ export default {
     }
   },
   watch: {
-    value (value) {
+    value(value) {
       this.currentValue = value
     }
   },
-  created () {
+  created() {
     this.currentValue = this.value
   },
   methods: {
-    selectIcon (iconName = '') {
+    selectIcon(iconName = '') {
       this.$emit('input', iconName)
       if (iconName && this.autoClose) {
         this.pop = false

@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-08-18 18:00:23
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\componnets\PageFooter\index.vue
- * @Description: 
+ * @Description:
 -->
 <template>
   <el-pagination
@@ -16,8 +16,7 @@
     layout="total, sizes, prev, pager, next, jumper"
     style="margin: -10px;"
     @size-change="handleSizeChange"
-    @current-change="handleCurrentChange">
-  </el-pagination>
+    @current-change="handleCurrentChange"/>
 </template>
 
 <script>
@@ -34,15 +33,15 @@ export default {
     }
   },
   methods: {
-    handleSizeChange (val) {
-      //TODO:$emit作用:子组件可以使用 $emit 触发父组件的自定义事件
+    handleSizeChange(val) {
+      // TODO:$emit作用:子组件可以使用 $emit 触发父组件的自定义事件
       this.$emit('change', {
         current: this.current,
         size: val,
         total: this.total
       })
     },
-    handleCurrentChange (val) {
+    handleCurrentChange(val) {
       this.$emit('change', {
         current: val,
         size: this.size,

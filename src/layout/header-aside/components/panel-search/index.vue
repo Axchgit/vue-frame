@@ -49,7 +49,7 @@ export default {
   components: {
     'd2-panel-search-item': () => import('./components/panel-search-item/index.vue')
   },
-  data () {
+  data() {
     return {
       searchText: '',
       results: []
@@ -61,14 +61,14 @@ export default {
       'pool'
     ]),
     // 这份数据是展示在搜索面板下面的
-    resultsList () {
+    resultsList() {
       return (this.results.length === 0 && this.searchText === '') ? this.pool.map(e => ({
         value: e.fullTitle,
         ...e
       })) : this.results
     },
     // 根据 pool 更新 fuse 实例
-    fuse () {
+    fuse() {
       return new Fuse(this.pool, {
         shouldSort: true,
         tokenize: true,
@@ -88,7 +88,7 @@ export default {
     /**
      * @description 过滤选项 这个方法在每次输入框的值发生变化时会触发
      */
-    querySearch (queryString, callback) {
+    querySearch(queryString, callback) {
       const results = this.fuse.search(queryString).map(e => e.item)
       this.results = results
       callback(results)
@@ -96,7 +96,7 @@ export default {
     /**
      * @description 聚焦输入框
      */
-    focus () {
+    focus() {
       this.input = ''
       setTimeout(() => {
         if (this.$refs.input) {
@@ -110,7 +110,7 @@ export default {
     /**
      * @description 接收用户在列表中选择项目的事件
      */
-    handleResultsGroupItemClick (path) {
+    handleResultsGroupItemClick(path) {
       // 如果用户选择的就是当前页面 就直接关闭搜索面板
       if (path === this.$route.path) {
         this.handleEsc()
@@ -122,7 +122,7 @@ export default {
     /**
      * @description 接收用户在下拉菜单中选中事件
      */
-    async handleSelect ({ path }) {
+    async handleSelect({ path }) {
       // 如果用户选择的就是当前页面 就直接关闭搜索面板
       if (path === this.$route.path) {
         this.handleEsc()
@@ -135,7 +135,7 @@ export default {
     /**
      * @augments 关闭输入框的下拉菜单
      */
-    closeSuggestion () {
+    closeSuggestion() {
       if (this.$refs.input.activated) {
         this.$refs.input.suggestions = []
         this.$refs.input.activated = false
@@ -144,13 +144,13 @@ export default {
     /**
      * @augments 接收用户点击空白区域的关闭
      */
-    handlePanelClick () {
+    handlePanelClick() {
       this.handleEsc()
     },
     /**
      * @augments 接收用户触发的关闭
      */
-    async handleEsc () {
+    async handleEsc() {
       this.closeSuggestion()
       await this.$nextTick()
       this.$emit('close')

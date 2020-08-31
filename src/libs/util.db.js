@@ -24,7 +24,7 @@ export default db
  * @param {Object} payload defaultValue {*} 初始化默认值
  * @returns {String} 可以直接使用的路径
  */
-export function pathInit ({
+export function pathInit({
   dbName = 'database',
   path = '',
   user = true,
@@ -50,7 +50,7 @@ export function pathInit ({
  * @param {Object} payload value {*} 需要存储的值
  * @param {Object} payload user {Boolean} 是否区分用户
  */
-export function dbSet ({
+export function dbSet({
   dbName = 'database',
   path = '',
   value = '',
@@ -71,7 +71,7 @@ export function dbSet ({
  * @param {Object} payload defaultValue {*} 取值失败的默认值
  * @param {Object} payload user {Boolean} 是否区分用户
  */
-export function dbGet ({
+export function dbGet({
   dbName = 'database',
   path = '',
   defaultValue = '',
@@ -89,7 +89,7 @@ export function dbGet ({
  * @description 获取存储数据库对象
  * @param {Object} payload user {Boolean} 是否区分用户
  */
-export function database ({
+export function database({
   dbName = 'database',
   path = '',
   user = false,

@@ -2,7 +2,7 @@
   <div class="page-login">
     <div class="page-login--layer page-login--layer-area">
       <ul class="circles">
-        <li v-for="n in 10" :key="n"></li>
+        <li v-for="n in 10" :key="n"/>
       </ul>
     </div>
     <div
@@ -38,7 +38,7 @@
                     type="text"
                     v-model="formLogin.username"
                     placeholder="用户名">
-                    <i slot="prepend" class="fa fa-user-circle-o"></i>
+                    <i slot="prepend" class="fa fa-user-circle-o"/>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="password">
@@ -46,7 +46,7 @@
                     type="password"
                     v-model="formLogin.password"
                     placeholder="密码">
-                    <i slot="prepend" class="fa fa-keyboard-o"></i>
+                    <i slot="prepend" class="fa fa-keyboard-o"/>
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="code">
@@ -129,7 +129,7 @@ export default {
   mixins: [
     localeMixin
   ],
-  data () {
+  data() {
     return {
       timeInterval: null,
       time: dayjs().format('HH:mm:ss'),
@@ -184,27 +184,27 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.timeInterval = setInterval(() => {
       this.refreshTime()
     }, 1000)
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.timeInterval)
   },
   methods: {
-    //D2项目逻辑:登录2.接收用户输入并传给store/modules...
+    // D2项目逻辑:登录2.接收用户输入并传给store/modules...
     ...mapActions('d2admin/account', [
       'loginXch'
     ]),
-    refreshTime () {
+    refreshTime() {
       this.time = dayjs().format('HH:mm:ss')
     },
     /**
      * @description 接收选择一个用户快速登录的事件
      * @param {Object} user 用户信息
      */
-    handleUserBtnClick (user) {
+    handleUserBtnClick(user) {
       this.formLogin.username = user.username
       this.formLogin.password = user.password
       this.submit()
@@ -213,13 +213,13 @@ export default {
      * @description 提交表单
      */
     // 提交登录信息
-    submit () {
+    submit() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           // 登录
           // 注意 这里的演示没有传验证码
           // 具体需要传递的数据请自行修改代码
-          //D2项目逻辑:登录1.提交用户输入
+          // D2项目逻辑:登录1.提交用户输入
           this.loginXch({
             username: this.formLogin.username,
             password: this.formLogin.password

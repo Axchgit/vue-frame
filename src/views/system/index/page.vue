@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-08-23 21:14:05
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\system\index\page.vue
- * @Description: 
+ * @Description:
 -->
 <template>
   <d2-container class="page">
@@ -28,7 +28,7 @@
           >掘金</span> | -->
           <el-popover :width="172" trigger="hover">
             <!-- <p class="d2-mt-0 d2-mb-10">今日前端</p> -->
-            <img src="./image/weixin_light.png" style="width: 172px;" />
+            <img src="./image/weixin_light.png" style="width: 172px;" >
             <span slot="reference" class="btn-group__btn btn-group__btn--link">
               <d2-icon name="weixin" />开发者微信
             </span>
@@ -45,16 +45,16 @@
 </template>
 
 <script>
-import D2Badge from "./components/d2-badge";
-import D2Help from "./components/d2-help";
-import D2PageCover from "./components/d2-page-cover";
+import D2Badge from './components/d2-badge'
+import D2Help from './components/d2-help'
+import D2PageCover from './components/d2-page-cover'
 export default {
   components: {
     D2Badge,
     D2Help,
-    D2PageCover,
-  },
-};
+    D2PageCover
+  }
+}
 </script>
 
 <style lang="scss" scoped>

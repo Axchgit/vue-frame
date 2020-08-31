@@ -4,14 +4,13 @@
  * @LastEditTime: 2020-08-21 19:03:55
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\store\index.js
- * @Description: 
+ * @Description:
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
 
 import d2admin from './modules/d2admin'
 import vueframe from './modules/vueframe'
-
 
 Vue.use(Vuex)
 

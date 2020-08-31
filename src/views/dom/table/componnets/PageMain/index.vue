@@ -51,13 +51,11 @@
 
       <el-table-column
         type="selection"
-        width="55">
-      </el-table-column>
+        width="55"/>
       <el-table-column
       label="序号"
         type="index"
-        width="50">
-      </el-table-column>
+        width="50"/>
 
       <el-table-column label="工号"  align="center">
         <!-- D2项目逻辑:slot-scope可以接收props中的数据(该属性现已废弃,v-slot代替) -->
@@ -76,7 +74,7 @@
           <!-- </el-tag> -->
         </template>
       </el-table-column>
-<!-- 
+<!--
       <el-table-column label="权限" width="50" align="center">
         <template slot-scope="scope">
           <boolean-control
@@ -137,7 +135,7 @@
           {{scope.row.create_time}}
         </template>
       </el-table-column>
-<!-- 
+<!--
       <el-table-column label="使用状态" width="100" align="center">
         <template slot-scope="scope">
           <el-tag
@@ -173,14 +171,14 @@ export default {
   },
   props: {
     tableData: {
-      //默认为空
+      // 默认为空
       default: () => []
     },
     loading: {
       default: false
     }
   },
-  data () {
+  data() {
     return {
       currentTableData: [],
       multipleSelection: [],
@@ -190,7 +188,7 @@ export default {
         { label: '权限', prop: 'role' },
         { label: '性别', prop: 'sex' },
         { label: '账户状态', prop: 'user_review_status}' },
-        { label: '创建时间', prop: 'create_time' },
+        { label: '创建时间', prop: 'create_time' }
         // { label: '使用状态', prop: 'used' },
         // { label: '使用时间', prop: 'dateTimeUse' }
       ]
@@ -198,38 +196,38 @@ export default {
   },
   watch: {
     tableData: {
-      handler (val) {
+      handler(val) {
         this.currentTableData = val
       },
       immediate: true
     }
   },
   methods: {
-    handleSwitchChange (val, index) {
+    handleSwitchChange(val, index) {
       const oldValue = this.currentTableData[index]
       this.$set(this.currentTableData, index, {
         ...oldValue,
         type: val
       })
-      //TODO:
+      // TODO:
       // 注意 这里并没有把修改后的数据传递出去 如果需要的话请自行修改
     },
-    handleSelectionChange (val) {
+    handleSelectionChange(val) {
       this.multipleSelection = val
     },
-    //D2项目逻辑:翻译数据为可读并返回
-    downloadDataTranslate (data) {
+    // D2项目逻辑:翻译数据为可读并返回
+    downloadDataTranslate(data) {
       return data.map(row => ({
         ...row,
         type: row.sex ? '男' : '女',
         used: row.rule ? '员工' : '超管'
       }))
     },
-    //$export-导出插件;
-    handleDownloadXlsx (data) {
+    // $export-导出插件;
+    handleDownloadXlsx(data) {
       this.$export.excel({
         title: 'vue-frame表格示例',
-        //D2项目逻辑:下载表格的列
+        // D2项目逻辑:下载表格的列
         columns: this.downloadColumns,
         data: this.downloadDataTranslate(data)
       })
@@ -237,7 +235,7 @@ export default {
           this.$message.success('导出表格成功')
         })
     },
-    handleDownloadCsv (data) {
+    handleDownloadCsv(data) {
       this.$export.csv({
         title: 'vue-frame表格示例',
         columns: this.downloadColumns,

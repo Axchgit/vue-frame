@@ -38,8 +38,6 @@
         style="width: 120px;"/>
     </el-form-item>
 
-
-
     <!-- <el-form-item label="备注" prop="note">
       <el-input
         v-model="form.note"
@@ -105,7 +103,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       form: {
         work_num: '',
@@ -118,38 +116,38 @@ export default {
       //   real_name: [{ required: true, message: '请输入用户', trigger: 'change' }]
       // },
       role: {
-        role: [{ required: true, message: '请填入权限', trigger: 'change' }],
+        role: [{ required: true, message: '请填入权限', trigger: 'change' }]
         // real_name: [{ required: true, message: '请输入用户', trigger: 'change' }]
       }
     }
   },
   methods: {
-    handleFormSubmitInfo () {
+    handleFormSubmitInfo() {
       // this.$refs.form.validate((valid) => {
-        // if (valid) {
-          //D2项目逻辑:验证是否填入内容
-          //给父组件提交form内容以供查询
-          // console.log([this.form.work_num,this.form.real_name])
-          this.$emit('submitInfo', {
-            work_num:this.form.work_num,
-            real_name: this.form.real_name
-          })
-        // } else {
-        //   this.$notify.error({
-        //     title: '错误',
-        //     message: '表单校验失败'
-        //   })
-        //   return false
-        // }
+      // if (valid) {
+      // D2项目逻辑:验证是否填入内容
+      // 给父组件提交form内容以供查询
+      // console.log([this.form.work_num,this.form.real_name])
+      this.$emit('submitInfo', {
+        work_num: this.form.work_num,
+        real_name: this.form.real_name
+      })
+      // } else {
+      //   this.$notify.error({
+      //     title: '错误',
+      //     message: '表单校验失败'
+      //   })
+      //   return false
+      // }
       // })
     },
-    handleFormSubmitRole () {
+    handleFormSubmitRole() {
       this.$refs.role_form.validate((valid) => {
         if (valid) {
-          //D2项目逻辑:验证是否填入内容
-          //给父组件提交form内容以供查询
+          // D2项目逻辑:验证是否填入内容
+          // 给父组件提交form内容以供查询
           console.log(this.form.role)
-          this.$emit('submitRule', {role:this.form.role})
+          this.$emit('submitRule', { role: this.form.role })
         } else {
           this.$notify.error({
             title: '错误',
@@ -159,22 +157,22 @@ export default {
         }
       })
     },
-    handleFormSubmit () {
+    handleFormSubmit() {
       // this.$refs.form.validate((valid) => {
-        // if (valid) {
-          //D2项目逻辑:验证是否填入内容
-          //给父组件提交form内容以供查询
-          this.$emit('submit', '')
-        // } else {
-        //   this.$notify.error({
-        //     title: '错误',
-        //     message: '表单校验失败'
-        //   })
-        //   return false
-        // }
+      // if (valid) {
+      // D2项目逻辑:验证是否填入内容
+      // 给父组件提交form内容以供查询
+      this.$emit('submit', '')
+      // } else {
+      //   this.$notify.error({
+      //     title: '错误',
+      //     message: '表单校验失败'
+      //   })
+      //   return false
+      // }
       // })
     },
-    handleFormReset () {
+    handleFormReset() {
       this.$refs.form.resetFields()
     }
   }

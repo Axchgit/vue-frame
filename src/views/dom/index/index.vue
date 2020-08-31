@@ -1,10 +1,10 @@
 
 <template>
   <d2-container>
-    
+
     <el-dropdown>
   <el-button type="primary">
-    更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+    更多菜单<i class="el-icon-arrow-down el-icon--right"/>
   </el-button>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -41,11 +41,11 @@
 </style>
 
 <script>
-  export default {
-    methods: {
-      handleClick() {
-        alert('button click');
-      }
+export default {
+  methods: {
+    handleClick() {
+      alert('button click')
     }
   }
+}
 </script>

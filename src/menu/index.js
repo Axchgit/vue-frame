@@ -1,24 +1,28 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-23 15:49:18
+ * @LastEditTime: 2020-08-28 11:49:17
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\index.js
- * @Description: 
+ * @Description:
  */
 import { uniqueId } from 'lodash'
 import util from '@/libs/util.js'
 // import store from '@/store/index'
 // import { mapState, mapActions } from 'vuex'
 
-
-
 import pagsDomTest from './modules/dom-test'
+import domPages from './modules/dom-pages'
+
 import adminEmpData from './modules/admin-employee'
+import adminEmpActivity from './modules/admin-emp-activity'
+import adminFeedback from './modules/admin-feedback'
+import adminGoods from './modules/admin-goods'
+import adminPerformance from './modules/admin-performance'
 
 import empActivity from './modules/emp-activity'
-
-
+import empMsgFeedback from './modules/emp-msg-feedback'
+import empPerformance from './modules/emp-performance'
 
 /**
  * @description 给菜单数据补充上 path 字段
@@ -26,16 +30,14 @@ import empActivity from './modules/emp-activity'
  * @param {Array} menu 原始的菜单数据
  */
 function supplementPath(menu) {
-    return menu.map(e => ({
-        ...e,
-        path: e.path || uniqueId('d2-menu-empty-'),
-        ...e.children ? {
-            children: supplementPath(e.children)
-        } : {}
-    }))
+  return menu.map(e => ({
+    ...e,
+    path: e.path || uniqueId('d2-menu-empty-'),
+    ...e.children ? {
+      children: supplementPath(e.children)
+    } : {}
+  }))
 }
-
-
 
 // const computed = {
 //     //D2项目逻辑:主框架显示用户name
@@ -45,7 +47,6 @@ function supplementPath(menu) {
 // }
 
 //     console.log(computed.avatar)
-
 
 /**
  * 逻辑,比较菜单项的roles与用户的roles,
@@ -65,11 +66,11 @@ function supplementPath(menu) {
 
 // console.log(adminEmpData.roles)
 
-//所有的需要判断权限的菜单项
-const allMenu = [adminEmpData, pagsDomTest, empActivity]
-//加入到顶部菜单数组中的菜单项
+// 所有的需要判断权限的菜单项
+const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback, pagsDomTest, domPages,
+  empActivity, empMsgFeedback, empPerformance]
+// 加入到顶部菜单数组中的菜单项
 const addMenu = []
-
 
 // var fontUrl = ''
 // console.log(process.env.VUE_APP_AJAX_URL+'api')
@@ -84,43 +85,37 @@ const addMenu = []
 const roles = util.cookies.get('roles')
 // console.log(roles)
 allMenu.forEach((menu) => {
-    // console.log(index)
-    if (menu.roles >= roles) {
-        addMenu.push(menu)
-    }
-    if ((menu.roles > 1 && menu.roles < 6) && roles <= 1) {
-        addMenu.pop()
-    }
+  // console.log(index)
+  if (menu.roles >= roles) {
+    addMenu.push(menu)
+  }
+  if ((menu.roles > 1 && menu.roles < 6) && roles <= 1) {
+    addMenu.pop()
+  }
 })
 
-
 export const menuAside = supplementPath([
-    // pagsDomTest,
-    // adminEmpData
-    ...addMenu
+  // pagsDomTest,
+  // adminEmpData
+  ...addMenu
 
 ])
 
 export const menuHeader = supplementPath([
-    { path: '/index', title: '首页', icon: 'home' },
-    // pagsDomTest,
-    ,
+  { path: '/index', title: '首页', icon: 'home' }, // pagsDomTest,
 
-    ...addMenu,
+  ...addMenu
 
-
-    {
-        title: '页面',
-        icon: 'folder-o',
-        children: [
-            { path: '/page1', title: '页面 1' },
-            { path: '/page2', title: '页面 2' },
-            { path: '/page3', title: '页面 3' },
-            { path: '/index/index', title: '新建示例' },
-            { path: '/table', title: '表格' },
-            // { path: '/test', title: 'test' }
-
-
-        ]
-    },
+  // {
+  //   title: '页面',
+  //   icon: 'folder-o',
+  //   children: [
+  //     { path: '/page1', title: '页面 1' },
+  //     { path: '/page2', title: '页面 2' },
+  //     { path: '/page3', title: '页面 3' },
+  //     { path: '/index/index', title: '新建示例' },
+  //     { path: '/table', title: '表格' }
+  //     // { path: '/test', title: 'test' }
+  //   ]
+  // }
 ])

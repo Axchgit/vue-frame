@@ -4,7 +4,7 @@
 //  * @LastEditTime: 2020-08-20 18:20:39
 //  * @LastEditors: xch
 //  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\test\test2.main.js
-//  * @Description: 
+//  * @Description:
 //  */
 // // main.js
 // router.beforeEach((to, from, next) => {
@@ -34,5 +34,4 @@
 //       }
 //     }
 //   });
-  
-  
+

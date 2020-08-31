@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'd2-contextmenu',
+  name: 'D2Contextmenu',
   props: {
     visible: {
       type: Boolean,
@@ -23,18 +23,18 @@ export default {
   },
   computed: {
     flag: {
-      get () {
+      get() {
         if (this.visible) {
           // 注册全局监听事件 [ 目前只考虑鼠标解除触发 ]
           window.addEventListener('mousedown', this.watchContextmenu)
         }
         return this.visible
       },
-      set (newVal) {
+      set(newVal) {
         this.$emit('update:visible', newVal)
       }
     },
-    style () {
+    style() {
       return {
         left: this.x + 'px',
         top: this.y + 'px',
@@ -43,12 +43,12 @@ export default {
     }
   },
   methods: {
-    watchContextmenu (event) {
+    watchContextmenu(event) {
       if (!this.$el.contains(event.target) || event.button !== 0) this.flag = false
       window.removeEventListener('mousedown', this.watchContextmenu)
     }
   },
-  mounted () {
+  mounted() {
     // 将菜单放置到body下
     document.querySelector('body').appendChild(this.$el)
   }

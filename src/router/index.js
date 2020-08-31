@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-08-23 21:48:35
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\index.js
- * @Description: 
+ * @Description:
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -19,14 +19,11 @@ import util from '@/libs/util.js'
 // 路由数据
 import routes from './routes'
 
-    // import { constantRoutes , errorPage } from './routes'
-
+// import { constantRoutes , errorPage } from './routes'
 
 // import getters from '@/store/getters'
 
 import { errorLog, errorCreate } from './tools'
-
-
 
 // fix vue-router NavigationDuplicated
 const VueRouterPush = VueRouter.prototype.push
@@ -45,14 +42,13 @@ const router = new VueRouter({
   routes
 })
 
-const whiteList = ['/login', '/salogin', '/emplogin', '/auth-redirect','/emprecover','/empactivate'] // no redirect whitelist
-
+const whiteList = ['/login', '/salogin', '/emplogin', '/auth-redirect', '/emprecover', '/empactivate'] // no redirect whitelist
 
 /**
  * 路由拦截
  * 权限验证
  */
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   // 确认已经加载多标签页数据 https://github.com/d2-projects/d2-admin/issues/201
   await store.dispatch('d2admin/page/isLoaded')
   // 确认已经加载组件尺寸设置 https://github.com/d2-projects/d2-admin/issues/198
@@ -78,7 +74,7 @@ router.beforeEach(async (to, from, next) => {
   // 验证当前路由所有的匹配中是否需要有登录验证的
   // if (to.matched.some(r => r.meta.auth)) {
   if (token && token !== 'undefined') {
-    if (to.path === '/salogin' || to.path === '/emplogin' ) {
+    if (to.path === '/salogin' || to.path === '/emplogin') {
       next({ path: 'index' })
       NProgress.done()
     } else {
@@ -89,9 +85,6 @@ router.beforeEach(async (to, from, next) => {
       //   // const roles = getters.roles
       //   const roles = util.cookies.get('roles')
       //   console.log(roles)
-
-
-
 
       //   // generae accessible routes map based on roles
       //   const accessRoutes = await store.dispatch('vueframe/permission/generateRoutes', roles)
@@ -107,7 +100,6 @@ router.beforeEach(async (to, from, next) => {
       //   // await store.dispatch('user/resetToken')
       //   util.cookies.remove('token')
       //   errorCreate(error || 'Has Error')
-
 
       //   // Message.error(error || 'Has Error')
       //   next(`/salogin?redirect=${to.path}`)
@@ -131,7 +123,6 @@ router.beforeEach(async (to, from, next) => {
       })
       NProgress.done()
     }
-
   }
 })
 router.afterEach(to => {

@@ -5,10 +5,10 @@
     <el-dialog :title="title" :visible.sync="dialogAddgsVisible" @close="closeDialogAddgsVisible">
       <el-form :model="addForm" :rules="rules" ref="addForm">
         <el-form-item label="类别名称" :label-width="formLabelWidth">
-          <el-input v-model="addForm.name" autocomplete="off"></el-input>
+          <el-input v-model="addForm.name" autocomplete="off"/>
         </el-form-item>
         <el-form-item label="排序" :label-width="formLabelWidth">
-          <el-input v-model="addForm.sort"></el-input>
+          <el-input v-model="addForm.sort"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -23,14 +23,14 @@
 export default {
   data() {
     return {
-        title:'',
-        rules:'',
-        dialogAddgsVisible:false,
-        addForm:{
-            
-        }
+      title: '',
+      rules: '',
+      dialogAddgsVisible: false,
+      addForm: {
 
-    };
+      }
+
+    }
   },
   methods: {
     /**
@@ -38,21 +38,21 @@ export default {
      * @param
      */
     addgsForm() {
-      this.dialogAddgsVisible = true;
-      this.title = "新增分类";
+      this.dialogAddgsVisible = true
+      this.title = '新增分类'
     },
     /**
      *关闭或取消模态框，清空值
      * @param
      */
     closeDialogAddgsVisible() {
-      this.$refs.addForm.resetFields(); //element封装的方法,清空模态框的值
-      this.title = ""; //初始化title的值
+      this.$refs.addForm.resetFields() // element封装的方法,清空模态框的值
+      this.title = '' // 初始化title的值
       this.addForm = {
-        //初始化addForm中的值
-        name: "",
-        sort: "",
-      };
+        // 初始化addForm中的值
+        name: '',
+        sort: ''
+      }
     },
 
     /**
@@ -61,21 +61,21 @@ export default {
      */
     saveAddForm(aaa) {
       this.$refs[aaa].validate((valid) => {
-        console.log(this.$refs[aaa]);
+        console.log(this.$refs[aaa])
         if (valid) {
-          let params = {
+          const params = {
             name: this.addForm.name,
-            sort: this.addForm.sort,
-          };
+            sort: this.addForm.sort
+          }
           this.axios.post(`接口地址`, params).then((res) => {
-            alert("新增成功");
-            this.dialogAddgsVisible = false;
+            alert('新增成功')
+            this.dialogAddgsVisible = false
             // this.$router.push({name:'categories'})
-            this.init();
-          });
+            this.init()
+          })
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>

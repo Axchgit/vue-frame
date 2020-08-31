@@ -4,7 +4,7 @@
 //  * @LastEditTime: 2020-08-20 18:09:12
 //  * @LastEditors: xch
 //  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\test\test.js
-//  * @Description: 
+//  * @Description:
 //  */
 // // store/permission.js
 // import { asyncRouterMap, constantRouterMap } from 'src/router';
@@ -13,7 +13,7 @@
 //   if (route.meta && route.meta.role) {
 //       //知识点:some()判断数组是否满足一个条件
 //       //知识点:indexOf(value)匹配数组中value的位置,无则返回-1
-//       //知识点:箭头函数 x=> x*x  ===  function(x) {x*x} 
+//       //知识点:箭头函数 x=> x*x  ===  function(x) {x*x}
 //     return roles.some(role => route.meta.role.indexOf(role) >= 0)
 //   } else {
 //     return true

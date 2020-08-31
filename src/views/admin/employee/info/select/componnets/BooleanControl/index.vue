@@ -19,8 +19,7 @@
       :active-text="activeText"
       :inactive-text="inactiveText"
       :disabled="disabled"
-      @change="handleChange">
-    </el-switch>
+      @change="handleChange"/>
     <span slot="reference">
       <slot v-if="value" name="active"/>
       <slot v-else name="inactive"/>
@@ -56,7 +55,7 @@ export default {
       default: '禁用'
     }
   },
-  data () {
+  data() {
     return {
       currentValue: false,
       disabled: false
@@ -64,22 +63,22 @@ export default {
   },
   watch: {
     value: {
-      //D2项目逻辑:val为事件接收值
-      handler (val) {
+      // D2项目逻辑:val为事件接收值
+      handler(val) {
         this.currentValue = val
       },
       immediate: true
     }
   },
   methods: {
-    handleChange (val) {
-      //知识点:控制元素disabled属性
+    handleChange(val) {
+      // 知识点:控制元素disabled属性
       this.disabled = true
       this.$message({
         message: '正在发送请求',
         type: 'info'
       })
-      //TODO:
+      // TODO:
       // 请将 setTimeout 修改为您的异步请求
       setTimeout(() => {
         this.disabled = false

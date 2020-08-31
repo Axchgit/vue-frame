@@ -1,34 +1,35 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-08-21 23:53:11
+ * @LastEditTime: 2020-08-28 11:56:35
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-emp-activity.js
- * @Description: 
+ * @Description:
  */
 export default {
-    path: '/admin/emp-activity',
-    title: '人员动态管理',
-    icon: 'flask',
-    children: (pre => [
-        { path: `${pre}index`, title: '示例', icon: 'home' },
-        {
-            title: '请假审核',
-            icon: 'table',
-            children: [
-                { path: `${pre}leave/wait`, title: '待审核' },
-                { path: `${pre}leave/adopt`, title: '已通过' }
-            ]
-        },
-        {
-            title: '离职审核',
-            icon: 'github',
-            children: [
-                { path: `${pre}quit/wait`, title: '待审核' },
-                { path: `${pre}quit/adopt`, title: '已通过' }
-            ]
-        }
-    ])('/admin/emp_activity/')
+  path: '/admin/emp-activity',
+  title: '人员动态管理',
+  roles: 1,
+  icon: 'flask',
+  children: (pre => [
+    { path: `${pre}index`, title: '示例', icon: 'home' },
+    {
+      title: '请假审核',
+      icon: 'table',
+      children: [
+        { path: `${pre}leave/wait`, title: '待审核' },
+        { path: `${pre}leave/adopt`, title: '已通过' }
+      ]
+    },
+    {
+      title: '离职审核',
+      icon: 'github',
+      children: [
+        { path: `${pre}quit/wait`, title: '待审核' },
+        { path: `${pre}quit/adopt`, title: '已通过' }
+      ]
+    }
+  ])('/admin/emp_activity/')
 }
 
 // {
@@ -40,7 +41,6 @@ export default {
 //         { path: '/page3', title: '页面 3' },
 //         { path: '/dom', title: '新建示例' },
 //         { path: '/test', title: 'test' }
-
 
 //     ]
 // },

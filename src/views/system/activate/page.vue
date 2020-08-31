@@ -2,7 +2,7 @@
   <div class="page-login">
     <div class="page-login--layer page-login--layer-area">
       <ul class="circles">
-        <li v-for="n in 10" :key="n"></li>
+        <li v-for="n in 10" :key="n"/>
       </ul>
     </div>
     <div class="page-login--layer page-login--layer-time" flex="main:center cross:center">{{time}}</div>
@@ -25,23 +25,23 @@
                 size="default"
               >
                 <el-form-item label="昵称" prop="nick_name">
-                  <el-input v-model="formActivate.nick_name"></el-input>
+                  <el-input v-model="formActivate.nick_name"/>
                 </el-form-item>
                 <el-form-item label="自我介绍" prop="profile">
-                  <el-input type="textarea" v-model="formActivate.profile"></el-input>
+                  <el-input type="textarea" v-model="formActivate.profile"/>
                 </el-form-item>
                 <el-form-item label="密码" prop="pass">
-                  <el-input type="password" v-model="formActivate.pass" autocomplete="off"></el-input>
+                  <el-input type="password" v-model="formActivate.pass" autocomplete="off"/>
                 </el-form-item>
                 <el-form-item label="确认密码" prop="checkPass">
-                  <el-input type="password" v-model="formActivate.checkPass" autocomplete="off"></el-input>
+                  <el-input type="password" v-model="formActivate.checkPass" autocomplete="off"/>
                 </el-form-item>
                 <el-button size="default" @click="submit" type="primary" class="button-login">提交</el-button>
               </el-form>
             </el-card>
           </div>
         </div>
-        <div class="page-login--content-footer"></div>
+        <div class="page-login--content-footer"/>
       </div>
     </div>
     <el-dialog
@@ -51,10 +51,10 @@
     >
       <el-form :model="formCode" :rules="dialogRule" ref="checkCode">
         <el-form-item prop="work_num" label="工号">
-          <el-input type="text" v-model="formCode.work_num" autocomplete="off"></el-input>
+          <el-input type="text" v-model="formCode.work_num" autocomplete="off"/>
         </el-form-item>
         <el-form-item prop="email" label="邮箱">
-          <el-input type="text" v-model="formCode.email"></el-input>
+          <el-input type="text" v-model="formCode.email"/>
         </el-form-item>
         <el-form-item prop="code">
           <el-input id="sendcode" type="text" v-model="formCode.code" placeholder="验证码">
@@ -76,133 +76,133 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
-import { mapActions } from "vuex";
-import localeMixin from "@/locales/mixin.js";
-import api from "@/api";
+import dayjs from 'dayjs'
+// import { mapActions } from 'vuex'
+import localeMixin from '@/locales/mixin.js'
+import api from '@/api'
 export default {
   mixins: [localeMixin],
   data() {
     var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
+      if (value === '') {
+        callback(new Error('请输入密码'))
       } else {
-        if (this.formActivate.checkPass !== "") {
-          this.$refs.activateForm.validateField("checkPass");
+        if (this.formActivate.checkPass !== '') {
+          this.$refs.activateForm.validateField('checkPass')
         }
-        callback();
+        callback()
       }
-    };
+    }
     var validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请再次输入密码"));
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
       } else if (value !== this.formActivate.pass) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error('两次输入密码不一致!'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
-      uuid: "",
+      uuid: '',
       //   isAble: false,
       timeRan: null,
       timeInterval: null,
-      time: dayjs().format("HH:mm:ss"),
+      time: dayjs().format('HH:mm:ss'),
       dialogActivateVisible: false,
       timer: 0,
       // 表单
       formActivate: {
-        nick_name: "",
-        pass: "",
-        checkPass: "",
+        nick_name: '',
+        pass: '',
+        checkPass: '',
         // avatar: "",
-        profile: "",
+        profile: ''
       },
-      //模态框
-      dialog_title: "",
+      // 模态框
+      dialog_title: '',
       formCode: {
-        work_num: "",
-        email: "",
-        code: "",
+        work_num: '',
+        email: '',
+        code: ''
       },
       // 表单校验
       rules: {
         nick_name: [
           {
             required: true,
-            message: "请输入昵称",
-            trigger: "blur",
-          },
+            message: '请输入昵称',
+            trigger: 'blur'
+          }
         ],
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
+        pass: [{ validator: validatePass, trigger: 'blur' }],
+        checkPass: [{ validator: validatePass2, trigger: 'blur' }]
       },
       dialogRule: {
         work_num: [
           {
             required: true,
-            message: "请输入工号",
-            trigger: "blur",
-          },
+            message: '请输入工号',
+            trigger: 'blur'
+          }
         ],
         email: [
           {
             required: true,
-            message: "请输入邮箱",
-            trigger: "blur",
-          },
+            message: '请输入邮箱',
+            trigger: 'blur'
+          }
         ],
         code: [
           {
             required: true,
-            message: "请输入验证码",
-            trigger: "blur",
-          },
-        ],
-      },
-    };
+            message: '请输入验证码',
+            trigger: 'blur'
+          }
+        ]
+      }
+    }
   },
   mounted() {
     this.timeInterval = setInterval(() => {
-      this.refreshTime();
-    }, 1000);
+      this.refreshTime()
+    }, 1000)
   },
   beforeDestroy() {
-    clearInterval(this.timeInterval);
+    clearInterval(this.timeInterval)
   },
   methods: {
-    //验证提交信息
+    // 验证提交信息
     // ...mapActions("d2admin/account", ["empRecover"]),
-    //发送验证码
-    async sendActivateCode({ work_num = "", email = "" } = {}) {
-      const res = await api.SYS_EMP_SENDACTIVATECODE({ work_num, email });
-      return res;
+    // 发送验证码
+    async sendActivateCode({ work_num = '', email = '' } = {}) {
+      const res = await api.SYS_EMP_SENDACTIVATECODE({ work_num, email })
+      return res
     },
-    //验证信息,返回用户标识
+    // 验证信息,返回用户标识
     async createEmpAccount({
-      uuid = "",
-      code = "",
-      nick_name = "",
-      password = "",
-      profile = "",
+      uuid = '',
+      code = '',
+      nick_name = '',
+      password = '',
+      profile = ''
     } = {}) {
       const res = await api.SYS_EMP_CREATE({
         uuid,
         code,
         nick_name,
         password,
-        profile,
-      });
-      return res;
+        profile
+      })
+      return res
     },
-    //更新密码
+    // 更新密码
     // async updatePassword({ uuid = "", password = "" } = {}) {
     //   const res = await api.EMPACCOUNT_UPDATE_PASSWORD({ uuid, password });
     //   return res;
     // },
-    //背景时间显示
+    // 背景时间显示
     refreshTime() {
-      this.time = dayjs().format("HH:mm:ss");
+      this.time = dayjs().format('HH:mm:ss')
     },
     /**
      * @description 提交表单
@@ -210,39 +210,39 @@ export default {
     submit() {
       this.$refs.activateForm.validate((valid) => {
         if (valid) {
-          this.dialogActivateVisible = true;
-          this.dialog_title = "身份认证";
+          this.dialogActivateVisible = true
+          this.dialog_title = '身份认证'
         } else {
-          this.$message.error("表单校验失败，请检查");
+          this.$message.error('表单校验失败，请检查')
         }
-      });
+      })
     },
-    //提交验证信息
+    // 提交验证信息
     checkInfo(formCode) {
       this.$refs.checkCode.validate((valid) => {
         if (valid) {
           this.createEmpAccount({
             uuid: this.uuid,
-            code:this.formCode.code,
+            code: this.formCode.code,
             nick_name: this.formActivate.nick_name,
             password: this.formActivate.pass,
-            profile: this.formActivate.profile,
+            profile: this.formActivate.profile
           }).then((res) => {
             if (res === undefined) {
-              this.$message.error("失败");
+              this.$message.error('失败')
             } else {
-              this.$message.success("成功");
+              this.$message.success('成功')
               // 重定向对象不存在则返回顶层路径
-              this.$router.replace(this.$route.query.redirect || "/");
+              this.$router.replace(this.$route.query.redirect || '/')
             }
-          });
+          })
         }
-      });
+      })
     },
-    //取消模态框,清空数据
+    // 取消模态框,清空数据
     closeDialogActivateVisible() {
-      this.$confirm("确认关闭？")
-        .then(_ => {          
+      this.$confirm('确认关闭？')
+        .then(_ => {
           // this.$refs.formCode.resetFields(); //element封装的方法,清空模态框的值
           // this.dialog_title = ""; //初始化title的值
           // this.formCode = {
@@ -251,49 +251,49 @@ export default {
           //   email: "",
           //   code: "",
           // };
-          this.dialogActivateVisible = false;
+          this.dialogActivateVisible = false
         })
         .catch(_ => {
           // this.dialogActivateVisible = true;
-        });
+        })
     },
 
-    //验证码
+    // 验证码
     sendCode() {
       if (!this.formCode.work_num || !this.formCode.email) {
-        this.$message.error("请输入信息");
-        return false;
+        this.$message.error('请输入信息')
+        return false
       }
       if (this.timer > 0) {
-        //知识点:上方弹出提示行
-        this.$message.error(this.timer + "s后再发送");
-        //知识点:阻止函数继续向下执行
-        return false;
+        // 知识点:上方弹出提示行
+        this.$message.error(this.timer + 's后再发送')
+        // 知识点:阻止函数继续向下执行
+        return false
       }
-      this.timer = 60;
+      this.timer = 60
       //   this.isAble = true;
-      //知识点:计时器
+      // 知识点:计时器
       this.timeRan = setInterval(() => {
-        this.timer--;
-      }, 1000);
+        this.timer--
+      }, 1000)
       setTimeout(() => {
-        clearInterval(this.timeRan);
-        this.timer = null;
-      }, 60000);
+        clearInterval(this.timeRan)
+        this.timer = null
+      }, 60000)
       this.sendActivateCode({
         work_num: this.formCode.work_num,
-        email: this.formCode.email,
+        email: this.formCode.email
       }).then((res) => {
         if (res === undefined) {
-          this.$message.error("失败");
+          this.$message.error('失败')
         } else {
-          this.uuid = res.uuid;
-          this.$message.success("发送成功");
+          this.uuid = res.uuid
+          this.$message.success('发送成功')
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss">
