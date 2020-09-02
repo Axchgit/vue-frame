@@ -1,14 +1,14 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 23:45:05
- * @LastEditTime: 2020-09-02 14:47:05
+ * @LastEditTime: 2020-09-02 15:04:42
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\select\jd\page.vue
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\performance\select\jd\page.vue
  * @Description:
 -->
 <template>
   <d2-container>
-    <!-- ref为验证表单用值 -->
+    <!--ref为验证表单用值 -->
     <demo-page-header
       slot="header"
       @submitSelect="handleSubmitSelect"
@@ -72,10 +72,10 @@ export default {
     handleSubmit(form) {
       this.table_page = form.table_page
       this.table = []
-      // 知识点:打印当前路由名字
+      // 打印当前路由名字
       // console.log(this.$route.name)
 
-      // 项目逻辑:设置按钮样式
+      // 设置按钮样式
       this.loading = true
       this.$notify({
         title: '开始请求表格数据'
@@ -110,7 +110,7 @@ export default {
     handleSubmitSelect(form) {
       this.table_page = form.table_page
       this.table = []
-      // 项目逻辑:设置按钮样式
+      // 设置按钮样式
       this.loading = true
       this.$notify({
         title: '开始请求表格数据'

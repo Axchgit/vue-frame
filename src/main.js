@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-31 01:15:25
+ * @LastEditTime: 2020-09-01 16:40:01
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\main.js
  * @Description:
@@ -14,7 +14,9 @@ import App from './App'
 import d2Admin from '@/plugin/d2admin'
 // store
 import store from '@/store/index'
-
+// 引入公共方法
+// import commonFunction from './assets/js/commonFunction.js'
+import moment from 'moment'
 // 浏览器警告
 import 'default-passive-events'
 
@@ -25,9 +27,9 @@ import { frameInRoutes } from '@/router/routes'
 
 // 核心插件
 Vue.use(d2Admin)
-
 new Vue({
   router,
+  moment,
   store,
   i18n,
   render: h => h(App),
@@ -73,7 +75,6 @@ new Vue({
              * @description:监听路由变化,登录后刷新页面
              */
       handler: function(val, oldVal) {
-        // console.log(oldVal)
         /**
                  * 逻辑
                  * 当前一个路由为登录界面,且当前路由不为登录页面时

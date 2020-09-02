@@ -1,7 +1,16 @@
+<!--
+ * @Author: xch
+ * @Date: 2020-08-10 17:43:37
+ * @LastEditTime: 2020-09-02 15:30:35
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\README.md
+ * @Description: 
+-->
 [D2Admin](https://github.com/d2-projects/d2-admin) 是一个完全 **开源免费** 的企业中后台产品前端集成方案，使用最新的前端技术栈，小于 60kb 的本地首屏 js 加载，已经做好大部分项目前期准备工作，并且带有大量示例代码，助力管理系统敏捷开发。
 
 **中文** | [English](https://github.com/d2-projects/d2-admin-start-kit)
 
+<a href="https://github.com/d2-projects/d2-admin" target="_blank"><img src="https://raw.githubusercontent.com/FairyEver/d2-admin/master/docs/image/d2-admin@2x.png" width="200"></a>
 ## 预览
 
 ![Deploy preview](https://github.com/d2-projects/d2-admin-start-kit/workflows/Deploy%20preview/badge.svg)

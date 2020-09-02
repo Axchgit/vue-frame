@@ -41,7 +41,6 @@
       :data="currentTableData"
       v-loading="loading"
       size="mini"
-      height="540"
       stripe
       style="width: 100%;"
       @selection-change="handleSelectionChange"
