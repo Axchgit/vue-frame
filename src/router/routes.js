@@ -149,7 +149,8 @@ export default [
   ...frameOut,
   ...errorPage
 ]
-
+export const constantRoutes = ''
+export const asyncRoutes = ''
 // 实例化vue的时候只挂载constantRouter
 // export default new Router({
 //     routes: constantRouterMap

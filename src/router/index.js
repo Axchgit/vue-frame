@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-23 21:48:35
+ * @LastEditTime: 2020-09-02 17:13:48
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\index.js
  * @Description:
@@ -23,7 +23,7 @@ import routes from './routes'
 
 // import getters from '@/store/getters'
 
-import { errorLog, errorCreate } from './tools'
+// import { errorLog, errorCreate } from './tools'
 
 // fix vue-router NavigationDuplicated
 const VueRouterPush = VueRouter.prototype.push

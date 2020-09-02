@@ -1,7 +1,7 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-20 12:41:29
+ * @LastEditTime: 2020-09-02 17:16:44
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\demo\page1\index.vue
  * @Description:
@@ -75,7 +75,7 @@ export default {
       }
     },
     verifyCode() {
-      if (this.input == this.identifyCode) {
+      if (this.input === this.identifyCode) {
         console.log('验证码输入正确')
       } else {
         console.log('错误')

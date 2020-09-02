@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 14:40:56
- * @LastEditTime: 2020-08-21 20:29:39
+ * @LastEditTime: 2020-09-02 17:16:09
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\store\modules\vueframe\modules\permission.js
  * @Description:
@@ -59,7 +59,7 @@ const mutations = {
 const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
-      let accessedRoutes
+      var accessedRoutes
       // if (roles.includes('admin')) {
       //   accessedRoutes = asyncRoutes || []
       // } else {

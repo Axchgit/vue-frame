@@ -162,19 +162,15 @@ export default {
         this.$router.push({ name, params, query })
       }
     },
-    /**
-     * @description 接收鼠标中键点击 tab 标签的事件
-     * @param {object} tab 标签
-     * @param {object} event 事件
-     */
-    handleClick(tab, event) {
-      // 找到点击的页面在 tag 列表里是哪个
-      const page = this.opened.find(page => page.fullPath === tab.name)
-      if (page) {
-        const { name, params, query } = page
-        this.$router.push({ name, params, query })
-      }
-    },
+    // TODO:接收鼠标中键点击 tab 标签的事件
+    // handleClick(tab, event) {
+    //   // 找到点击的页面在 tag 列表里是哪个
+    //   const page = this.opened.find(page => page.fullPath === tab.name)
+    //   if (page) {
+    //     const { name, params, query } = page
+    //     this.$router.push({ name, params, query })
+    //   }
+    // },
     /**
      * @description 点击 tab 上的删除按钮触发这里
      * @param {String} tagName tab 名称

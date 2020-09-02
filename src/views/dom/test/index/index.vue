@@ -1,11 +1,19 @@
+<!--
+ * @Author: xch
+ * @Date: 2020-09-02 16:49:40
+ * @LastEditTime: 2020-09-02 17:18:09
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\test\index\index.vue
+ * @Description:
+-->
 <template>
   <d2-container type="ghost"/>
 </template>
 
 <script>
 import menu from '@/menu/modules/dom-test'
-import { menuHeader, menuAside } from '@/menu'
-import util from '@/libs/util.js'
+// import { menuHeader, menuAside } from '@/menu'
+// import util from '@/libs/util.js'
 
 // import { delete } from 'vue/types/umd'
 
@@ -13,7 +21,7 @@ export default {
   data() {
     return {
 
-      menuHeader,
+      // menuHeader,
       menu,
       banner: {
         title: 'DEMOS',

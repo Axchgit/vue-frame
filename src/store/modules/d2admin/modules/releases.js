@@ -1,4 +1,12 @@
-import util from '@/libs/util.js'
+/*
+ * @Author: xch
+ * @Date: 2020-09-02 16:49:39
+ * @LastEditTime: 2020-09-02 17:14:40
+ * @LastEditors: xch
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\store\modules\d2admin\modules\releases.js
+ * @Description:
+ */
+// import util from '@/libs/util.js'
 
 export default {
   namespaced: true,

@@ -157,7 +157,7 @@
 </template>
 
 <script>
-import BooleanControl from '../BooleanControl'
+// import BooleanControl from '../BooleanControl'
 import BooleanControlMini from '../BooleanControlMini'
 // D2项目逻辑:下载插件引用
 import Vue from 'vue'
@@ -166,7 +166,7 @@ Vue.use(pluginExport)
 
 export default {
   components: {
-    BooleanControl,
+    // BooleanControl,
     BooleanControlMini
   },
   props: {

@@ -87,8 +87,9 @@ import d2HeaderLocales from './components/header-locales'
 import d2HeaderSearch from './components/header-search'
 import d2HeaderSize from './components/header-size'
 import d2HeaderTheme from './components/header-theme'
-// TODO:注销下行
-import d2HeaderUser from './components/header-user'
+// 注销下行
+// import d2HeaderUser from './components/header-user'
+// TODO:用户头像点击事件优化
 import d2HeaderAvatar from './components/header-avatar'
 
 import d2HeaderLog from './components/header-log'
@@ -109,8 +110,8 @@ export default {
     d2HeaderSearch,
     d2HeaderSize,
     d2HeaderTheme,
-    // TODO:注销下行
-    d2HeaderUser,
+    // 注销下行
+    // d2HeaderUser,
     d2HeaderAvatar,
     d2HeaderLog,
     d2HeaderColor
