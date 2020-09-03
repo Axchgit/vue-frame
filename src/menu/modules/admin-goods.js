@@ -1,16 +1,16 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-08-28 11:29:41
+ * @LastEditTime: 2020-09-02 23:49:32
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-goods.js
  * @Description:
  */
 export default {
   path: '/admin/goods',
-  title: '推广商品',
+  title: ' 推广商品',
   roles: 1,
-  icon: 'flask',
+  icon: 'bar-chart',
   children: (pre => [
     { path: `${pre}index`, title: '数据管理', icon: 'home' },
     {

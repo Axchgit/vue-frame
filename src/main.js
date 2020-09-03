@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-09-01 16:40:01
+ * @LastEditTime: 2020-09-02 22:41:07
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\main.js
  * @Description:
@@ -19,6 +19,7 @@ import store from '@/store/index'
 import moment from 'moment'
 // 浏览器警告
 import 'default-passive-events'
+import './business'
 
 // 菜单和路由设置
 import router from './router'

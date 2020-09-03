@@ -1,110 +1,66 @@
 <!--
  * @Author: xch
- * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-09-02 17:16:44
+ * @Date: 2020-09-02 22:24:53
+ * @LastEditTime: 2020-09-02 22:25:12
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\demo\page1\index.vue
  * @Description:
 -->
 <template>
-  <d2-container>
-    <template slot="header">Page 1 header</template>
-    Hello World!!!
-    <el-input style="width:100px" v-model="input" size="medium" placeholder="请输入内容"/>
-  <el-button @click="verifyCode" type="primary">提交验证码</el-button>
-    <!-- <div @click="refreshCode"> -->
-      <template >
-        <div @click="refreshCode" style="width:100px">
-      <Sidentify  :identifyCode="identifyCode"/>
-        </div>
-      </template>
+  <d2-container  :class="{'page-compact':crud.pageOptions.compact}">
+    <template slot="header">测试页面1</template>
+    <d2-crud-x
+        ref="d2Crud"
+        v-bind="_crudProps"
+        v-on="_crudListeners"
+    >
+      <div slot="header">
+        <crud-search ref="search" :options="crud.searchOptions" @submit="handleSearch"  />
+        <el-button-group>
+          <el-button size="small" type="primary" @click="addRow"><i class="el-icon-plus"/> 新增</el-button>
+        </el-button-group>
+        <crud-toolbar
+:search.sync="crud.searchOptions.show"
+                      :compact.sync="crud.pageOptions.compact"
+                      :columns="crud.columns"
+                      @refresh="doRefresh()"
+                      @columns-filter-changed="handleColumnsFilterChanged"/>
 
-    <!-- </div> -->
-    <div class="title-group">
-      <p class="title">一般用法</p>
-      <p class="sub-title">
-        <template v-if="icon">
-          选择的图标 {{icon}}
-          <i :class="'fa fa-' + icon"/>
-        </template>
-        <template v-else>未选择</template>
-      </p>
-    </div>
-    <d2-icon-select v-model="icon" />
-    <div class="title-group">
-      <p class="title">用户可以输入</p>
-      <p class="sub-title">
-        <template v-if="icon2">
-          选择的图标 {{icon2}}
-          <i :class="'fa fa-' + icon2"/>
-        </template>
-        <template v-else>未选择</template>
-      </p>
-    </div>
-    <d2-icon-select v-model="icon2" :user-input="true" />
+      </div>
+    </d2-crud-x>
+
   </d2-container>
 </template>
 
 <script>
+import * as api from './api'
+import { crudOptions } from './crud'
+import { d2CrudPlus } from 'd2-crud-plus'
 export default {
+  name: 'FormSelect',
+  mixins: [d2CrudPlus.crud],
   data() {
     return {
-      input: '',
-      icon: '',
-      icon2: '',
-      identifyCode: ' ',
-      identifyCodeKey: 'qwertyuiopasdfghjklzxcvbnm1234567890'
     }
   },
-  name: 'Page1',
   methods: {
-    randomNum(min, max) {
-      return Math.floor(Math.random() * (max - min) + min)
+    getCrudOptions() {
+      return crudOptions(this)
     },
-    refreshCode() {
-      // 刷新验证码前清空之前的
-      this.identifyCode = ''
-      this.makeCode(4)
-      console.log('当前验证码==' + this.identifyCode)
+    pageRequest(query) {
+      return api.GetList(query)
     },
-    makeCode(l) {
-      for (let i = 0; i < l; i++) {
-        this.identifyCode += this.identifyCodeKey[
-          this.randomNum(0, this.identifyCodeKey.length)
-        ]
-      }
+    addRequest(row) {
+      console.log('api', api)
+      return api.AddObj(row)
     },
-    verifyCode() {
-      if (this.input === this.identifyCode) {
-        console.log('验证码输入正确')
-      } else {
-        console.log('错误')
-      }
-      this.refreshCode()
+    updateRequest(row) {
+      console.log('----', row)
+      return api.UpdateObj(row)
+    },
+    delRequest(row) {
+      return api.DelObj(row.id)
     }
-
-  },
-  created() {
-    this.refreshCode()
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.title-group {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  &:first-child {
-    margin-top: 0px;
-  }
-  .title {
-    margin: 0px;
-  }
-  .sub-title {
-    margin: 0px;
-    color: $color-text-sub;
-    font-size: 10px;
-  }
-}
-</style>
-

@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-08-28 11:36:07
+ * @LastEditTime: 2020-09-02 23:23:19
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\emp-msg-feedback.js
  * @Description:
@@ -10,7 +10,7 @@ export default {
   path: '/employee/msg_feedback',
   title: '信息反馈',
   roles: 5,
-  icon: 'flask',
+  icon: 'commenting',
   children: (pre => [
     { path: `${pre}index`, title: '示例', icon: 'home' },
     {

@@ -1,14 +1,14 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-08-28 11:33:18
+ * @LastEditTime: 2020-09-02 23:26:39
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-performance.js
  * @Description:
  */
 export default {
   path: '/admin/performance',
-  title: '业绩审核',
+  title: ' 业绩审核',
   roles: 1,
   icon: 'flask',
   children: (pre => [

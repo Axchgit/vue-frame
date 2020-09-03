@@ -1,16 +1,16 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-08-28 11:56:35
+ * @LastEditTime: 2020-09-02 23:48:54
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-emp-activity.js
  * @Description:
  */
 export default {
   path: '/admin/emp-activity',
-  title: '人员动态管理',
+  title: ' 人员动态管理',
   roles: 1,
-  icon: 'flask',
+  icon: 'check-square',
   children: (pre => [
     { path: `${pre}index`, title: '示例', icon: 'home' },
     {

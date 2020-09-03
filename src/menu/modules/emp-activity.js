@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-08-22 12:56:11
+ * @LastEditTime: 2020-09-02 23:21:40
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\emp-activity.js
  * @Description:
@@ -10,7 +10,7 @@ export default {
   path: '/employee/activity',
   title: '人员动态申请',
   roles: 5,
-  icon: 'flask',
+  icon: 'plane',
   children: (pre => [
     { path: `${pre}index`, title: '示例', icon: 'home' },
     {

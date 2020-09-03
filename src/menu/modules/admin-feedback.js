@@ -1,16 +1,16 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-08-28 11:19:27
+ * @LastEditTime: 2020-09-02 23:34:04
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-feedback.js
  * @Description:
  */
 export default {
   path: '/admin/feedback',
-  title: '反馈处理',
+  title: ' 反馈处理',
   roles: 1,
-  icon: 'flask',
+  icon: 'comments',
   children: (pre => [
     { path: `${pre}index`, title: '反馈处理', icon: 'home' },
     {

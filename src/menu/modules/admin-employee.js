@@ -1,16 +1,16 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-08-22 00:54:04
+ * @LastEditTime: 2020-09-02 23:49:25
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-employee.js
  * @Description:
  */
 export default {
   path: '/admin/employee',
-  title: '员工管理',
+  title: ' 员工管理',
   roles: 1,
-  icon: 'flask',
+  icon: 'users',
   children: (pre => [
     { path: `${pre}index`, title: '示例', icon: 'home' },
     {

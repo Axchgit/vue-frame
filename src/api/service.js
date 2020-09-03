@@ -1,6 +1,9 @@
+/* eslint-disable no-inner-declarations */
+
 import axios from 'axios'
 import Adapter from 'axios-mock-adapter'
 import router from '@/router'
+import store from '@/store/index'
 
 // import { mapActions } from "vuex";
 import { get } from 'lodash'
@@ -50,20 +53,29 @@ function createService() {
             errorCreate(`[ code: 204 ] ${dataAxios.msg}: ${response.config.url}`)
             break
           case 304:
+
             // FIXME:token过期后执行注销操作
             /**
                          * @description 注销  //验证token过期 删除cookie
                          */
-            async function logout({ dispatch }) {
+            // eslint-disable-next-line no-case-declarations
+            // eslint-disable-next-line no-inner-declarations
+            // eslint-disable-next-line no-case-declarations
+            async function logout() {
               // 删除cookie
               util.cookies.remove('token')
               util.cookies.remove('uuid')
+              util.cookies.remove('roles')
+
               // 清空 vuex 用户信息
-              await dispatch('d2admin/user/set', {}, { root: true })
+              await store.dispatch('d2admin/user/set', {}, { root: true })
               // 跳转路由
-              router.push({ name: 'login' })
+              router.push({ name: 'emplogin' })
+              errorCreate(`登录失效--请重新登录`)
+              // errorCreate(`${dataAxios.msg}: ${response.config.url}`)
             }
             logout()
+
             break
           default:
             // 不是正确的 code

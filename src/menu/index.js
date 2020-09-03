@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-08-28 11:49:17
+ * @LastEditTime: 2020-09-02 22:53:35
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\index.js
  * @Description:
@@ -67,8 +67,8 @@ function supplementPath(menu) {
 // console.log(adminEmpData.roles)
 
 // 所有的需要判断权限的菜单项
-const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback, pagsDomTest, domPages,
-  empActivity, empMsgFeedback, empPerformance]
+const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback,
+  empPerformance, empActivity, empMsgFeedback, domPages, pagsDomTest]
 // 加入到顶部菜单数组中的菜单项
 const addMenu = []
 
