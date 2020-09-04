@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-12 13:29:07
- * @LastEditTime: 2020-09-04 02:25:37
+ * @LastEditTime: 2020-09-04 13:10:28
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\modules\emp-performance.js
  * @Description:
@@ -37,7 +37,7 @@ export default {
       component: _import('employee/performance/goods/index'),
       meta: {
         ...meta,
-        title: '推广商品'
+        title: '已推商品'
       }
     }
   ])('EmployeePerformance')

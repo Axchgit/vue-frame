@@ -60,22 +60,24 @@
       <el-table-column label="商品名称" align="center" show-overflow-tooltip>
         <template slot-scope="scope">{{scope.row.goods_name}}</template>
       </el-table-column>
-      <el-table-column label="店铺名称" align="center">
+      <el-table-column label="店铺名称|ID" align="center">
         <template slot-scope="scope">{{scope.row.shop_name}}</template>
       </el-table-column>
-      <el-table-column label="同跨店" align="center">
+      <!-- <el-table-column label="同跨店" align="center">
         <template slot-scope="scope">{{scope.row.is_same_shop}}</template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column label="佣金比例" align="center">
-        <template slot-scope="scope">{{scope.row.commission_rate/10+'%'}}</template>
+        <template slot-scope="scope">
+          <el-tag size="mini" type="">{{scope.row.commission_rate/10+'%'}}</el-tag>
+        </template>
       </el-table-column>
-      <el-table-column label="分成比例" align="center">
+      <!-- <el-table-column label="分成比例" align="center">
         <template slot-scope="scope">{{scope.row.division_proportion+'%'}}</template>
-      </el-table-column>
-      <el-table-column label="预估金额" align="center">
+      </el-table-column>-->
+      <!-- <el-table-column label="预估金额" align="center">
         <template slot-scope="scope">{{scope.row.expec_amount/100}}</template>
-      </el-table-column>
-      <el-table-column label="预估佣金" align="center">
+      </el-table-column>-->
+      <el-table-column label="佣金(元)" align="center">
         <template slot-scope="scope">
           <el-tag size="mini" type="success">{{scope.row.expec_commission/100}}</el-tag>
         </template>
@@ -85,7 +87,7 @@
       </el-table-column>
       <!-- <el-table-column label="创建时间" width="150" :show-overflow-tooltip="true">
         <template slot-scope="scope">{{scope.row.create_time }}</template>
-      </el-table-column> -->
+      </el-table-column>-->
       <!--
       <el-table-column label="管理权限" align="center">
         <template slot-scope="scope">
