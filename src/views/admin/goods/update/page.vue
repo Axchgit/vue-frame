@@ -1,9 +1,9 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-29 22:44:20
- * @LastEditTime: 2020-09-04 18:00:52
+ * @LastEditTime: 2020-09-04 22:33:11
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\update\jd\page.vue
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\update\page.vue
  * @Description:
 -->
 <template>
@@ -54,7 +54,7 @@ import pluginImport from '@d2-projects/vue-table-import'
 Vue.use(pluginImport)
 
 export default {
-  name: 'AdminGoodsUpdateJd',
+  name: 'AdminGoodsUpdateIndex',
   data() {
     return {
       results: '',

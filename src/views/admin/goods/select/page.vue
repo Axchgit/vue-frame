@@ -1,9 +1,9 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 23:45:05
- * @LastEditTime: 2020-09-02 14:47:05
+ * @LastEditTime: 2020-09-04 22:32:59
  * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\select\jd\page.vue
+ * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\select\page.vue
  * @Description:
 -->
 <template>
@@ -29,7 +29,7 @@
 <script>
 export default {
   // name 值和本页的 $route.name 一致才可以缓存页面
-  name: 'AdminGoodsSelectJd',
+  name: 'AdminGoodsSelectIndex',
   components: {
     DemoPageHeader: () => import('./componnets/PageHeader'),
     DemoPageMain: () => import('./componnets/PageMain'),

@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-02 23:49:32
+ * @LastEditTime: 2020-09-04 22:35:43
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-goods.js
  * @Description:
@@ -12,27 +12,29 @@ export default {
   roles: 1,
   icon: 'bar-chart',
   children: (pre => [
-    { path: `${pre}index`, title: '数据管理', icon: 'home' },
-    {
-      title: '更新数据',
-      icon: 'table',
-      children: [
-        { path: `${pre}update/tb`, title: '淘宝' },
-        { path: `${pre}update/jd`, title: '京东' },
-        { path: `${pre}update/pdd`, title: '拼多多' }
-        // { path: `${pre}info/update`, title: '修改' }
-      ]
-    },
-    {
-      title: '数据查询',
-      icon: 'github',
-      children: [
-        { path: `${pre}select/tb`, title: '淘宝' },
-        { path: `${pre}select/jd`, title: '京东' },
-        { path: `${pre}select/pdd`, title: '拼多多' }
-        // { path: `${pre}account/update`, title: '修改' }
-      ]
-    }
+    { path: `${pre}update`, title: '更新数据', icon: 'home' },
+    { path: `${pre}select`, title: '数据查询', icon: 'home' }
+
+    // {
+    //   title: '更新数据',
+    //   icon: 'table',
+    //   children: [
+    //     { path: `${pre}update/tb`, title: '淘宝' },
+    //     { path: `${pre}update/jd`, title: '京东' },
+    //     { path: `${pre}update/pdd`, title: '拼多多' }
+    //     // { path: `${pre}info/update`, title: '修改' }
+    //   ]
+    // },
+    // {
+    //   title: '数据查询',
+    //   icon: 'github',
+    //   children: [
+    //     { path: `${pre}select/tb`, title: '淘宝' },
+    //     { path: `${pre}select/jd`, title: '京东' },
+    //     { path: `${pre}select/pdd`, title: '拼多多' }
+    //     // { path: `${pre}account/update`, title: '修改' }
+    //   ]
+    // }
     // {
     //   title: '数据统计',
     //   icon: 'github',
