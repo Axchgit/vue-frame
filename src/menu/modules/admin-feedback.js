@@ -7,36 +7,35 @@
  * @Description:
  */
 export default {
-  path: '/admin/feedback',
-  title: ' 反馈处理',
-  roles: 1,
-  icon: 'comments',
-  children: (pre => [
-    { path: `${pre}index`, title: '反馈处理', icon: 'home' },
-    {
-      title: '系统功能问题',
-      icon: 'table',
-      children: [
-        { path: `${pre}sys`, title: '处理' }
-        // { path: `${pre}info/update`, title: '修改' }
-      ]
-    },
-    {
-      title: '业务问题',
-      icon: 'github',
-      children: [
-        { path: `${pre}business`, title: '处理' }
-        // { path: `${pre}account/update`, title: '修改' }
-      ]
-    },
-    {
-      title: '其他问题',
-      icon: 'github',
-      children: [
-        { path: `${pre}other`, title: '处理' }
-        // { path: `${pre}account/update`, title: '修改' }
-      ]
-    }
-  ])('/admin/feedback/')
+    path: '/admin/feedback',
+    title: ' 反馈处理',
+    roles: 1,
+    icon: 'comments',
+    children: (pre => [
+        { path: `${pre}index`, title: '反馈处理', icon: 'home' },
+        {
+            title: '系统功能问题',
+            icon: 'table',
+            children: [
+                { path: `${pre}sys`, title: '处理' }
+                // { path: `${pre}info/update`, title: '修改' }
+            ]
+        },
+        {
+            title: '业务问题',
+            icon: 'github',
+            children: [
+                { path: `${pre}business`, title: '处理' }
+                // { path: `${pre}account/update`, title: '修改' }
+            ]
+        },
+        {
+            title: '其他问题',
+            icon: 'github',
+            children: [
+                { path: `${pre}other`, title: '处理' }
+                // { path: `${pre}account/update`, title: '修改' }
+            ]
+        }
+    ])('/admin/feedback/')
 }
-

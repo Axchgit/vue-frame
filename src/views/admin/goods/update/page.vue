@@ -91,19 +91,20 @@ export default {
 
       // this.isLoad = !this.isLoad
       // 限定上传的文件为.xlsx
-      const isExcel = file.type === 'application/vnd.ms-excel'
+      const isExcel = file.type === 'application/vnd.ms-excel' || file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       // console.log(file.name.lastIndexOf('.'))
       // console.log(file.name.length)
       // console.log(file.name.slice(file.name.lastIndexOf('.') + 1))
 
       // substring(first + 1, namelength)
       // const isLt2M = file.size / 1024 / 1024 < 2
-      // console.log(file.type)
+      console.log(file.type)
       if (!isExcel) {
         this.$message.error(' 上传的文件只能是 .xls或.csv 格式!')
         return false
       }
-      if (file.name.slice(file.name.lastIndexOf('.') + 1) === 'xls') {
+      const fileNameLast = file.name.slice(file.name.lastIndexOf('.') + 1)
+      if (fileNameLast === 'xls' || fileNameLast === 'xlsx' ) {
         this.$import.xlsx(file).then(({ header, results }) => {
           this.table.columns = header.map((e) => {
             return {
@@ -113,10 +114,10 @@ export default {
           })
           this.table.data = [results[0]]
           this.results = results
-          this.fileType = 'xls'
+          // this.fileType = 'xls'
 
           // console.log(results)
-          console.info(JSON.stringify(this.table.data))
+          // console.info(JSON.stringify(this.table.data))
         })
         setTimeout(() => {
           this.$notify({
@@ -136,8 +137,8 @@ export default {
             }))
             this.table.data = [res.data[0]]
             this.results = res.data
-            this.fileType = 'csv'
-            console.info(JSON.stringify(this.table.data))
+            // this.fileType = 'csv'
+            // console.info(JSON.stringify(this.table.data))
           })
         return false
       }
