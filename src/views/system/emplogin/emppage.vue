@@ -13,7 +13,7 @@
         </div>
         <div class="page-login--content-main" flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo-login-new-01.png" >
+          <img class="page-login--logo" src="./image/logo-login-03.png" >
           <!-- form -->
           <div class="page-login--form">
             <el-card shadow="never">

@@ -38,7 +38,7 @@
           </el-popover>
         </div>
         <!-- <d2-badge/> -->
-        <d2-help />
+        <!-- <d2-help /> -->
       </template>
     </d2-page-cover>
   </d2-container>
