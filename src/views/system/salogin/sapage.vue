@@ -13,7 +13,7 @@
         </div>
         <div class="page-login--content-main" flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo-lac.png" >
+          <img class="page-login--logo" src="./image/logo-login-01.png" >
           <!-- form -->
           <div class="page-login--form">
             <el-card shadow="never">
@@ -216,7 +216,7 @@ export default {
         // 知识点:阻止函数继续向下执行
         return false
       }
-      this.timer = 60
+      this.timer = 10
       this.isAble = true
       // 知识点:计时器
       this.timeRan = setInterval(() => {
@@ -226,7 +226,7 @@ export default {
         clearInterval(this.timeRan)
         this.timer = null
         // this.isAble = false;
-      }, 5000)
+      }, this.timer * 1000)
       this.sendLogcode({
         username: this.formLogin.username
       }).then((res) => {
@@ -304,8 +304,8 @@ export default {
     // 登录按钮
     .button-login {
       width: 100%;
-      background: #4d3d3e;
-      border: #4d3d3e;
+      // background: #4d3d3e;
+      // border: #4d3d3e;
     }
     // #sendcode{
     //   width: 30%;
