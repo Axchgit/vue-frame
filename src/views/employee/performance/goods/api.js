@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-09-02 23:54:36
- * @LastEditTime: 2020-09-04 02:30:04
+ * @LastEditTime: 2020-09-10 09:49:44
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\employee\performance\goods\api.js
  * @Description:
@@ -16,9 +16,9 @@ export function GetPerformanceList(query) {
   })
 }
 
-export function SelectPerformanceByUuid({ key, value }) {
+export function selectPerformanceGoodsByUuid({ key, value }) {
   return request({
-    url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceByUuid',
+    url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceGoodsByUuid',
     method: 'get',
     params: { key, value }
   })

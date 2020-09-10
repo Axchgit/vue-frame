@@ -16,20 +16,26 @@ export const crudOptions = {
     // width: 200,
 
     view: {
-      thin: true,
-      text: null
+      thin: false,
+      text: '查看',
+      type: 'primary'
+
     },
     edit: {
       disabled: true,
       thin: true,
       // type: 'primary'
       // circle: true,
-      text: null
+      text: null,
+      show: false // 是否显示按钮
+
     },
     remove: {
       disabled: true,
       thin: true,
-      text: null
+      text: null,
+      show: false // 是否显示按钮
+
     },
     width: 140
   },
@@ -61,7 +67,7 @@ export const crudOptions = {
       sortable: true,
       search: {
         name: 'goods_id',
-        disabled: true,
+        disabled: false,
         title: '商品ID'
       },
       form: {
@@ -81,7 +87,7 @@ export const crudOptions = {
       search: {
         name: 'goods_name',
         title: '商品名称',
-        disabled: true
+        disabled: false
       },
       form: {
         addDisabled: true,
@@ -123,7 +129,7 @@ export const crudOptions = {
       search: {
         name: 'stataudit_statusus',
         title: '审核状态',
-        disabled: true,
+        disabled: false,
         component: {
           props: {
             clearable: true
@@ -197,5 +203,20 @@ export const crudOptions = {
     //   }
 
     // }
-  ]
+  ],
+  formGroup: { // 表单分组
+    type: 'collapse', // tab暂未实现
+    accordion: false,
+    groups: { // 分组
+      base: { // 分组key
+        title: '商品ID', // 分组标题
+        disabled: false, // 禁止展开或收起
+        // disabled(context){return true} //可以传一个方法
+        show: true, // 是否显示
+        // show(context){return true} //可以传一个方法
+        icon: 'el-icon-goods', // 分组标题前的图标
+        columns: ['title', 'code', 'images'] // 该组内包含的字段列表
+      }
+    }
+  }
 }
