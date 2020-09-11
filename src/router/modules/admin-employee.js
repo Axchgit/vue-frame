@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-12 13:29:07
- * @LastEditTime: 2020-08-28 00:48:54
+ * @LastEditTime: 2020-09-10 18:08:02
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\modules\admin-employee.js
  * @Description:
@@ -38,6 +38,17 @@ export default {
       meta: {
         ...meta,
         title: '员工信息查询'
+      }
+    },
+    {
+      // D2项目逻辑:这里的path不需要写父路由path前缀
+      path: 'info',
+      name: `${pre}Info`,
+      // D2项目逻辑:和menu的path一样
+      component: _import('admin/employee/info'),
+      meta: {
+        ...meta,
+        title: '员工信息管理'
       }
     }
   ])('AdminEmployee')

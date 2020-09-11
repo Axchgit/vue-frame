@@ -113,9 +113,9 @@ export const crudOptions = {
       },
       dict: {
         data: [
-          { value: 0, label: '正在审核', color: 'info' },
-          { value: 1, label: '通过', color: 'success' },
-          { value: 2, label: '未通过', color: 'danger' }
+          { value: 1, label: '正在审核', color: 'info' },
+          { value: 2, label: '通过', color: 'success' },
+          { value: 3, label: '未通过', color: 'danger' }
         ]
       }
     },

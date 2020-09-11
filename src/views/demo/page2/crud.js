@@ -1,24 +1,15 @@
 /*
  * @Author: xch
  * @Date: 2020-09-02 22:43:49
- * @LastEditTime: 2020-09-02 22:46:50
+ * @LastEditTime: 2020-09-10 20:00:21
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\demo\page2\crud.js
  * @Description:
  */
 export const crudOptions = (vm) => {
   return {
-    pageOptions: {
-      compact: true
-    },
     options: {
       height: '100%'
-    },
-    viewOptions: {
-      componentType: 'row'
-    },
-    formOptions: {
-      defaultSpan: 12 // 默认的表单 span
     },
     columns: [
       {
@@ -30,42 +21,84 @@ export const crudOptions = (vm) => {
         }
       },
       {
-        title: '单选本地',
-        key: 'select1',
+        title: '动态显隐',
+        key: 'show',
         sortable: true,
-        search: {
-          disabled: true
-        },
-        type: 'select',
-        dict: {
-          data: [{ value: '1', label: '开启' }, { value: '0', label: '关闭' }, { value: '2', label: '停止' }]
+        search: { disabled: false },
+        type: 'radio',
+        dict: { data: [{ value: true, label: '显示' }, { value: false, label: '隐藏' }] },
+        form: {
+          helper: '点击显示与隐藏右边整个字段',
+          span: 12
         }
       },
       {
-        title: '多选,本地,自动染色',
-        key: 'select2',
+        title: '显隐目标',
+        key: 'show_ret',
         sortable: true,
-        width: 180,
         search: {
-          disabled: false,
-          title: '多选'
-        },
-        type: 'select',
-        form: {
-          title: '多选本地',
+          // disabled: false
           component: {
-            props: {
-              filterable: true,
-              multiple: true,
-              clearable: true
+            disabled: ({ key, value, search }) => {
+              console.log('show:', key, value, search)
+              return search.disabled
             }
           }
         },
-        dict: {
-          data: [{ value: 'sz', label: '深圳' }, { value: 'gz', label: '广州' }, { value: 'wh', label: '武汉' }, { value: 'sh', label: '上海' }]
-        },
-        component: { props: { color: 'auto' }} // 自动染色
+        // disabled: true,
+        form: {
+          component: {
+            // 也可以直接配置 show:false 进行隐藏
+            show: ({ key, value, form }) => {
+              console.log('show:', key, value, form)
+              return form.show
+            }
+          }
+        }
+      },
+      {
+        title: '文本',
+        key: 'text2',
+        sortable: true,
+        form: {
+          component: {
+            readonly: (context) => {
+              console.log('text2 readonly context:', context)
+              return context.form.readonly1
+            },
+            span: 24
+          }
+        }
+      },
+      {
+        title: 'textarea',
+        key: 'text-area',
+        sortable: true,
+        search: { disabled: true },
+        type: 'text-area',
+        form: {
+          component: {
+            readonly: ({ key, value, form }) => {
+              console.log('text-area readonly', key, value, form)
+              return vm.getEditForm().readonly1
+            }
+          }
+        }
+      },
+      {
+        title: '只读',
+        key: 'readonly1',
+        sortable: true,
+        search: { disabled: false },
+        type: 'dict-switch',
+        dict: { data: [{ value: true, label: '只读' }, { value: false, label: '' }] },
+        form: {
+          component: {
+            span: 24
+          }
+        }
       }
+
     ]
   }
 }

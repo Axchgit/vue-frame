@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-02 23:49:25
+ * @LastEditTime: 2020-09-10 19:08:54
  * @LastEditors: xch
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-employee.js
  * @Description:
@@ -18,10 +18,19 @@ export default {
       icon: 'table',
       children: [
         // D2项目逻辑:menupath是项目所在目录,自动路由到index
-        { path: `${pre}info/select`, title: '查询' },
-        { path: `${pre}info/update`, title: '修改' }
+        { path: `${pre}info`, title: '管理' }
       ]
     },
+    // {
+    //   title: '个人资料',
+    //   icon: 'table',
+    //   children: [
+    //     // D2项目逻辑:menupath是项目所在目录,自动路由到index
+    //     { path: `${pre}info/select`, title: '查询' },
+    //     { path: `${pre}info/update`, title: '修改' }
+    //   ]
+    // },
+
     {
       title: '账户信息',
       icon: 'github',
