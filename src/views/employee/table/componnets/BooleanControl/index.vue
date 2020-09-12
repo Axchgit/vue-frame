@@ -29,67 +29,67 @@
 
 <script>
 export default {
-  props: {
-    value: {
-      default: false
+    props: {
+        value: {
+            default: false
+        },
+        popoverPlacement: {
+            default: 'left'
+        },
+        popoverTitle: {
+            default: '修改'
+        },
+        popoverWidth: {
+            default: '150'
+        },
+        activeColor: {
+            default: '#67C23A'
+        },
+        inactiveColor: {
+            default: '#F56C6C'
+        },
+        activeText: {
+            default: '正常'
+        },
+        inactiveText: {
+            default: '禁用'
+        }
     },
-    popoverPlacement: {
-      default: 'left'
+    data() {
+        return {
+            currentValue: false,
+            disabled: false
+        }
     },
-    popoverTitle: {
-      default: '修改'
+    watch: {
+        value: {
+            // D2项目逻辑:val为事件接收值
+            handler(val) {
+                this.currentValue = val
+            },
+            immediate: true
+        }
     },
-    popoverWidth: {
-      default: '150'
-    },
-    activeColor: {
-      default: '#67C23A'
-    },
-    inactiveColor: {
-      default: '#F56C6C'
-    },
-    activeText: {
-      default: '正常'
-    },
-    inactiveText: {
-      default: '禁用'
+    methods: {
+        handleChange(val) {
+            // 知识点:控制元素disabled属性
+            this.disabled = true
+            this.$message({
+                message: '正在发送请求',
+                type: 'info'
+            })
+            // TODO:
+            // 请将 setTimeout 修改为您的异步请求
+            setTimeout(() => {
+                this.disabled = false
+                this.$message({
+                    message: '修改成功',
+                    type: 'success'
+                })
+                this.$emit('change', val)
+                // 如果修改失败的话需要在这里手动将 currentValue 复原
+            }, 1000)
+        }
     }
-  },
-  data() {
-    return {
-      currentValue: false,
-      disabled: false
-    }
-  },
-  watch: {
-    value: {
-      // D2项目逻辑:val为事件接收值
-      handler(val) {
-        this.currentValue = val
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    handleChange(val) {
-      // 知识点:控制元素disabled属性
-      this.disabled = true
-      this.$message({
-        message: '正在发送请求',
-        type: 'info'
-      })
-      // TODO:
-      // 请将 setTimeout 修改为您的异步请求
-      setTimeout(() => {
-        this.disabled = false
-        this.$message({
-          message: '修改成功',
-          type: 'success'
-        })
-        this.$emit('change', val)
-        // 如果修改失败的话需要在这里手动将 currentValue 复原
-      }, 1000)
-    }
-  }
 }
 </script>

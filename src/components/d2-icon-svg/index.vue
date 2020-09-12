@@ -6,17 +6,17 @@
 
 <script>
 export default {
-  name: 'D2IconSvg',
-  props: {
-    name: {
-      type: String,
-      required: true
+    name: 'D2IconSvg',
+    props: {
+        name: {
+            type: String,
+            required: true
+        }
+    },
+    computed: {
+        icon() {
+            return `#d2-${this.name}`
+        }
     }
-  },
-  computed: {
-    icon() {
-      return `#d2-${this.name}`
-    }
-  }
 }
 </script>

@@ -1,8 +1,8 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-09-02 17:19:13
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-11 22:30:17
+ * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\system\index\page.vue
  * @Description:
 -->
@@ -46,14 +46,14 @@
 
 <script>
 // import D2Badge from './components/d2-badge'
-import D2Help from './components/d2-help'
+// import D2Help from './components/d2-help'
 import D2PageCover from './components/d2-page-cover'
 export default {
-  components: {
+    components: {
     // D2Badge,
-    D2Help,
-    D2PageCover
-  }
+        // D2Help,
+        D2PageCover
+    }
 }
 </script>
 

@@ -30,13 +30,13 @@ import empPerformance from './modules/emp-performance'
  * @param {Array} menu 原始的菜单数据
  */
 function supplementPath(menu) {
-  return menu.map(e => ({
-    ...e,
-    path: e.path || uniqueId('d2-menu-empty-'),
-    ...e.children ? {
-      children: supplementPath(e.children)
-    } : {}
-  }))
+    return menu.map(e => ({
+        ...e,
+        path: e.path || uniqueId('d2-menu-empty-'),
+        ...e.children ? {
+            children: supplementPath(e.children)
+        } : {}
+    }))
 }
 
 // const computed = {
@@ -68,7 +68,7 @@ function supplementPath(menu) {
 
 // 所有的需要判断权限的菜单项
 const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback,
-  empPerformance, empActivity, empMsgFeedback, domPages, pagsDomTest]
+    empPerformance, empActivity, empMsgFeedback, domPages, pagsDomTest]
 // 加入到顶部菜单数组中的菜单项
 const addMenu = []
 
@@ -85,37 +85,37 @@ const addMenu = []
 const roles = util.cookies.get('roles')
 // console.log(roles)
 allMenu.forEach((menu) => {
-  // console.log(index)
-  if (menu.roles >= roles) {
-    addMenu.push(menu)
-  }
-  if ((menu.roles > 1 && menu.roles < 6) && roles <= 1) {
-    addMenu.pop()
-  }
+    // console.log(index)
+    if (menu.roles >= roles) {
+        addMenu.push(menu)
+    }
+    if ((menu.roles > 1 && menu.roles < 6) && roles <= 1) {
+        addMenu.pop()
+    }
 })
 
 export const menuAside = supplementPath([
-  // pagsDomTest,
-  // adminEmpData
-  ...addMenu
+    // pagsDomTest,
+    // adminEmpData
+    ...addMenu
 
 ])
 
 export const menuHeader = supplementPath([
-  { path: '/index', title: '首页', icon: 'home' }, // pagsDomTest,
+    { path: '/index', title: '首页', icon: 'home' }, // pagsDomTest,
 
-  ...addMenu
+    ...addMenu
 
-  // {
-  //   title: '页面',
-  //   icon: 'folder-o',
-  //   children: [
-  //     { path: '/page1', title: '页面 1' },
-  //     { path: '/page2', title: '页面 2' },
-  //     { path: '/page3', title: '页面 3' },
-  //     { path: '/index/index', title: '新建示例' },
-  //     { path: '/table', title: '表格' }
-  //     // { path: '/test', title: 'test' }
-  //   ]
-  // }
+    // {
+    //   title: '页面',
+    //   icon: 'folder-o',
+    //   children: [
+    //     { path: '/page1', title: '页面 1' },
+    //     { path: '/page2', title: '页面 2' },
+    //     { path: '/page3', title: '页面 3' },
+    //     { path: '/index/index', title: '新建示例' },
+    //     { path: '/table', title: '表格' }
+    //     // { path: '/test', title: 'test' }
+    //   ]
+    // }
 ])

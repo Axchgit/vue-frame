@@ -9,40 +9,40 @@
 // import request from '@/business/api/request.mock'
 import { request } from '@/api/service'
 export function GetPerformanceList(query) {
-  return request({
-    url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceGoodsByUuid',
-    method: 'get',
-    params: query
-  })
+    return request({
+        url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceGoodsByUuid',
+        method: 'get',
+        params: query
+    })
 }
 
 export function selectPerformanceGoodsByUuid({ key, value }) {
-  return request({
-    url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceGoodsByUuid',
-    method: 'get',
-    params: { key, value }
-  })
+    return request({
+        url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceGoodsByUuid',
+        method: 'get',
+        params: { key, value }
+    })
 }
 
 export function AddPerformance(goods) {
-  return request({
-    url: process.env.VUE_APP_AJAX_URL + '/employee/submitPerformanc',
-    method: 'post',
-    data: goods
-  })
+    return request({
+        url: process.env.VUE_APP_AJAX_URL + '/employee/submitPerformanc',
+        method: 'post',
+        data: goods
+    })
 }
 
 export function UpdatePerformance(room) {
-  return request({
-    url: '/hotel/room/update',
-    method: 'post',
-    data: room
-  })
+    return request({
+        url: '/hotel/room/update',
+        method: 'post',
+        data: room
+    })
 }
 export function DelPerformance(id) {
-  return request({
-    url: process.env.VUE_APP_AJAX_URL + '/employee/deletePerformanceByUuuid',
-    method: 'post',
-    params: { id }
-  })
+    return request({
+        url: process.env.VUE_APP_AJAX_URL + '/employee/deletePerformanceByUuuid',
+        method: 'post',
+        params: { id }
+    })
 }

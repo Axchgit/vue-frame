@@ -21,61 +21,61 @@
 
 <script>
 export default {
-  data() {
-    return {
-      title: '',
-      rules: '',
-      dialogAddgsVisible: false,
-      addForm: {
+    data() {
+        return {
+            title: '',
+            rules: '',
+            dialogAddgsVisible: false,
+            addForm: {
 
-      }
+            }
 
-    }
-  },
-  methods: {
+        }
+    },
+    methods: {
     /**
      *点击新增按钮，弹出新增模态框
      * @param
      */
-    addgsForm() {
-      this.dialogAddgsVisible = true
-      this.title = '新增分类'
-    },
-    /**
+        addgsForm() {
+            this.dialogAddgsVisible = true
+            this.title = '新增分类'
+        },
+        /**
      *关闭或取消模态框，清空值
      * @param
      */
-    closeDialogAddgsVisible() {
-      this.$refs.addForm.resetFields() // element封装的方法,清空模态框的值
-      this.title = '' // 初始化title的值
-      this.addForm = {
-        // 初始化addForm中的值
-        name: '',
-        sort: ''
-      }
-    },
+        closeDialogAddgsVisible() {
+            this.$refs.addForm.resetFields() // element封装的方法,清空模态框的值
+            this.title = '' // 初始化title的值
+            this.addForm = {
+                // 初始化addForm中的值
+                name: '',
+                sort: ''
+            }
+        },
 
-    /**
+        /**
      *确定新增数据
      * @param
      */
-    saveAddForm(aaa) {
-      this.$refs[aaa].validate((valid) => {
-        console.log(this.$refs[aaa])
-        if (valid) {
-          const params = {
-            name: this.addForm.name,
-            sort: this.addForm.sort
-          }
-          this.axios.post(`接口地址`, params).then((res) => {
-            alert('新增成功')
-            this.dialogAddgsVisible = false
-            // this.$router.push({name:'categories'})
-            this.init()
-          })
+        saveAddForm(aaa) {
+            this.$refs[aaa].validate((valid) => {
+                console.log(this.$refs[aaa])
+                if (valid) {
+                    const params = {
+                        name: this.addForm.name,
+                        sort: this.addForm.sort
+                    }
+                    this.axios.post(`接口地址`, params).then((res) => {
+                        alert('新增成功')
+                        this.dialogAddgsVisible = false
+                        // this.$router.push({name:'categories'})
+                        this.init()
+                    })
+                }
+            })
         }
-      })
     }
-  }
 }
 </script>

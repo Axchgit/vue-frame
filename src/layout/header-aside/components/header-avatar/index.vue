@@ -32,12 +32,12 @@
           <router-link to="/" text-decoration:none flex-box="0">
             <el-dropdown-item>首页</el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
+          <!-- <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
             <el-dropdown-item>项目地址</el-dropdown-item>
           </a>
           <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
             <el-dropdown-item>文档</el-dropdown-item>
-          </a>
+          </a> -->
           <el-dropdown-item divided @click.native="logOff">
             <span style="display:block;">退出登录</span>
           </el-dropdown-item>
@@ -51,25 +51,25 @@
 import { mapState, mapActions } from 'vuex'
 export default {
 
-  computed: {
+    computed: {
     // D2项目逻辑:主框架显示用户name
-    ...mapState('d2admin/user', [
-      'info'
-    ])
-  },
-  methods: {
-    ...mapActions('d2admin/account', [
-      'logout'
-    ]),
-    /**
+        ...mapState('d2admin/user', [
+            'info'
+        ])
+    },
+    methods: {
+        ...mapActions('d2admin/account', [
+            'logout'
+        ]),
+        /**
      * @description 登出
      */
-    logOff() {
-      this.logout({
-        confirm: true
-      })
+        logOff() {
+            this.logout({
+                confirm: true
+            })
+        }
     }
-  }
 }
 </script>
 

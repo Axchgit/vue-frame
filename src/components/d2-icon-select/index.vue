@@ -67,97 +67,97 @@
 <script>
 import icon from './data/index'
 export default {
-  name: 'D2IconSelect',
-  props: {
+    name: 'D2IconSelect',
+    props: {
     // 值
-    value: {
-      type: String,
-      required: false,
-      default: ''
+        value: {
+            type: String,
+            required: false,
+            default: ''
+        },
+        // 占位符
+        placeholder: {
+            type: String,
+            required: false,
+            default: '请选择'
+        },
+        // 弹出界面的方向
+        placement: {
+            type: String,
+            required: false,
+            default: 'right'
+        },
+        // 是否可清空
+        clearable: {
+            type: Boolean,
+            required: false,
+            default: true
+        },
+        // 是否允许用户输入
+        userInput: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        // 是否在选择后自动关闭
+        autoClose: {
+            type: Boolean,
+            required: false,
+            default: true
+        }
     },
-    // 占位符
-    placeholder: {
-      type: String,
-      required: false,
-      default: '请选择'
+    data() {
+        return {
+            // 绑定弹出框
+            pop: false,
+            // 所有图标
+            icon,
+            // 组件内输入框的值
+            currentValue: '',
+            // 搜索的文字
+            searchText: '',
+            // 不是搜索的时候显示的折叠面板绑定的展开数据
+            collapseActive: []
+            // collapseActive: [...Array(icon.length)].map((e, i) => i)
+        }
     },
-    // 弹出界面的方向
-    placement: {
-      type: String,
-      required: false,
-      default: 'right'
-    },
-    // 是否可清空
-    clearable: {
-      type: Boolean,
-      required: false,
-      default: true
-    },
-    // 是否允许用户输入
-    userInput: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    // 是否在选择后自动关闭
-    autoClose: {
-      type: Boolean,
-      required: false,
-      default: true
-    }
-  },
-  data() {
-    return {
-      // 绑定弹出框
-      pop: false,
-      // 所有图标
-      icon,
-      // 组件内输入框的值
-      currentValue: '',
-      // 搜索的文字
-      searchText: '',
-      // 不是搜索的时候显示的折叠面板绑定的展开数据
-      collapseActive: []
-      // collapseActive: [...Array(icon.length)].map((e, i) => i)
-    }
-  },
-  computed: {
+    computed: {
     // 输入框上绑定的设置
-    bind() {
-      return {
-        placeholder: this.placeholder,
-        clearable: this.clearable,
-        ...this.$attrs
-      }
+        bind() {
+            return {
+                placeholder: this.placeholder,
+                clearable: this.clearable,
+                ...this.$attrs
+            }
+        },
+        // 是否在搜索
+        searchMode() {
+            return !!this.searchText
+        },
+        // 过滤后的图标
+        iconFilted() {
+            return this.icon.map(iconClass => ({
+                title: iconClass.title,
+                icon: iconClass.icon.filter(icon => icon.indexOf(this.searchText) >= 0)
+            })).filter(iconClass => iconClass.icon.length > 0)
+        }
     },
-    // 是否在搜索
-    searchMode() {
-      return !!this.searchText
+    watch: {
+        value(value) {
+            this.currentValue = value
+        }
     },
-    // 过滤后的图标
-    iconFilted() {
-      return this.icon.map(iconClass => ({
-        title: iconClass.title,
-        icon: iconClass.icon.filter(icon => icon.indexOf(this.searchText) >= 0)
-      })).filter(iconClass => iconClass.icon.length > 0)
+    created() {
+        this.currentValue = this.value
+    },
+    methods: {
+        selectIcon(iconName = '') {
+            this.$emit('input', iconName)
+            if (iconName && this.autoClose) {
+                this.pop = false
+            }
+        }
     }
-  },
-  watch: {
-    value(value) {
-      this.currentValue = value
-    }
-  },
-  created() {
-    this.currentValue = this.value
-  },
-  methods: {
-    selectIcon(iconName = '') {
-      this.$emit('input', iconName)
-      if (iconName && this.autoClose) {
-        this.pop = false
-      }
-    }
-  }
 }
 </script>
 

@@ -17,9 +17,9 @@
 <script>
 import bs from './mixins/bs'
 export default {
-  name: 'D2ContainerCardBs',
-  mixins: [
-    bs
-  ]
+    name: 'D2ContainerCardBs',
+    mixins: [
+        bs
+    ]
 }
 </script>

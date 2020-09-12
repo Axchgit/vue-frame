@@ -159,88 +159,88 @@ import pluginExport from '@d2-projects/vue-table-export'
 Vue.use(pluginExport)
 
 export default {
-  components: {
+    components: {
     // BooleanControl,
     // BooleanControlMini
-  },
-  props: {
-    tableData: {
-      // 默认为空
-      default: () => []
     },
-    loading: {
-      default: false
+    props: {
+        tableData: {
+            // 默认为空
+            default: () => []
+        },
+        loading: {
+            default: false
+        }
+    },
+    data() {
+        return {
+            currentTableData: [],
+            multipleSelection: [],
+            downloadColumns: [
+                { label: '工号', prop: 'work_num' },
+                { label: '姓名', prop: 'real_name' },
+                { label: '权限', prop: 'role' },
+                { label: '性别', prop: 'sex' },
+                { label: '账户状态', prop: 'user_review_status}' },
+                { label: '创建时间', prop: 'create_time' }
+                // { label: '使用状态', prop: 'used' },
+                // { label: '使用时间', prop: 'dateTimeUse' }
+            ]
+        }
+    },
+    watch: {
+        tableData: {
+            handler(val) {
+                this.currentTableData = val
+            },
+            immediate: true
+        }
+    },
+    methods: {
+        handleSwitchChange(val, index) {
+            const oldValue = this.currentTableData[index]
+            this.$set(this.currentTableData, index, {
+                ...oldValue,
+                type: val
+            })
+            // TODO:
+            // 注意 这里并没有把修改后的数据传递出去 如果需要的话请自行修改
+        },
+        handleSelectionChange(val) {
+            this.multipleSelection = val
+        },
+        // D2项目逻辑:翻译数据为可读并返回
+        downloadDataTranslate(data) {
+            return data.map((row) => ({
+                ...row,
+                type: row.sex ? '男' : '女',
+                used: row.rule ? '员工' : '超管'
+            }))
+        },
+        // $export-导出插件;
+        handleDownloadXlsx(data) {
+            this.$export
+                .excel({
+                    title: 'vue-frame表格示例',
+                    // D2项目逻辑:下载表格的列
+                    columns: this.downloadColumns,
+                    data: this.downloadDataTranslate(data)
+                })
+                .then(() => {
+                    this.$message.success('导出表格成功')
+                })
+        },
+        handleDownloadCsv(data) {
+            this.$export
+                .csv({
+                    title: 'vue-frame表格示例',
+                    columns: this.downloadColumns,
+                    data: this.downloadDataTranslate(data)
+                })
+                .then(() => {
+                    this.$message('导出CSV成功')
+                })
+        }
     }
-  },
-  data() {
-    return {
-      currentTableData: [],
-      multipleSelection: [],
-      downloadColumns: [
-        { label: '工号', prop: 'work_num' },
-        { label: '姓名', prop: 'real_name' },
-        { label: '权限', prop: 'role' },
-        { label: '性别', prop: 'sex' },
-        { label: '账户状态', prop: 'user_review_status}' },
-        { label: '创建时间', prop: 'create_time' }
-        // { label: '使用状态', prop: 'used' },
-        // { label: '使用时间', prop: 'dateTimeUse' }
-      ]
-    }
-  },
-  watch: {
-    tableData: {
-      handler(val) {
-        this.currentTableData = val
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    handleSwitchChange(val, index) {
-      const oldValue = this.currentTableData[index]
-      this.$set(this.currentTableData, index, {
-        ...oldValue,
-        type: val
-      })
-      // TODO:
-      // 注意 这里并没有把修改后的数据传递出去 如果需要的话请自行修改
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val
-    },
-    // D2项目逻辑:翻译数据为可读并返回
-    downloadDataTranslate(data) {
-      return data.map((row) => ({
-        ...row,
-        type: row.sex ? '男' : '女',
-        used: row.rule ? '员工' : '超管'
-      }))
-    },
-    // $export-导出插件;
-    handleDownloadXlsx(data) {
-      this.$export
-        .excel({
-          title: 'vue-frame表格示例',
-          // D2项目逻辑:下载表格的列
-          columns: this.downloadColumns,
-          data: this.downloadDataTranslate(data)
-        })
-        .then(() => {
-          this.$message.success('导出表格成功')
-        })
-    },
-    handleDownloadCsv(data) {
-      this.$export
-        .csv({
-          title: 'vue-frame表格示例',
-          columns: this.downloadColumns,
-          data: this.downloadDataTranslate(data)
-        })
-        .then(() => {
-          this.$message('导出CSV成功')
-        })
-    }
-  }
 }
 </script>

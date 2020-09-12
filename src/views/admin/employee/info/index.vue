@@ -34,39 +34,39 @@
 import { crudOptions } from './crud'
 import { d2CrudPlus } from 'd2-crud-plus'
 import {
-  AddPerformance,
-  GetPerformanceList,
-  UpdatePerformance,
-  DelPerformance
-  // selectPerformanceGoodsByUuid
+    AddPerformance,
+    GetPerformanceList,
+    UpdatePerformance,
+    DelPerformance
+    // selectPerformanceGoodsByUuid
 } from './api'
 export default {
-  name: 'EmployeePerformanceSubmitIndex',
-  mixins: [d2CrudPlus.crud],
-  data() {
-    return {
-      // data: ''
-    }
-  },
-  created() {},
-  methods: {
-    getCrudOptions() {
-      return crudOptions
+    name: 'EmployeePerformanceSubmitIndex',
+    mixins: [d2CrudPlus.crud],
+    data() {
+        return {
+            // data: ''
+        }
     },
-    pageRequest(query) {
-      console.log(GetPerformanceList(query))
+    created() {},
+    methods: {
+        getCrudOptions() {
+            return crudOptions
+        },
+        pageRequest(query) {
+            console.log(GetPerformanceList(query))
 
-      return GetPerformanceList(query)
-    },
-    addRequest(row) {
-      return AddPerformance(row)
-    },
-    updateRequest(row) {
-      return UpdatePerformance(row)
-    },
-    delRequest(row) {
-      return DelPerformance(row.id)
-    }
+            return GetPerformanceList(query)
+        },
+        addRequest(row) {
+            return AddPerformance(row)
+        },
+        updateRequest(row) {
+            return UpdatePerformance(row)
+        },
+        delRequest(row) {
+            return DelPerformance(row.id)
+        }
 
     // handleSearch(val) {
     //   var key = ''
@@ -99,7 +99,7 @@ export default {
     //   //     : ([key = false]))
     //   // console.log(val)
     // }
-  }
+    }
 }
 </script>
 <style lang="scss" scoped>

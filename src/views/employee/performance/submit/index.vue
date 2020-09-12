@@ -34,68 +34,68 @@
 import { crudOptions } from './crud'
 import { d2CrudPlus } from 'd2-crud-plus'
 import {
-  AddPerformance,
-  GetPerformanceList,
-  UpdatePerformance,
-  DelPerformance,
-  SelectPerformanceByUuid
+    AddPerformance,
+    GetPerformanceList,
+    UpdatePerformance,
+    DelPerformance,
+    SelectPerformanceByUuid
 } from './api'
 export default {
-  name: 'EmployeePerformanceSubmitIndex',
-  mixins: [d2CrudPlus.crud],
-  data() {
-    return {}
-  },
-  created() {},
-  methods: {
-    getCrudOptions() {
-      return crudOptions
+    name: 'EmployeePerformanceSubmitIndex',
+    mixins: [d2CrudPlus.crud],
+    data() {
+        return {}
     },
-    pageRequest(query) {
-      return GetPerformanceList(query)
-    },
-    addRequest(row) {
-      return AddPerformance(row)
-    },
-    updateRequest(row) {
-      return UpdatePerformance(row)
-    },
-    delRequest(row) {
-      return DelPerformance(row.id)
-    },
+    created() {},
+    methods: {
+        getCrudOptions() {
+            return crudOptions
+        },
+        pageRequest(query) {
+            return GetPerformanceList(query)
+        },
+        addRequest(row) {
+            return AddPerformance(row)
+        },
+        updateRequest(row) {
+            return UpdatePerformance(row)
+        },
+        delRequest(row) {
+            return DelPerformance(row.id)
+        },
 
-    handleSearch(val) {
-      var key = ''
-      var value = ''
-      console.log(val)
-      // console.log(value)
-      if (!val.goods_id) {
-        if (!val.audit_status && val.audit_status !== 0) {
-          this.$message.info('表单校验失败，请检查')
-        } else {
-          key = 'audit_status'
-          value = val.audit_status
-        }
-      } else {
-        if (!val.audit_status && val.audit_status !== 0) {
-          key = 'goods_id'
-          value = val.goods_id
-        } else {
-          this.$message.error('不可同时查询')
-        }
-      }
+        handleSearch(val) {
+            var key = ''
+            var value = ''
+            console.log(val)
+            // console.log(value)
+            if (!val.goods_id) {
+                if (!val.audit_status && val.audit_status !== 0) {
+                    this.$message.info('表单校验失败，请检查')
+                } else {
+                    key = 'audit_status'
+                    value = val.audit_status
+                }
+            } else {
+                if (!val.audit_status && val.audit_status !== 0) {
+                    key = 'goods_id'
+                    value = val.goods_id
+                } else {
+                    this.$message.error('不可同时查询')
+                }
+            }
 
-      return SelectPerformanceByUuid({ key, value })
-      // val.goods_id === undefined
-      //   ? (val.audit_status === undefined
-      //     ? ([key = false])
-      //     : [key => 'audit_status', value => val.audit_status])
-      //   : (val.audit_status === undefined
-      //     ? ([key => 'goods_id', value => val.goods_id])
-      //     : ([key = false]))
-      // console.log(val)
+            return SelectPerformanceByUuid({ key, value })
+            // val.goods_id === undefined
+            //   ? (val.audit_status === undefined
+            //     ? ([key = false])
+            //     : [key => 'audit_status', value => val.audit_status])
+            //   : (val.audit_status === undefined
+            //     ? ([key => 'goods_id', value => val.goods_id])
+            //     : ([key = false]))
+            // console.log(val)
+        }
     }
-  }
 }
 </script>
 <style lang="scss" scoped>

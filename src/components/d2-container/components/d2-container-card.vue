@@ -17,17 +17,17 @@
 <script>
 import scroll from './mixins/normal'
 export default {
-  name: 'D2ContainerCard',
-  mixins: [
-    scroll
-  ],
-  mounted() {
+    name: 'D2ContainerCard',
+    mixins: [
+        scroll
+    ],
+    mounted() {
     // 增加滚动事件监听
-    this.addScrollListener()
-  },
-  beforeDestroy() {
+        this.addScrollListener()
+    },
+    beforeDestroy() {
     // 移除滚动事件监听
-    this.removeScrollListener()
-  }
+        this.removeScrollListener()
+    }
 }
 </script>

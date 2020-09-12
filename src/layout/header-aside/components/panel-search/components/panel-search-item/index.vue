@@ -23,14 +23,14 @@
 
 <script>
 export default {
-  props: {
-    item: {
-      default: () => ({})
-    },
-    hoverMode: {
-      default: false
+    props: {
+        item: {
+            default: () => ({})
+        },
+        hoverMode: {
+            default: false
+        }
     }
-  }
 }
 </script>
 

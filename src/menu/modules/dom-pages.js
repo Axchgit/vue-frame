@@ -9,16 +9,16 @@
 
 export default {
 //   path: '/dom/test',
-  title: '表格演示',
-  roles: 5,
-  icon: 'table',
-  children: (pre => [
-    { path: '/page1', title: '页面 1' },
-    { path: '/page2', title: '页面 2' },
-    { path: '/page3', title: '页面 3' },
-    { path: '/index/index', title: '新建示例' },
-    { path: '/table', title: '表格' }
-  ])('/dom/test/')
+    title: '表格演示',
+    roles: 5,
+    icon: 'table',
+    children: (pre => [
+        { path: '/page1', title: '页面 1' },
+        { path: '/page2', title: '页面 2' },
+        { path: '/page3', title: '页面 3' },
+        { path: '/index/index', title: '新建示例' },
+        { path: '/table', title: '表格' }
+    ])('/dom/test/')
 }
 
 // {

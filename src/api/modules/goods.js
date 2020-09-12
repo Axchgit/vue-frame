@@ -8,22 +8,22 @@
  */
 
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
-  // 上传商品表格信息
-  GOODS_UPLOAD_EXCEL(data = {}) {
-    return request({
-      url: process.env.VUE_APP_AJAX_URL + '/goods/uploadExcel',
-      method: 'post',
-      data
-    })
-  },
-  // 查询信息
-  GOODS_SELECT(data = {}) {
-    return request({
-      url: process.env.VUE_APP_AJAX_URL + '/goods/selectGoods',
-      method: 'post',
-      data
-    })
-  }
+    // 上传商品表格信息
+    GOODS_UPLOAD_EXCEL(data = {}) {
+        return request({
+            url: process.env.VUE_APP_AJAX_URL + '/goods/uploadExcel',
+            method: 'post',
+            data
+        })
+    },
+    // 查询信息
+    GOODS_SELECT(data = {}) {
+        return request({
+            url: process.env.VUE_APP_AJAX_URL + '/goods/selectGoods',
+            method: 'post',
+            data
+        })
+    }
 
 })
 

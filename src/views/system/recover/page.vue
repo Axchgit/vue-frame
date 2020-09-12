@@ -79,193 +79,193 @@ import { mapActions } from 'vuex'
 import localeMixin from '@/locales/mixin.js'
 import api from '@/api'
 export default {
-  mixins: [localeMixin],
-  data() {
-    return {
-      uuid: '',
-      //   isAble: false,
-      timeRan: null,
-      timeInterval: null,
-      time: dayjs().format('HH:mm:ss'),
-      dialogRecoverVisible: false,
-      timer: 0,
-      // 表单
-      formRecover: {
-        work_num: '',
-        email: '',
-        code: ''
-      },
-      // 模态框
-      re_title: '',
-      recover: {
-        password1: '',
-        password2: ''
-      },
-      // 表单校验
-      rules: {
-        work_num: [
-          {
-            required: true,
-            message: '请输入工号',
-            trigger: 'blur'
-          }
-        ],
-        email: [
-          {
-            required: true,
-            message: '请输入邮箱',
-            trigger: 'blur'
-          }
-        ],
-        code: [
-          {
-            required: true,
-            message: '请输入验证码',
-            trigger: 'blur'
-          }
-        ]
-      },
-      re_rules: {
-        password1: [
-          {
-            required: true,
-            message: '请输入密码',
-            trigger: 'blur'
-          }
-        ],
-        password2: [
-          {
-            required: true,
-            message: '请输入确认密码',
-            trigger: 'blur'
-          }
-        ]
-      }
-    }
-  },
-  mounted() {
-    this.timeInterval = setInterval(() => {
-      this.refreshTime()
-    }, 1000)
-  },
-  beforeDestroy() {
-    clearInterval(this.timeInterval)
-  },
-  methods: {
+    mixins: [localeMixin],
+    data() {
+        return {
+            uuid: '',
+            //   isAble: false,
+            timeRan: null,
+            timeInterval: null,
+            time: dayjs().format('HH:mm:ss'),
+            dialogRecoverVisible: false,
+            timer: 0,
+            // 表单
+            formRecover: {
+                work_num: '',
+                email: '',
+                code: ''
+            },
+            // 模态框
+            re_title: '',
+            recover: {
+                password1: '',
+                password2: ''
+            },
+            // 表单校验
+            rules: {
+                work_num: [
+                    {
+                        required: true,
+                        message: '请输入工号',
+                        trigger: 'blur'
+                    }
+                ],
+                email: [
+                    {
+                        required: true,
+                        message: '请输入邮箱',
+                        trigger: 'blur'
+                    }
+                ],
+                code: [
+                    {
+                        required: true,
+                        message: '请输入验证码',
+                        trigger: 'blur'
+                    }
+                ]
+            },
+            re_rules: {
+                password1: [
+                    {
+                        required: true,
+                        message: '请输入密码',
+                        trigger: 'blur'
+                    }
+                ],
+                password2: [
+                    {
+                        required: true,
+                        message: '请输入确认密码',
+                        trigger: 'blur'
+                    }
+                ]
+            }
+        }
+    },
+    mounted() {
+        this.timeInterval = setInterval(() => {
+            this.refreshTime()
+        }, 1000)
+    },
+    beforeDestroy() {
+        clearInterval(this.timeInterval)
+    },
+    methods: {
     // 验证提交信息
-    ...mapActions('d2admin/account', ['empRecover']),
-    // 发送验证码
-    async sendRecoverCode({ work_num = '', email = '' } = {}) {
-      const res = await api.SYS_EMP_SENDRCODE({ work_num, email })
-      return res
-    },
-    // 验证信息,返回用户标识
-    async empRecover({ work_num = '', email = '', code = '' } = {}) {
-      const res = await api.SYS_EMP_RECOVER({ work_num, email, code })
-      return res
-    },
-    // 更新密码
-    async updatePassword({ uuid = '', password = '' } = {}) {
-      const res = await api.EMPACCOUNT_UPDATE_PASSWORD({ uuid, password })
-      return res
-    },
-    // 背景时间显示
-    refreshTime() {
-      this.time = dayjs().format('HH:mm:ss')
-    },
-    /**
+        ...mapActions('d2admin/account', ['empRecover']),
+        // 发送验证码
+        async sendRecoverCode({ work_num = '', email = '' } = {}) {
+            const res = await api.SYS_EMP_SENDRCODE({ work_num, email })
+            return res
+        },
+        // 验证信息,返回用户标识
+        async empRecover({ work_num = '', email = '', code = '' } = {}) {
+            const res = await api.SYS_EMP_RECOVER({ work_num, email, code })
+            return res
+        },
+        // 更新密码
+        async updatePassword({ uuid = '', password = '' } = {}) {
+            const res = await api.EMPACCOUNT_UPDATE_PASSWORD({ uuid, password })
+            return res
+        },
+        // 背景时间显示
+        refreshTime() {
+            this.time = dayjs().format('HH:mm:ss')
+        },
+        /**
      * @description 提交表单
      */
-    submit() {
-      this.$refs.recoverForm.validate((valid) => {
-        if (valid) {
-          // 登录
-          this.empRecover({
-            work_num: this.formRecover.work_num,
-            email: this.formRecover.email,
-            code: this.formRecover.code
-            // uuid:this.uuid
-          }).then((res) => {
-            console.log(res.uuid)
-            this.uuid = res.uuid
+        submit() {
+            this.$refs.recoverForm.validate((valid) => {
+                if (valid) {
+                    // 登录
+                    this.empRecover({
+                        work_num: this.formRecover.work_num,
+                        email: this.formRecover.email,
+                        code: this.formRecover.code
+                        // uuid:this.uuid
+                    }).then((res) => {
+                        console.log(res.uuid)
+                        this.uuid = res.uuid
 
-            this.dialogRecoverVisible = true
-            this.re_title = '修改密码'
-            // 重定向对象不存在则返回顶层路径
-            // this.$router.replace(this.$route.query.redirect || "/");
-          })
-        } else {
-          // 登录表单校验失败
-          this.$message.error('表单校验失败，请检查')
-        }
-      })
-    },
-    // 提交修改后的密码
-    savePWForm(password) {
-      this.$refs.password.validate((valid) => {
-        if (valid) {
-          if (this.recover.password1 === this.recover.password2) {
-            this.updatePassword({
-              uuid: this.uuid,
-              password: this.recover.password1
-            }).then((res) => {
-              if (res === undefined) {
-                this.$message.error('失败')
-              } else {
-                this.$message.success('成功')
-                // 重定向对象不存在则返回顶层路径
-                this.$router.replace(this.$route.query.redirect || '/')
-              }
+                        this.dialogRecoverVisible = true
+                        this.re_title = '修改密码'
+                        // 重定向对象不存在则返回顶层路径
+                        // this.$router.replace(this.$route.query.redirect || "/");
+                    })
+                } else {
+                    // 登录表单校验失败
+                    this.$message.error('表单校验失败，请检查')
+                }
             })
-          }
-        }
-      })
-    },
-    // 取消模态框,清空数据
-    closeDialogRecoverVisible() {
-      this.$refs.password.resetFields() // element封装的方法,清空模态框的值
-      this.title = '' // 初始化title的值
-      this.recover = {
-        // 初始化addForm中的值
-        password1: '',
-        password2: ''
-      }
-    },
+        },
+        // 提交修改后的密码
+        savePWForm(password) {
+            this.$refs.password.validate((valid) => {
+                if (valid) {
+                    if (this.recover.password1 === this.recover.password2) {
+                        this.updatePassword({
+                            uuid: this.uuid,
+                            password: this.recover.password1
+                        }).then((res) => {
+                            if (res === undefined) {
+                                this.$message.error('失败')
+                            } else {
+                                this.$message.success('成功')
+                                // 重定向对象不存在则返回顶层路径
+                                this.$router.replace(this.$route.query.redirect || '/')
+                            }
+                        })
+                    }
+                }
+            })
+        },
+        // 取消模态框,清空数据
+        closeDialogRecoverVisible() {
+            this.$refs.password.resetFields() // element封装的方法,清空模态框的值
+            this.title = '' // 初始化title的值
+            this.recover = {
+                // 初始化addForm中的值
+                password1: '',
+                password2: ''
+            }
+        },
 
-    // 验证码
-    sendCode() {
-      if (!this.formRecover.work_num || !this.formRecover.email) {
-        this.$message.error('请输入验证信息')
-        return false
-      }
-      if (this.timer > 0) {
-        // 知识点:上方弹出提示行
-        this.$message.error(this.timer + 's后再发送')
-        // 知识点:阻止函数继续向下执行
-        return false
-      }
-      this.timer = 60
-      //   this.isAble = true;
-      // 知识点:计时器
-      this.timeRan = setInterval(() => {
-        this.timer--
-      }, 1000)
-      setTimeout(() => {
-        clearInterval(this.timeRan)
-        this.timer = null
-      }, 5000)
-      this.sendRecoverCode({
-        work_num: this.formRecover.work_num,
-        email: this.formRecover.email
-      }).then((res) => {
-        if (res === undefined) {
-          this.$message.error('失败')
-        } else {
-          this.$message.success('发送成功')
+        // 验证码
+        sendCode() {
+            if (!this.formRecover.work_num || !this.formRecover.email) {
+                this.$message.error('请输入验证信息')
+                return false
+            }
+            if (this.timer > 0) {
+                // 知识点:上方弹出提示行
+                this.$message.error(this.timer + 's后再发送')
+                // 知识点:阻止函数继续向下执行
+                return false
+            }
+            this.timer = 60
+            //   this.isAble = true;
+            // 知识点:计时器
+            this.timeRan = setInterval(() => {
+                this.timer--
+            }, 1000)
+            setTimeout(() => {
+                clearInterval(this.timeRan)
+                this.timer = null
+            }, 5000)
+            this.sendRecoverCode({
+                work_num: this.formRecover.work_num,
+                email: this.formRecover.email
+            }).then((res) => {
+                if (res === undefined) {
+                    this.$message.error('失败')
+                } else {
+                    this.$message.success('发送成功')
+                }
+            })
         }
-      })
     }
-  }
 }
 </script>
 

@@ -97,64 +97,64 @@ import d2HeaderColor from './components/header-color'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import mixinSearch from './mixins/search'
 export default {
-  name: 'D2LayoutHeaderAside',
-  mixins: [
-    mixinSearch
-  ],
-  components: {
-    d2MenuSide,
-    d2MenuHeader,
-    d2Tabs,
-    d2HeaderFullscreen,
-    d2HeaderLocales,
-    d2HeaderSearch,
-    d2HeaderSize,
-    d2HeaderTheme,
-    // 注销下行
-    // d2HeaderUser,
-    d2HeaderAvatar,
-    d2HeaderLog,
-    d2HeaderColor
-  },
-  data() {
-    return {
-      // [侧边栏宽度] 正常状态
-      asideWidth: '200px',
-      // [侧边栏宽度] 折叠状态
-      asideWidthCollapse: '65px'
-    }
-  },
-  computed: {
-    ...mapState('d2admin', {
-      keepAlive: state => state.page.keepAlive,
-      grayActive: state => state.gray.active,
-      transitionActive: state => state.transition.active,
-      asideCollapse: state => state.menu.asideCollapse,
-      asideTransition: state => state.menu.asideTransition
-    }),
-    ...mapGetters('d2admin', {
-      themeActiveSetting: 'theme/activeSetting'
-    }),
-    /**
+    name: 'D2LayoutHeaderAside',
+    mixins: [
+        mixinSearch
+    ],
+    components: {
+        d2MenuSide,
+        d2MenuHeader,
+        d2Tabs,
+        d2HeaderFullscreen,
+        d2HeaderLocales,
+        d2HeaderSearch,
+        d2HeaderSize,
+        d2HeaderTheme,
+        // 注销下行
+        // d2HeaderUser,
+        d2HeaderAvatar,
+        d2HeaderLog,
+        d2HeaderColor
+    },
+    data() {
+        return {
+            // [侧边栏宽度] 正常状态
+            asideWidth: '200px',
+            // [侧边栏宽度] 折叠状态
+            asideWidthCollapse: '65px'
+        }
+    },
+    computed: {
+        ...mapState('d2admin', {
+            keepAlive: state => state.page.keepAlive,
+            grayActive: state => state.gray.active,
+            transitionActive: state => state.transition.active,
+            asideCollapse: state => state.menu.asideCollapse,
+            asideTransition: state => state.menu.asideTransition
+        }),
+        ...mapGetters('d2admin', {
+            themeActiveSetting: 'theme/activeSetting'
+        }),
+        /**
      * @description 最外层容器的背景图片样式
      */
-    styleLayoutMainGroup() {
-      return this.themeActiveSetting.backgroundImage
-        ? { backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')` }
-        : {}
-    }
-  },
-  methods: {
-    ...mapActions('d2admin/menu', [
-      'asideCollapseToggle'
-    ]),
-    /**
+        styleLayoutMainGroup() {
+            return this.themeActiveSetting.backgroundImage
+                ? { backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')` }
+                : {}
+        }
+    },
+    methods: {
+        ...mapActions('d2admin/menu', [
+            'asideCollapseToggle'
+        ]),
+        /**
      * 接收点击切换侧边栏的按钮
      */
-    handleToggleAside() {
-      this.asideCollapseToggle()
+        handleToggleAside() {
+            this.asideCollapseToggle()
+        }
     }
-  }
 }
 </script>
 

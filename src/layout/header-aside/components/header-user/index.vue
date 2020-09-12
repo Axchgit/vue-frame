@@ -12,21 +12,21 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-  computed: {
+    computed: {
     // D2项目逻辑:主框架显示用户name
-    ...mapState('d2admin/user', ['info'])
-  },
+        ...mapState('d2admin/user', ['info'])
+    },
 
-  methods: {
-    ...mapActions('d2admin/account', ['logout']),
-    /**
+    methods: {
+        ...mapActions('d2admin/account', ['logout']),
+        /**
      * @description 登出
      */
-    logOff() {
-      this.logout({
-        confirm: true
-      })
+        logOff() {
+            this.logout({
+                confirm: true
+            })
+        }
     }
-  }
 }
 </script>

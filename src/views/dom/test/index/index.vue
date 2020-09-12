@@ -18,18 +18,18 @@ import menu from '@/menu/modules/dom-test'
 // import { delete } from 'vue/types/umd'
 
 export default {
-  data() {
-    return {
+    data() {
+        return {
 
-      // menuHeader,
-      menu,
-      banner: {
-        title: 'DEMOS',
-        subTitle: '提供借鉴和参考的页面'
-      }
-    }
-  },
-  created() {
+            // menuHeader,
+            menu,
+            banner: {
+                title: 'DEMOS',
+                subTitle: '提供借鉴和参考的页面'
+            }
+        }
+    },
+    created() {
     // alert(util.cookies.get('token'));
     // menuHeader
     // delete menuHeader[0];
@@ -37,20 +37,20 @@ export default {
     // 测试testApi接口
     // console.log('test success');
     // this.getUserInfo();
-  },
-  methods: {
+    },
+    methods: {
 
-    async getUserInfo() {
-      try {
-        const username = '星辰哈'
-        const password = '43rewr343'
-        const res = await this.$api.DEMO_FETCH({ username, password })
-        console.log(res)
-      } catch (error) {
-        console.log(error)
-      }
+        async getUserInfo() {
+            try {
+                const username = '星辰哈'
+                const password = '43rewr343'
+                const res = await this.$api.DEMO_FETCH({ username, password })
+                console.log(res)
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
-  }
 
 }
 </script>

@@ -8,13 +8,13 @@ import util from '@/libs/util'
  * @param {String} defaultValue 默认值
  */
 export function parse(jsonString = '{}', defaultValue = {}) {
-  let result = defaultValue
-  try {
-    result = JSON.parse(jsonString)
-  } catch (error) {
-    console.log(error)
-  }
-  return result
+    let result = defaultValue
+    try {
+        result = JSON.parse(jsonString)
+    } catch (error) {
+        console.log(error)
+    }
+    return result
 }
 
 /**
@@ -24,10 +24,10 @@ export function parse(jsonString = '{}', defaultValue = {}) {
  * @param {Number} code 状态码
  */
 export function response(data = {}, msg = '', code = 0) {
-  return [
-    200,
-    { code, msg, data }
-  ]
+    return [
+        200,
+        { code, msg, data }
+    ]
 }
 
 /**
@@ -36,7 +36,7 @@ export function response(data = {}, msg = '', code = 0) {
  * @param {String} msg 状态信息
  */
 export function responseSuccess(data = {}, msg = '成功') {
-  return response(data, msg)
+    return response(data, msg)
 }
 
 /**
@@ -46,7 +46,7 @@ export function responseSuccess(data = {}, msg = '成功') {
  * @param {Number} code 状态码
  */
 export function responseError(data = {}, msg = '请求失败', code = 500) {
-  return response(data, msg, code)
+    return response(data, msg, code)
 }
 
 /**
@@ -54,25 +54,25 @@ export function responseError(data = {}, msg = '请求失败', code = 500) {
  * @param {Error} error 错误对象
  */
 export function errorLog(error) {
-  // 添加到日志
-  store.dispatch('d2admin/log/push', {
-    message: '数据请求异常',
-    type: 'danger',
-    meta: {
-      error
+    // 添加到日志
+    store.dispatch('d2admin/log/push', {
+        message: '数据请求异常',
+        type: 'danger',
+        meta: {
+            error
+        }
+    })
+    // 打印到控制台
+    if (process.env.NODE_ENV === 'development') {
+        util.log.danger('>>>>>> Error >>>>>>')
+        console.log(error)
     }
-  })
-  // 打印到控制台
-  if (process.env.NODE_ENV === 'development') {
-    util.log.danger('>>>>>> Error >>>>>>')
-    console.log(error)
-  }
-  // 显示提示
-  Message({
-    message: error.message,
-    type: 'error',
-    duration: 5 * 1000
-  })
+    // 显示提示
+    Message({
+        message: error.message,
+        type: 'error',
+        duration: 5 * 1000
+    })
 }
 
 /**
@@ -80,7 +80,7 @@ export function errorLog(error) {
  * @param {String} msg 错误信息
  */
 export function errorCreate(msg) {
-  const error = new Error(msg)
-  errorLog(error)
-  throw error
+    const error = new Error(msg)
+    errorLog(error)
+    throw error
 }

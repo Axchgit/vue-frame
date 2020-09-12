@@ -78,14 +78,14 @@ import menu from '@/menu/modules/dom-test'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  state: {
-    count: 0
-  },
-  mutations: {
-    increment(state) {
-      state.count++
+    state: {
+        count: 0
+    },
+    mutations: {
+        increment(state) {
+            state.count++
+        }
     }
-  }
 })
 
 store.commit('increment')
@@ -94,29 +94,29 @@ console.log(store.state.count) // -> 1
 
 export default {
 
-  data() {
-    return {
-      menu,
-      icon: '',
-      icon2: ''
-    }
-  },
+    data() {
+        return {
+            menu,
+            icon: '',
+            icon2: ''
+        }
+    },
 
-  created() {
+    created() {
     //   console.log('test success');
     // this.getTableData();
-  },
-  methods: {
+    },
+    methods: {
 
-    async getTableData() {
-      try {
-        const res = await this.$api.DEMO_FETCH(123)
-        console.log(res)
-      } catch (error) {
-        console.log(error)
-      }
+        async getTableData() {
+            try {
+                const res = await this.$api.DEMO_FETCH(123)
+                console.log(res)
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
-  }
 }
 </script>
 

@@ -14,31 +14,31 @@ const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 const meta = { auth: true, rules: 5, title: '员工业绩', cache: true }
 
 export default {
-  path: '/employee/performance',
-  name: 'EmployeePerformance',
-  meta,
-  redirect: { name: 'EmployeePerformanceIndex' },
-  component: layoutHeaderAside,
-  children: (pre => [
-    {
-      path: 'submit/index',
-      name: `${pre}SubmitIndex`,
-      component: _import('employee/performance/submit/index'),
-      meta: {
-        ...meta,
-        title: '提交业绩'
-      }
-    },
-    {
-      // 这里的path不需要写父路由path前缀
-      path: 'goods/index',
-      name: `${pre}GoodsIndex`,
-      // 和menu的path一样
-      component: _import('employee/performance/goods/index'),
-      meta: {
-        ...meta,
-        title: '已推商品'
-      }
-    }
-  ])('EmployeePerformance')
+    path: '/employee/performance',
+    name: 'EmployeePerformance',
+    meta,
+    redirect: { name: 'EmployeePerformanceIndex' },
+    component: layoutHeaderAside,
+    children: (pre => [
+        {
+            path: 'submit/index',
+            name: `${pre}SubmitIndex`,
+            component: _import('employee/performance/submit/index'),
+            meta: {
+                ...meta,
+                title: '提交业绩'
+            }
+        },
+        {
+            // 这里的path不需要写父路由path前缀
+            path: 'goods/index',
+            name: `${pre}GoodsIndex`,
+            // 和menu的path一样
+            component: _import('employee/performance/goods/index'),
+            meta: {
+                ...meta,
+                title: '已推商品'
+            }
+        }
+    ])('EmployeePerformance')
 }

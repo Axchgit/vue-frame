@@ -1,8 +1,8 @@
 /*
  * @Author: xch
  * @Date: 2020-08-12 13:29:07
- * @LastEditTime: 2020-09-10 18:08:02
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-12 02:20:15
+ * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\modules\admin-employee.js
  * @Description:
  */
@@ -14,42 +14,48 @@ const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 const meta = { auth: true, rules: 1, title: '员工管理', cache: true }
 
 export default {
-  path: '/admin/employee',
-  name: 'AdminEmployee',
-  meta,
-  redirect: { name: 'AdminEmployeeIndex' },
-  component: layoutHeaderAside,
-  children: (pre => [
-    {
-      path: 'index',
-      name: `${pre}Index`,
-      component: _import('admin/employee/index'),
-      meta: {
-        ...meta,
-        title: '员工信息管理首页'
-      }
-    },
-    {
-      // D2项目逻辑:这里的path不需要写父路由path前缀
-      path: 'info/select',
-      name: `${pre}InfoSelect`,
-      // D2项目逻辑:和menu的path一样
-      component: _import('admin/employee/info/select'),
-      meta: {
-        ...meta,
-        title: '员工信息查询'
-      }
-    },
-    {
-      // D2项目逻辑:这里的path不需要写父路由path前缀
-      path: 'info',
-      name: `${pre}Info`,
-      // D2项目逻辑:和menu的path一样
-      component: _import('admin/employee/info'),
-      meta: {
-        ...meta,
-        title: '员工信息管理'
-      }
-    }
-  ])('AdminEmployee')
+    path: '/admin/employee',
+    name: 'AdminEmployee',
+    meta,
+    redirect: { name: 'AdminEmployeeIndex' },
+    component: layoutHeaderAside,
+    children: (pre => [
+        {
+            path: 'index',
+            name: `${pre}Index`,
+            component: _import('admin/employee/index'),
+            meta: {
+                ...meta,
+                title: '员工信息管理首页'
+            }
+        },
+        // TODO:删除
+        {
+            path: 'info/select',
+            name: `${pre}InfoSelect`,
+            component: _import('admin/employee/info/select'),
+            meta: {
+                ...meta,
+                title: '员工信息查询'
+            }
+        },
+        {
+            path: 'info',
+            name: `${pre}Info`,
+            component: _import('admin/employee/info'),
+            meta: {
+                ...meta,
+                title: '员工信息管理'
+            }
+        },
+        {
+            path: 'account',
+            name: `${pre}account`,
+            component: _import('admin/employee/account'),
+            meta: {
+                ...meta,
+                title: '员工账户信息管理'
+            }
+        }
+    ])('AdminEmployee')
 }

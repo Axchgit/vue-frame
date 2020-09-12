@@ -7,13 +7,13 @@
  * @Description:
  */
 export default {
-  path: '/admin/goods',
-  title: ' 推广商品',
-  roles: 1,
-  icon: 'bar-chart',
-  children: (pre => [
-    { path: `${pre}update`, title: '更新数据', icon: 'home' },
-    { path: `${pre}select`, title: '数据查询', icon: 'home' }
+    path: '/admin/goods',
+    title: ' 推广商品',
+    roles: 1,
+    icon: 'bar-chart',
+    children: (pre => [
+        { path: `${pre}update`, title: '更新数据', icon: 'home' },
+        { path: `${pre}select`, title: '数据查询', icon: 'home' }
 
     // {
     //   title: '更新数据',
@@ -43,6 +43,6 @@ export default {
     //     // { path: `${pre}account/update`, title: '修改' }
     //   ]
     // }
-  ])('/admin/goods/')
+    ])('/admin/goods/')
 }
 

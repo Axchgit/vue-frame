@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  methods: {
-    handleClick() {
-      this.$emit('click')
+    methods: {
+        handleClick() {
+            this.$emit('click')
+        }
     }
-  }
 }
 </script>

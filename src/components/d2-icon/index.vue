@@ -5,13 +5,13 @@
 <script>
 import './font-awesome-4.7.0/css/font-awesome.min.css'
 export default {
-  name: 'D2Icon',
-  props: {
-    name: {
-      type: String,
-      required: false,
-      default: 'font-awesome'
+    name: 'D2Icon',
+    props: {
+        name: {
+            type: String,
+            required: false,
+            default: 'font-awesome'
+        }
     }
-  }
 }
 </script>

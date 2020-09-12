@@ -43,119 +43,119 @@ import Fuse from 'fuse.js'
 import { mapState } from 'vuex'
 import mixin from '../mixin/menu'
 export default {
-  mixins: [
-    mixin
-  ],
-  components: {
-    'd2-panel-search-item': () => import('./components/panel-search-item/index.vue')
-  },
-  data() {
-    return {
-      searchText: '',
-      results: []
-    }
-  },
-  computed: {
-    ...mapState('d2admin/search', [
-      'hotkey',
-      'pool'
-    ]),
-    // 这份数据是展示在搜索面板下面的
-    resultsList() {
-      return (this.results.length === 0 && this.searchText === '') ? this.pool.map(e => ({
-        value: e.fullTitle,
-        ...e
-      })) : this.results
+    mixins: [
+        mixin
+    ],
+    components: {
+        'd2-panel-search-item': () => import('./components/panel-search-item/index.vue')
     },
-    // 根据 pool 更新 fuse 实例
-    fuse() {
-      return new Fuse(this.pool, {
-        shouldSort: true,
-        tokenize: true,
-        threshold: 0.6,
-        location: 0,
-        distance: 100,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        keys: [
-          'fullTitle',
-          'path'
-        ]
-      })
-    }
-  },
-  methods: {
+    data() {
+        return {
+            searchText: '',
+            results: []
+        }
+    },
+    computed: {
+        ...mapState('d2admin/search', [
+            'hotkey',
+            'pool'
+        ]),
+        // 这份数据是展示在搜索面板下面的
+        resultsList() {
+            return (this.results.length === 0 && this.searchText === '') ? this.pool.map(e => ({
+                value: e.fullTitle,
+                ...e
+            })) : this.results
+        },
+        // 根据 pool 更新 fuse 实例
+        fuse() {
+            return new Fuse(this.pool, {
+                shouldSort: true,
+                tokenize: true,
+                threshold: 0.6,
+                location: 0,
+                distance: 100,
+                maxPatternLength: 32,
+                minMatchCharLength: 1,
+                keys: [
+                    'fullTitle',
+                    'path'
+                ]
+            })
+        }
+    },
+    methods: {
     /**
      * @description 过滤选项 这个方法在每次输入框的值发生变化时会触发
      */
-    querySearch(queryString, callback) {
-      const results = this.fuse.search(queryString).map(e => e.item)
-      this.results = results
-      callback(results)
-    },
-    /**
+        querySearch(queryString, callback) {
+            const results = this.fuse.search(queryString).map(e => e.item)
+            this.results = results
+            callback(results)
+        },
+        /**
      * @description 聚焦输入框
      */
-    focus() {
-      this.input = ''
-      setTimeout(() => {
-        if (this.$refs.input) {
-          this.$refs.input.focus()
-        }
-        // 还原
-        this.searchText = ''
-        this.results = []
-      }, 500)
-    },
-    /**
+        focus() {
+            this.input = ''
+            setTimeout(() => {
+                if (this.$refs.input) {
+                    this.$refs.input.focus()
+                }
+                // 还原
+                this.searchText = ''
+                this.results = []
+            }, 500)
+        },
+        /**
      * @description 接收用户在列表中选择项目的事件
      */
-    handleResultsGroupItemClick(path) {
-      // 如果用户选择的就是当前页面 就直接关闭搜索面板
-      if (path === this.$route.path) {
-        this.handleEsc()
-        return
-      }
-      // 用户选择的是其它页面
-      this.handleMenuSelect(path)
-    },
-    /**
+        handleResultsGroupItemClick(path) {
+            // 如果用户选择的就是当前页面 就直接关闭搜索面板
+            if (path === this.$route.path) {
+                this.handleEsc()
+                return
+            }
+            // 用户选择的是其它页面
+            this.handleMenuSelect(path)
+        },
+        /**
      * @description 接收用户在下拉菜单中选中事件
      */
-    async handleSelect({ path }) {
-      // 如果用户选择的就是当前页面 就直接关闭搜索面板
-      if (path === this.$route.path) {
-        this.handleEsc()
-        return
-      }
-      // 用户选择的是其它页面
-      await this.$nextTick()
-      this.handleMenuSelect(path)
-    },
-    /**
+        async handleSelect({ path }) {
+            // 如果用户选择的就是当前页面 就直接关闭搜索面板
+            if (path === this.$route.path) {
+                this.handleEsc()
+                return
+            }
+            // 用户选择的是其它页面
+            await this.$nextTick()
+            this.handleMenuSelect(path)
+        },
+        /**
      * @augments 关闭输入框的下拉菜单
      */
-    closeSuggestion() {
-      if (this.$refs.input.activated) {
-        this.$refs.input.suggestions = []
-        this.$refs.input.activated = false
-      }
-    },
-    /**
+        closeSuggestion() {
+            if (this.$refs.input.activated) {
+                this.$refs.input.suggestions = []
+                this.$refs.input.activated = false
+            }
+        },
+        /**
      * @augments 接收用户点击空白区域的关闭
      */
-    handlePanelClick() {
-      this.handleEsc()
-    },
-    /**
+        handlePanelClick() {
+            this.handleEsc()
+        },
+        /**
      * @augments 接收用户触发的关闭
      */
-    async handleEsc() {
-      this.closeSuggestion()
-      await this.$nextTick()
-      this.$emit('close')
+        async handleEsc() {
+            this.closeSuggestion()
+            await this.$nextTick()
+            this.$emit('close')
+        }
     }
-  }
 }
 </script>
 

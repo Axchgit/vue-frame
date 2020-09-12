@@ -51,11 +51,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      dialogVisible: false
+    data() {
+        return {
+            dialogVisible: false
+        }
     }
-  }
 }
 </script>
 

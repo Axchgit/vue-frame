@@ -11,22 +11,22 @@
 
 <script>
 export default {
-  name: 'D2ContextmenuList',
-  props: {
-    menulist: {
-      type: Array,
-      default: () => []
+    name: 'D2ContextmenuList',
+    props: {
+        menulist: {
+            type: Array,
+            default: () => []
+        }
+    },
+    methods: {
+        rowClick(event) {
+            let target = event.target
+            while (!target.dataset.value) {
+                target = target.parentNode
+            }
+            this.$emit('rowClick', target.dataset.value)
+        }
     }
-  },
-  methods: {
-    rowClick(event) {
-      let target = event.target
-      while (!target.dataset.value) {
-        target = target.parentNode
-      }
-      this.$emit('rowClick', target.dataset.value)
-    }
-  }
 }
 </script>
 

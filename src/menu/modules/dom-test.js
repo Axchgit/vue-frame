@@ -7,27 +7,27 @@
  * @Description:
  */
 export default {
-  path: '/dom/test',
-  title: '测试',
-  roles: 5,
-  icon: 'flask',
-  children: (pre => [
-    { path: `${pre}index`, title: '示例', icon: 'home' },
-    {
-      title: '表格',
-      icon: 'table',
-      children: [
-        { path: `${pre}table/1`, title: '表格 1' }
-      ]
-    },
-    {
-      title: 'ISSUES',
-      icon: 'github',
-      children: [
-        { path: `${pre}issues/142`, title: '#142' }
-      ]
-    }
-  ])('/dom/test/')
+    path: '/dom/test',
+    title: '测试',
+    roles: 5,
+    icon: 'flask',
+    children: (pre => [
+        { path: `${pre}index`, title: '示例', icon: 'home' },
+        {
+            title: '表格',
+            icon: 'table',
+            children: [
+                { path: `${pre}table/1`, title: '表格 1' }
+            ]
+        },
+        {
+            title: 'ISSUES',
+            icon: 'github',
+            children: [
+                { path: `${pre}issues/142`, title: '#142' }
+            ]
+        }
+    ])('/dom/test/')
 }
 
 // {

@@ -42,10 +42,10 @@
 
 <script>
 export default {
-  methods: {
-    handleClick() {
-      alert('button click')
+    methods: {
+        handleClick() {
+            alert('button click')
+        }
     }
-  }
 }
 </script>

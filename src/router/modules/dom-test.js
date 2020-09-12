@@ -14,18 +14,18 @@ const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 const meta = { auth: true, rules: 0, title: '测试' }
 
 export default {
-  path: '/dom/test',
-  name: 'test',
-  meta,
-  redirect: { name: 'dom-test-index' },
-  component: layoutHeaderAside,
-  children: (pre => [{
-    path: 'index',
-    name: `${pre}index`,
-    component: _import('dom/test/index/index'),
-    meta: {
-      ...meta,
-      title: '测试首页'
-    }
-  }])('dom-test-')
+    path: '/dom/test',
+    name: 'test',
+    meta,
+    redirect: { name: 'dom-test-index' },
+    component: layoutHeaderAside,
+    children: (pre => [{
+        path: 'index',
+        name: `${pre}index`,
+        component: _import('dom/test/index/index'),
+        meta: {
+            ...meta,
+            title: '测试首页'
+        }
+    }])('dom-test-')
 }

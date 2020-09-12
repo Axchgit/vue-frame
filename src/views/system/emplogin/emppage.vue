@@ -112,107 +112,107 @@ import dayjs from 'dayjs'
 import { mapActions } from 'vuex'
 import localeMixin from '@/locales/mixin.js'
 export default {
-  mixins: [localeMixin],
-  data() {
-    return {
-      identifyCode: ' ',
-      identifyCodeKey: 'qwertyuiopasdfghjklzxcvbnm1234567890',
-      timeInterval: null,
-      time: dayjs().format('HH:mm:ss'),
-      // 表单
-      formLogin: {
-        username: '',
-        password: '',
-        code: ''
-      },
-      // 表单校验
-      rules: {
-        username: [
-          {
-            required: true,
-            message: '请输入用户名',
-            trigger: 'blur'
-          }
-        ],
-        password: [
-          {
-            required: true,
-            message: '请输入密码',
-            trigger: 'blur'
-          }
-        ],
-        code: [
-          {
-            required: true,
-            message: '请输入验证码',
-            trigger: 'blur'
-          }
-        ]
-      }
-    }
-  },
-  mounted() {
-    this.timeInterval = setInterval(() => {
-      this.refreshTime()
-    }, 1000)
-  },
-  beforeDestroy() {
-    clearInterval(this.timeInterval)
-  },
-  methods: {
+    mixins: [localeMixin],
+    data() {
+        return {
+            identifyCode: ' ',
+            identifyCodeKey: 'qwertyuiopasdfghjklzxcvbnm1234567890',
+            timeInterval: null,
+            time: dayjs().format('HH:mm:ss'),
+            // 表单
+            formLogin: {
+                username: '',
+                password: '',
+                code: ''
+            },
+            // 表单校验
+            rules: {
+                username: [
+                    {
+                        required: true,
+                        message: '请输入用户名',
+                        trigger: 'blur'
+                    }
+                ],
+                password: [
+                    {
+                        required: true,
+                        message: '请输入密码',
+                        trigger: 'blur'
+                    }
+                ],
+                code: [
+                    {
+                        required: true,
+                        message: '请输入验证码',
+                        trigger: 'blur'
+                    }
+                ]
+            }
+        }
+    },
+    mounted() {
+        this.timeInterval = setInterval(() => {
+            this.refreshTime()
+        }, 1000)
+    },
+    beforeDestroy() {
+        clearInterval(this.timeInterval)
+    },
+    methods: {
     /** 验证码**** */
-    randomNum(min, max) {
-      return Math.floor(Math.random() * (max - min) + min)
-    },
-    refreshCode() {
-      // 刷新验证码前清空之前的
-      this.identifyCode = ''
-      this.makeCode(4)
-      console.log('当前验证码==' + this.identifyCode)
-    },
-    makeCode(l) {
-      for (let i = 0; i < l; i++) {
-        this.identifyCode += this.identifyCodeKey[
-          this.randomNum(0, this.identifyCodeKey.length)
-        ]
-      }
-    },
-    ...mapActions('d2admin/account', ['empLogin']),
-    refreshTime() {
-      this.time = dayjs().format('HH:mm:ss')
-    },
-    /**
+        randomNum(min, max) {
+            return Math.floor(Math.random() * (max - min) + min)
+        },
+        refreshCode() {
+            // 刷新验证码前清空之前的
+            this.identifyCode = ''
+            this.makeCode(4)
+            console.log('当前验证码==' + this.identifyCode)
+        },
+        makeCode(l) {
+            for (let i = 0; i < l; i++) {
+                this.identifyCode += this.identifyCodeKey[
+                    this.randomNum(0, this.identifyCodeKey.length)
+                ]
+            }
+        },
+        ...mapActions('d2admin/account', ['empLogin']),
+        refreshTime() {
+            this.time = dayjs().format('HH:mm:ss')
+        },
+        /**
      * @description 提交表单
      */
-    // 提交登录信息
-    submit() {
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          if (this.formLogin.code === this.identifyCode) {
-            this.$message.success('表单验证成功,正在登录')
+        // 提交登录信息
+        submit() {
+            this.$refs.loginForm.validate((valid) => {
+                if (valid) {
+                    if (this.formLogin.code === this.identifyCode) {
+                        this.$message.success('表单验证成功,正在登录')
 
-            // 登录
-            this.empLogin({
-              username: this.formLogin.username,
-              password: this.formLogin.password
-            }).then(() => {
-              // 重定向对象不存在则返回顶层路径
-              this.$router.replace(this.$route.query.redirect || '/')
+                        // 登录
+                        this.empLogin({
+                            username: this.formLogin.username,
+                            password: this.formLogin.password
+                        }).then(() => {
+                            // 重定向对象不存在则返回顶层路径
+                            this.$router.replace(this.$route.query.redirect || '/')
+                        })
+                    } else {
+                        this.$message.error('验证码错误,请重新输入')
+                    }
+                } else {
+                    // 登录表单校验失败
+                    this.$message.error('表单校验失败，请检查')
+                }
+                this.refreshCode()
             })
-          } else {
-            this.$message.error('验证码错误,请重新输入')
-          }
-        } else {
-          // 登录表单校验失败
-          this.$message.error('表单校验失败，请检查')
         }
+    },
+    created() {
         this.refreshCode()
-      })
     }
-  },
-  created() {
-    this.refreshCode()
-  }
 }
 </script>
 
