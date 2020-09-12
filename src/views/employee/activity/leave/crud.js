@@ -8,7 +8,13 @@ export const crudOptions = {
         height: '100%' // 表格高度100%, 使用toolbar必须设置
     },
     formOptions: {
-        defaultSpan: 12 // 默认的表单 span
+        // defaultSpan: 12, // 默认的表单 span
+        width: '60%'
+    },
+    searchOptions: {
+        form: {
+            daterange: [] // 表单重置bug
+        }
     },
     // 知识点:CRUD:控制操作列
     rowHandle: {
@@ -133,6 +139,90 @@ export const crudOptions = {
             }
         },
         {
+            title: '代理人工号',
+            key: 'agent',
+            align: 'center',
+            width: '100',
+            disabled: false,
+
+            sortable: true,
+            search: {
+                // name: 'real_name',
+                // disabled: false,
+                // title: '姓名'
+            },
+            form: {
+                rules: [{ required: true, message: '请输入代理人工号' }]
+            },
+            component: {
+                // name: 'values-format'
+            }
+        },
+        // {
+        //     title: '日期时间范围',
+        //     key: 'datetimerange',
+        //     sortable: true,
+        //     type: 'datetimerange',
+        //     width: 300,
+        //     form: {
+        //         component: {
+        //             props: {
+        //                 size: 'mini',
+        //                 width: '50px',
+        //                 'time-arrow-control': true,
+        //                 'default-time': ['12:00:00', '12:00:00']
+        //                 // 'picker-options': { shortcuts: shortcuts }
+        //             }
+        //         }
+        //     },
+        //     valueBuilder(row, key) {
+        //         if (!StringUtils.hasEmpty(row.datetimerangeStart, row.datetimerangeEnd)) {
+        //             row.datetimerange = [new Date(row.datetimerangeStart), new Date(row.datetimerangeEnd)]
+        //         }
+        //     },
+        //     valueResolve(row, key) {
+        //         if (row.datetimerange != null && !StringUtils.hasEmpty(row.datetimerange)) {
+        //             row.datetimerangeStart = row.datetimerange[0].getTime()
+        //             row.datetimerangeEnd = row.datetimerange[1].getTime()
+        //         } else {
+        //             row.datetimerangeStart = null
+        //             row.datetimerangeEnd = null
+        //         }
+        //     }
+        // },
+        // {
+        //     title: '日期时间范围',
+        //     key: 'datetimerange',
+        //     sortable: true,
+        //     type: 'datetimerange',
+        //     width: 300,
+        //     form: {
+        //         component: {
+        //             props: {
+        //                 size: 'mini',
+        //                 width: '50px',
+        //                 'time-arrow-control': true,
+        //                 'default-time': ['12:00:00', '12:00:00']
+        //                 // 'picker-options': { shortcuts: shortcuts }
+        //             }
+        //         }
+        //     },
+        //     valueBuilder(row, key) {
+        //         if (!StringUtils.hasEmpty(row.datetimerangeStart, row.datetimerangeEnd)) {
+        //             row.datetimerange = [new Date(row.datetimerangeStart), new Date(row.datetimerangeEnd)]
+        //         }
+        //     },
+        //     valueResolve(row, key) {
+        //         if (row.datetimerange != null && !StringUtils.hasEmpty(row.datetimerange)) {
+        //             row.datetimerangeStart = row.datetimerange[0].getTime()
+        //             row.datetimerangeEnd = row.datetimerange[1].getTime()
+        //         } else {
+        //             row.datetimerangeStart = null
+        //             row.datetimerangeEnd = null
+        //         }
+        //     }
+        // },
+        {
             title: '选择日期',
             key: 'datetimerange',
             sortable: true,
@@ -143,14 +233,19 @@ export const crudOptions = {
                 disabled: true
             },
             // type: 'datetime',
-            // width: '50',
+            width: '50',
             form: {
                 component: {
+                    width: '50',
+
                     // 知识点:element ui 配置项,改为驼峰命名
                     props: {
-                        'value-format': 'timestamp'
+                        'time-arrow-control': false
+                        // 'value-format': 'timestamp'
                     }
                 },
+                width: '50',
+
                 // valueFormat: 'timestamp',
                 rules: [{ required: true, message: '请输入开始时间' }]
             },
@@ -158,17 +253,18 @@ export const crudOptions = {
                 // name: 'values-format'
             },
             valueBuilder(row, key) {
-                if (!StringUtils.hasEmpty(row.datetimerangeStart, row.datetimerangeEnd)) {
-                    row.datetimerange = [new Date(row.datetimerangeStart), new Date(row.datetimerangeEnd)]
+                if (!StringUtils.hasEmpty(row.start_time, row.end_time)) {
+                    row.datetimerange = [new Date(row.start_time), new Date(row.end_time)]
                 }
             },
             valueResolve(row, key) {
                 if (row.datetimerange != null && !StringUtils.hasEmpty(row.datetimerange)) {
-                    row.datetimerangeStart = row.datetimerange[0].getTime()
-                    row.datetimerangeEnd = row.datetimerange[1].getTime()
+                    row.start_time = row.datetimerange[0].getTime() / 1000
+                    row.end_time = row.datetimerange[1].getTime() / 1000
+                    row.duration = row.end_time - row.start_time
                 } else {
-                    row.datetimerangeStart = null
-                    row.datetimerangeEnd = null
+                    row.start_time = null
+                    row.end_time = null
                 }
             }
         },
@@ -226,26 +322,7 @@ export const crudOptions = {
                 // rules: [{ required: true, message: '请输入结束时间' }]
             }
         },
-        {
-            title: '代理人工号',
-            key: 'agent',
-            align: 'center',
-            width: '100',
-            disabled: false,
 
-            sortable: true,
-            search: {
-                // name: 'real_name',
-                // disabled: false,
-                // title: '姓名'
-            },
-            form: {
-                rules: [{ required: true, message: '请输入代理人工号' }]
-            },
-            component: {
-                // name: 'values-format'
-            }
-        },
         {
             title: '审核状态',
             key: 'review_status',

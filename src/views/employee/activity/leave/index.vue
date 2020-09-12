@@ -60,6 +60,10 @@ export default {
         },
         delRequest(row) {
             return DelObj(row.id)
+        },
+        handleDialogOpened({ mode, row, form, template, groupTemplate }) {
+            // 在对话框打开的时候，调用一下disableText3 的valueChange方法，使禁用效果一致
+            this.getEditFormTemplate('disableText3').valueChange('disableText3', form.disableText3, form)
         }
     }
 }
