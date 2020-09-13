@@ -8,7 +8,7 @@ export const crudOptions = {
         height: '100%' // 表格高度100%, 使用toolbar必须设置
     },
     formOptions: {
-        labelWidth: '100px',
+        labelWidth: '150px',
         defaultSpan: 20, // 默认的表单 span
         width: '60%'
     },
@@ -89,7 +89,7 @@ export const crudOptions = {
             }
         },
         {
-            title: '请假类别',
+            title: '离职类别',
             key: 'category',
             align: 'center',
             width: '100',
@@ -101,6 +101,18 @@ export const crudOptions = {
                 title: '请假类别'
             },
             form: {
+                component: {
+                    props: {
+                        // dict: { // 此处配置不影响列展示的效率
+                        //     cache: false, // 表单的dict可以禁用缓存
+                        //     clone: true, // 获取成功后clone一份，不影响全局缓存
+                        //     onReady(data, dict, context) {
+                        //         console.log('字典请求ready', data, context)
+                        //         data[0].disabled = true // 禁用某个选项， 还可以自己修改选项，如果没有禁用缓存，则可能会影响全局
+                        //     }
+                        // }
+                    }
+                },
                 rules: [{ required: true, message: '请输入请假类别' }]
             },
             component: {
@@ -111,22 +123,19 @@ export const crudOptions = {
             },
             dict: {
                 data: [
-                    { value: 1, label: '事假' },
-                    { value: 2, label: '病假', color: 'danger' },
-                    { value: 3, label: '产假', color: 'success' },
-                    { value: 4, label: '婚假', color: 'success' },
-                    { value: 5, label: '丧假', color: 'info' },
-                    { value: 6, label: '年假' }
-
+                    { value: 1, label: '辞职' },
+                    { value: 2, label: '辞退', color: 'danger', disabled: true },
+                    { value: 3, label: '其他', color: 'success' }
                 ]
             }
         },
         {
-            title: '具体事由',
+            title: '离职理由',
             key: 'reason',
             align: 'center',
-            type: 'text-area',
             width: '100',
+            type: 'text-area',
+            //
             showOverflowTooltip: true,
             // sortable: true,
             search: {
@@ -134,7 +143,9 @@ export const crudOptions = {
                 disabled: true,
                 title: '具体事由'
             },
+            // type: 'textarea',
             form: {
+                // type: 'textarea',
                 rules: [{ required: true, message: '请输入具体事由' }]
             },
             component: {
@@ -155,7 +166,6 @@ export const crudOptions = {
                 // title: '姓名'
             },
             form: {
-                component: { span: 10 },
                 rules: [{ required: true, message: '请输入代理人工号' }]
             },
             component: {
@@ -163,126 +173,33 @@ export const crudOptions = {
             }
         },
         {
-            title: '日期',
-            key: 'datetimerange',
-            // sortable: true,
+            title: '预计离职时间',
+            key: 'estimated_time',
+            sortable: true,
             align: 'center',
-            // disabled: true,
-            type: 'datetimerange',
-            width: '300',
+            disabled: true,
+
             search: {
                 disabled: true
             },
+            type: 'datetime',
+            width: '150',
             form: {
-                component: {
-                    // element ui 配置项,改为驼峰命名
-                    props: {
-                        'time-arrow-control': false
-                        // 'value-format': 'yyyy-M-d-H'
-                    }
-                },
-                // valueFormat: 'yyyy-M-d-H',
-                rules: [{ required: true, message: '请输入开始时间' }]
-            },
-            component: {
-                // name: 'values-format'
-            },
-            test(row, key) {
-                console.log(row)
-                console.log(12321321)
+                rules: [{ required: true, message: '请输入时间' }]
             },
             valueBuilder(row, key) {
-                if (!StringUtils.hasEmpty(row.start_time, row.end_time)) {
-                    row.datetimerange = [new Date(row.start_time * 1000), new Date(row.end_time * 1000)]
+                if (!StringUtils.hasEmpty(row.estimated_time)) {
+                    row.estimated_time = new Date(row.estimated_time * 1000)
                 }
             },
             valueResolve(row, key) {
-                if (row.datetimerange != null && !StringUtils.hasEmpty(row.datetimerange)) {
-                    row.start_time = row.datetimerange[0].getTime() / 1000
-                    row.end_time = row.datetimerange[1].getTime() / 1000
-                    row.duration = row.end_time - row.start_time
+                if (row.estimated_time != null && !StringUtils.hasEmpty(row.estimated_time)) {
+                    row.estimated_time = row.estimated_time.getTime() / 1000
                 } else {
-                    row.start_time = null
-                    row.end_time = null
+                    row.estimated_time = null
                 }
             }
         },
-        // {
-        //     title: '开始时间',
-        //     key: 'start_time',
-        //     sortable: true,
-        //     align: 'center',
-        //     disabled: true,
-
-        //     search: {
-        //         disabled: true
-        //     },
-        //     type: 'datetime',
-        //     width: '150',
-        //     form: {
-        //         addDisabled: true,
-        //         editDisabled: true
-        //         // rules: [{ required: true, message: '请输入时间' }]
-        //     }
-        // },
-        // {
-        //     title: '结束时间',
-        //     key: 'end_time',
-        //     sortable: true,
-        //     align: 'center',
-        //     disabled: true,
-
-        //     search: {
-        //         disabled: true
-        //     },
-        //     type: 'datetime',
-        //     width: '150',
-        //     form: {
-        //         addDisabled: true,
-        //         editDisabled: true
-        //         // rules: [{ required: true, message: '请输入结束时间' }]
-        //     }
-        // },
-        {
-            title: '持续时间',
-            key: 'duration',
-            sortable: true,
-            align: 'center',
-            disabled: false,
-
-            search: {
-                disabled: true
-            },
-            // type: 'datetime',
-            width: '150',
-            form: {
-                addDisabled: true,
-                editDisabled: true
-                // rules: [{ required: true, message: '请输入结束时间' }]
-            },
-            component: {
-                name: 'values-format'
-            },
-            // CRUD处理表单值
-            valueBuilder(row, key) {
-                var days = parseInt(row.duration / (60 * 60 * 24))
-                var hours = parseInt((row.duration % (60 * 60 * 24)) / (60 * 60))
-                // var minutes = parseInt((row.duration % (60 * 60)) / (60))
-                // var seconds = (row.duration % (60)) / 1000
-                row.duration = days + ' 天 ' + hours + ' 小时 '
-                if (days === 0) {
-                    row.duration = hours + ' 小时 '
-                } else if (hours === 0) {
-                    row.duration = days + ' 天 '
-                }
-                // row.duration = row.duration / (60 * 60 * 24)
-                // row.duration = 321312432434324
-                // if (!StringUtils.hasEmpty(row.start_time, row.end_time)) {
-                //     row.datetimerange = [new Date(row.start_time), new Date(row.end_time)]
-                // }
-            }
-        },
-
         {
             title: '审核状态',
             key: 'review_status',

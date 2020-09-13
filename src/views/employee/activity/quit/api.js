@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-09-02 23:54:36
- * @LastEditTime: 2020-09-13 03:13:34
+ * @LastEditTime: 2020-09-13 12:27:31
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\employee\performance\submit\api.js
  * @Description:
@@ -10,23 +10,23 @@
 import { request } from '@/api/service'
 export function GetList(query) {
     return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/selectEmployeeLeaveByUuid',
+        url: process.env.VUE_APP_AJAX_URL + '/employee/selectEmployeeQuitByUuid',
         method: 'get',
         params: query
     })
 }
 
-export function SelectPerformanceByUuid({ key, value }) {
-    return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceByUuid',
-        method: 'get',
-        params: { key, value }
-    })
-}
+// export function SelectPerformanceByUuid({ key, value }) {
+//     return request({
+//         url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceByUuid',
+//         method: 'get',
+//         params: { key, value }
+//     })
+// }
 
 export function AddObj(data) {
     return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/addEmployeeLeave',
+        url: process.env.VUE_APP_AJAX_URL + '/employee/addEmployeeQuit',
         method: 'post',
         data: data
     })
@@ -41,7 +41,7 @@ export function UpdateObj(data) {
 }
 export function DelObj(id) {
     return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/recallEmployeeLeave',
+        url: process.env.VUE_APP_AJAX_URL + '/employee/recallEmployeeQuit',
         method: 'post',
         params: { id }
     })

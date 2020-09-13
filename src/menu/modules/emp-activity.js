@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-12 12:47:35
+ * @LastEditTime: 2020-09-13 15:38:51
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\emp-activity.js
  * @Description:
@@ -12,7 +12,7 @@ export default {
     roles: 5,
     icon: 'plane',
     children: (pre => [
-        { path: `${pre}index`, title: '示例', icon: 'home' },
+        // { path: `${pre}index`, title: '示例', icon: 'home' },
         {
             title: '请假',
             icon: 'table',
