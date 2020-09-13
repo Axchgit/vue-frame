@@ -3,6 +3,7 @@ import test from './modules/dom-test'
 import adminEmp from './modules/admin-employee'
 import adminGoods from './modules/admin-goods'
 import adminPerformance from './modules/admin-performance'
+import adminEmpActivity from './modules/admin-activity'
 
 import employeePerformance from './modules/emp-performance'
 import employeeActivity from './modules/emp-activity'
@@ -99,6 +100,7 @@ const frameIn = [
     adminEmp,
     adminGoods,
     adminPerformance,
+    adminEmpActivity,
     employeePerformance,
     employeeActivity,
     employeeFeedback

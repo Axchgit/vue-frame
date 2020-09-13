@@ -1,5 +1,5 @@
 
-// import StringUtils from 'd2-crud-plus/src/lib/utils/util.string'
+import StringUtils from 'd2-crud-plus/src/lib/utils/util.string'
 export const crudOptions = {
     pageOptions: {
         compact: true // 是否紧凑型页面
@@ -8,8 +8,8 @@ export const crudOptions = {
         height: '100%' // 表格高度100%, 使用toolbar必须设置
     },
     formOptions: {
-        labelWidth: '100px',
-        defaultSpan: 12, // 默认的表单 span
+        labelWidth: '150px',
+        defaultSpan: 20, // 默认的表单 span
         width: '60%'
     },
     searchOptions: {
@@ -48,7 +48,9 @@ export const crudOptions = {
         }
     },
     columns: [
+
         {
+
             title: 'ID',
             key: 'id',
             width: '90',
@@ -87,76 +89,175 @@ export const crudOptions = {
             }
         },
         {
-            title: '商品ID',
-            key: 'goods_id',
-            align: 'center',
-            width: '100',
-            // sortable: true,
-            // disabled: true,
-            search: {
-                name: '商品ID',
-                disabled: true,
-                title: 'goods_id'
-            },
-            form: {
-                // addDisabled: true,
-                editDisabled: true,
-                rules: [{ required: true, message: '请输入商品ID' }]
-            },
-            component: {
-                name: 'values-format'
-            }
-        },
-        {
-            title: '工号',
+            title: '申请人工号',
             key: 'work_num',
             align: 'center',
             width: '100',
             // sortable: true,
             // disabled: true,
             search: {
-                name: '工号',
+                name: '申请人工号',
                 disabled: true,
                 title: 'work_num'
             },
             form: {
-                addDisabled: true,
+                // addDisabled: true,
                 editDisabled: true,
                 rules: [{ required: true, message: '请输入工号' }]
             },
             component: {
-                // name: 'values-format'
+                name: 'values-format'
             }
-        }, {
-            title: '姓名',
+        },
+        {
+            title: '申请人姓名',
             key: 'real_name',
             align: 'center',
             width: '100',
             // sortable: true,
             // disabled: true,
             search: {
-                name: '姓名',
+                name: '申请人姓名',
                 disabled: true,
                 title: 'real_name'
             },
             form: {
                 addDisabled: true,
-                editDisabled: true,
-                rules: [{ required: true, message: '请输入姓名' }]
+                editDisabled: true
+                // rules: [{ required: true, message: '请输入UUID' }]
             },
             component: {
                 // name: 'values-format'
             }
         },
-        // TODO:优化审核操作
         {
-            title: '审核状态',
-            key: 'audit_status',
+            title: '离职类别',
+            key: 'category',
+            align: 'center',
+            width: '100',
+            sortable: true,
+            type: 'select',
+            search: {
+                name: 'category',
+                disabled: false,
+                title: '请假类别'
+            },
+            form: {
+                addDisabled: true,
+                editDisabled: true,
+                component: {
+                    props: {
+                        // dict: { // 此处配置不影响列展示的效率
+                        //     cache: false, // 表单的dict可以禁用缓存
+                        //     clone: true, // 获取成功后clone一份，不影响全局缓存
+                        //     onReady(data, dict, context) {
+                        //         console.log('字典请求ready', data, context)
+                        //         data[0].disabled = true // 禁用某个选项， 还可以自己修改选项，如果没有禁用缓存，则可能会影响全局
+                        //     }
+                        // }
+                    }
+                },
+                rules: [{ required: true, message: '请输入请假类别' }]
+            },
+            component: {
+                props: {
+                    clearable: true
+                },
+                name: 'values-format'
+            },
+            dict: {
+                data: [
+                    { value: 1, label: '辞职' },
+                    { value: 2, label: '辞退', color: 'danger', disabled: true },
+                    { value: 3, label: '其他', color: 'success' }
+                ]
+            }
+        },
+        {
+            title: '离职理由',
+            key: 'reason',
+            align: 'center',
+            width: '100',
+            type: 'text-area',
+            //
+            showOverflowTooltip: true,
+            // sortable: true,
+            search: {
+                name: 'reason',
+                disabled: true,
+                title: '具体事由'
+            },
+            // type: 'textarea',
+            form: {
+                // type: 'textarea',
+                addDisabled: true,
+                editDisabled: true,
+                rules: [{ required: true, message: '请输入具体事由' }]
+            },
+            component: {
+                // name: 'values-format'
+            }
+        },
+        {
+            title: '代理人工号',
+            key: 'agent',
+            align: 'center',
+            width: '100',
+            disabled: false,
+
+            // sortable: true,
+            search: {
+                // name: 'real_name',
+                // disabled: false,
+                // title: '姓名'
+            },
+            form: {
+                addDisabled: true
+                // editDisabled: true
+                // rules: [{ required: true, message: '请输入代理人工号' }]
+            },
+            component: {
+                // name: 'values-format'
+            }
+        },
+        {
+            title: '预计离职时间',
+            key: 'estimated_time',
             sortable: true,
             align: 'center',
-            width: '50',
+            disabled: true,
+
             search: {
-                name: 'audit_status',
+                disabled: true
+            },
+            type: 'datetime',
+            width: '150',
+            form: {
+                addDisabled: true
+                // editDisabled: true
+                // rules: [{ required: true, message: '请输入时间' }]
+            },
+            valueBuilder(row, key) {
+                if (!StringUtils.hasEmpty(row.estimated_time)) {
+                    row.estimated_time = new Date(row.estimated_time * 1000)
+                }
+            },
+            valueResolve(row, key) {
+                if (row.estimated_time != null && !StringUtils.hasEmpty(row.estimated_time)) {
+                    row.estimated_time = row.estimated_time.getTime() / 1000
+                } else {
+                    row.estimated_time = null
+                }
+            }
+        },
+        {
+            title: '审核状态',
+            key: 'review_status',
+            sortable: true,
+            align: 'center',
+            width: '100',
+            search: {
+                name: 'review_status',
                 title: '审核状态',
                 disabled: true,
                 component: {
@@ -167,21 +268,19 @@ export const crudOptions = {
             },
             type: 'select',
             form: {
-                addDisabled: true,
-                // editDisabled: true,
                 rules: [{ required: true, message: '请输入审核状态' }]
             },
             dict: {
                 data: [
                     { value: 1, label: '正在审核', color: 'warning' },
-                    { value: 2, label: '审核通过', color: 'success' },
+                    { value: 2, label: '通过', color: 'success' },
                     { value: 3, label: '未通过', color: 'danger' }
                 ]
             }
         },
         {
-            title: '审核人员',
-            key: 'handler',
+            title: '审核人工号',
+            key: 'reviewer',
             align: 'center',
             width: '100',
             disabled: false,
@@ -206,9 +305,10 @@ export const crudOptions = {
             component: {
                 // name: 'values-format'
             },
+
             valueBuilder(row, key) {
-                if (row.handler === '') {
-                    row.handler = '未审核'
+                if (row.reviewer === '') {
+                    row.reviewer = '未审核'
                 }
             }
         },
@@ -231,70 +331,5 @@ export const crudOptions = {
                 rules: [{ required: true, message: '请输入添加时间' }]
             }
         }
-        // {
-        //     title: '审核',
-        //     key: 'audit_status',
-        //     sortable: true,
-        //     search: {},
-        //     type: 'switch',
-        //     width: '150px',
-        //     form: {
-        //         valueChange(key, value) {
-        //             console.log('-----你选择了', value)
-        //         }
-        //     }
-        //     // valueBuilder(row, key) {
-        //     //     if (row.audit_status === 1 || row.audit_status === 3) {
-        //     //         row.audit_status = '未通过'
-        //     //         console.log(row.audit_status)
-        //     //     } else {
-        //     //         row.audit_status = '通过'
-        //     //     }
-        //     //     // if (!StringUtils.hasEmpty(row.exact_date)) {
-        //     //     //     row.audit_status = new Date(row.audit_status * 1000)
-        //     //     // }
-        //     // }
-        // }
-        // {
-        //     title: '审核',
-        //     key: 'audit_status',
-        //     sortable: true,
-        //     search: { disabled: false },
-        //     valueBuilder(row, key) {
-        //         if (row.audit_status === 1 || row.audit_status === 3) {
-        //             row.audit_status = false
-        //             console.log(row.audit_status)
-        //         } else {
-        //             row.audit_status = true
-        //         }
-        //         // if (!StringUtils.hasEmpty(row.exact_date)) {
-        //         //     row.audit_status = new Date(row.audit_status * 1000)
-        //         // }
-        //     },
-        //     type: 'dict-switch',
-        //     dict: { data: [{ value: true, label: '通过' }, { value: false, label: '未通过' }] },
-        //     form: {
-        //         component: {
-        //             span: 24,
-        //             events: {
-        //                 blur: () => {
-        //                     console.log('on blur')
-        //                 }
-        //             }
-        //         },
-        //         valueChange(key, value, form) {
-        //             console.log('您选中了：', value)
-        //         }
-        //     },
-        //     minWidth: 200
-
-        //     // valueResolve(row, key) {
-        //     //     if (row.exact_date != null && !StringUtils.hasEmpty(row.exact_date)) {
-        //     //         row.exact_date = row.exact_date.getTime() / 1000
-        //     //     } else {
-        //     //         row.exact_date = (new Date()).getTime() / 1000
-        //     //     }
-        //     // }
-        // }
     ]
 }
