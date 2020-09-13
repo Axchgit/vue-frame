@@ -120,14 +120,14 @@ export const crudOptions = {
         },
         {
             title: '具体事项',
-            key: 'reason',
+            key: 'matter',
             align: 'center',
             width: '200',
             type: 'text-area',
             showOverflowTooltip: true,
             // sortable: true,
             search: {
-                name: 'reason',
+                name: 'matter',
                 disabled: true,
                 title: '具体事项'
             },

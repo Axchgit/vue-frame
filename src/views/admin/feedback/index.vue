@@ -9,7 +9,7 @@
 
       <div slot="header">
         <!-- <crud-search ref="search" :options="crud.searchOptions" @submit="handleSearch"  /> -->
-        <el-button size="small" type="primary" @click="addRow"><i class="el-icon-plus"/> 新增</el-button>
+        <!-- <el-button size="small" type="primary" @click="addRow"><i class="el-icon-plus"/> 新增</el-button> -->
         <!-- <el-button size="small" type="primary" @click="test"><i class="el-icon-plus"/> 新增</el-button> -->
 
         <crud-toolbar

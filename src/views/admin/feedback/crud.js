@@ -35,7 +35,7 @@ export const crudOptions = {
             thin: true,
             type: 'success',
             // circle: true,
-            text: '编辑'
+            text: '审核'
             // show: false // 是否显示按钮
 
         },
@@ -43,8 +43,8 @@ export const crudOptions = {
             // disabled: true,
             thin: true,
             type: 'danger',
-            text: '撤回'
-            // show: false // 是否显示按钮
+            text: '撤回',
+            show: false // 是否显示按钮
         }
     },
     columns: [
@@ -99,6 +99,8 @@ export const crudOptions = {
                 title: '问题类别'
             },
             form: {
+                addDisabled: true,
+                editDisabled: true,
                 component: { span: 10 },
                 rules: [{ required: true, message: '请输入问题类别' }]
             },
@@ -120,18 +122,20 @@ export const crudOptions = {
         },
         {
             title: '具体事项',
-            key: 'reason',
+            key: 'matter',
             align: 'center',
             width: '200',
             type: 'text-area',
             showOverflowTooltip: true,
             // sortable: true,
             search: {
-                name: 'reason',
+                name: 'matter',
                 disabled: true,
                 title: '具体事项'
             },
             form: {
+                addDisabled: true,
+                editDisabled: true,
                 rules: [{ required: true, message: '请输入具体事项' }]
             },
             component: {
@@ -151,6 +155,8 @@ export const crudOptions = {
             type: 'date',
             width: '150',
             form: {
+                addDisabled: true,
+                editDisabled: true,
                 // rules: [{ required: true, message: '请输入时间' }]
                 helper: '默认为今天'
             },
@@ -186,8 +192,8 @@ export const crudOptions = {
             type: 'select',
             form: {
                 addDisabled: true,
-                editDisabled: true
-                // rules: [{ required: true, message: '请输入审核状态' }]
+                // editDisabled: true
+                rules: [{ required: true, message: '请输入审核状态' }]
             },
             dict: {
                 data: [
