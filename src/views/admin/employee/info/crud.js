@@ -251,6 +251,7 @@ export const crudOptions = {
             },
             dict: {
                 data: [
+                    { value: 0, label: '超级管理员', color: 'danger' },
                     { value: 1, label: '管理员', color: 'success' },
                     { value: 2, label: '普通员工' },
                     { value: 3, label: '普通员工' },

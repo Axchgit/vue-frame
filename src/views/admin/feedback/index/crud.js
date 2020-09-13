@@ -1,5 +1,5 @@
 
-// import StringUtils from 'd2-crud-plus/src/lib/utils/util.string'
+import StringUtils from 'd2-crud-plus/src/lib/utils/util.string'
 export const crudOptions = {
     pageOptions: {
         compact: true // 是否紧凑型页面
@@ -35,7 +35,7 @@ export const crudOptions = {
             thin: true,
             type: 'success',
             // circle: true,
-            text: '审核'
+            text: '编辑'
             // show: false // 是否显示按钮
 
         },
@@ -43,8 +43,8 @@ export const crudOptions = {
             // disabled: true,
             thin: true,
             type: 'danger',
-            text: '撤回',
-            show: false // 是否显示按钮
+            text: '撤回'
+            // show: false // 是否显示按钮
         }
     },
     columns: [
@@ -87,76 +87,94 @@ export const crudOptions = {
             }
         },
         {
-            title: '商品ID',
-            key: 'goods_id',
+            title: '问题类别',
+            key: 'category',
             align: 'center',
             width: '100',
-            // sortable: true,
-            // disabled: true,
+            sortable: true,
+            type: 'select',
             search: {
-                name: '商品ID',
-                disabled: true,
-                title: 'goods_id'
+                name: 'category',
+                disabled: false,
+                title: '问题类别'
             },
             form: {
-                // addDisabled: true,
-                editDisabled: true,
-                rules: [{ required: true, message: '请输入商品ID' }]
+                component: { span: 10 },
+                rules: [{ required: true, message: '请输入问题类别' }]
             },
             component: {
+                props: {
+                    clearable: true
+                },
                 name: 'values-format'
+            },
+            dict: {
+                data: [
+                    { value: 1, label: '系统' },
+                    { value: 2, label: '业务', color: 'danger' },
+                    { value: 3, label: '公司', color: 'success' },
+                    { value: 4, label: '其他', color: 'info' }
+
+                ]
             }
         },
         {
-            title: '工号',
-            key: 'work_num',
+            title: '具体事项',
+            key: 'reason',
             align: 'center',
-            width: '100',
+            width: '200',
+            type: 'text-area',
+            showOverflowTooltip: true,
             // sortable: true,
-            // disabled: true,
             search: {
-                name: '工号',
+                name: 'reason',
                 disabled: true,
-                title: 'work_num'
+                title: '具体事项'
             },
             form: {
-                addDisabled: true,
-                editDisabled: true,
-                rules: [{ required: true, message: '请输入工号' }]
-            },
-            component: {
-                // name: 'values-format'
-            }
-        }, {
-            title: '姓名',
-            key: 'real_name',
-            align: 'center',
-            width: '100',
-            // sortable: true,
-            // disabled: true,
-            search: {
-                name: '姓名',
-                disabled: true,
-                title: 'real_name'
-            },
-            form: {
-                addDisabled: true,
-                editDisabled: true,
-                rules: [{ required: true, message: '请输入姓名' }]
+                rules: [{ required: true, message: '请输入具体事项' }]
             },
             component: {
                 // name: 'values-format'
             }
         },
-        // TODO:优化审核操作
         {
-            title: '审核状态',
-            key: 'audit_status',
+            title: '问题日期',
+            key: 'exact_date',
+            sortable: true,
+            align: 'center',
+            // disabled: true,
+
+            search: {
+                disabled: true
+            },
+            type: 'date',
+            width: '150',
+            form: {
+                // rules: [{ required: true, message: '请输入时间' }]
+                helper: '默认为今天'
+            },
+            valueBuilder(row, key) {
+                if (!StringUtils.hasEmpty(row.exact_date)) {
+                    row.exact_date = new Date(row.exact_date * 1000)
+                }
+            },
+            valueResolve(row, key) {
+                if (row.exact_date != null && !StringUtils.hasEmpty(row.exact_date)) {
+                    row.exact_date = row.exact_date.getTime() / 1000
+                } else {
+                    row.exact_date = (new Date()).getTime() / 1000
+                }
+            }
+        },
+        {
+            title: '处理状态',
+            key: 'process_status',
             sortable: true,
             align: 'center',
             width: '50',
             search: {
-                name: 'audit_status',
+                name: 'process_status',
                 title: '审核状态',
                 disabled: true,
                 component: {
@@ -168,19 +186,19 @@ export const crudOptions = {
             type: 'select',
             form: {
                 addDisabled: true,
-                // editDisabled: true,
-                rules: [{ required: true, message: '请输入审核状态' }]
+                editDisabled: true
+                // rules: [{ required: true, message: '请输入审核状态' }]
             },
             dict: {
                 data: [
-                    { value: 1, label: '正在审核', color: 'warning' },
-                    { value: 2, label: '审核通过', color: 'success' },
-                    { value: 3, label: '未通过', color: 'danger' }
+                    { value: 1, label: '处理中', color: 'warning' },
+                    { value: 2, label: '已处理', color: 'success' },
+                    { value: 3, label: '已核查', color: 'info' }
                 ]
             }
         },
         {
-            title: '审核人员',
+            title: '处理人工号',
             key: 'handler',
             align: 'center',
             width: '100',
@@ -206,6 +224,7 @@ export const crudOptions = {
             component: {
                 // name: 'values-format'
             },
+
             valueBuilder(row, key) {
                 if (row.handler === '') {
                     row.handler = '未审核'
@@ -231,70 +250,5 @@ export const crudOptions = {
                 rules: [{ required: true, message: '请输入添加时间' }]
             }
         }
-        // {
-        //     title: '审核',
-        //     key: 'audit_status',
-        //     sortable: true,
-        //     search: {},
-        //     type: 'switch',
-        //     width: '150px',
-        //     form: {
-        //         valueChange(key, value) {
-        //             console.log('-----你选择了', value)
-        //         }
-        //     }
-        //     // valueBuilder(row, key) {
-        //     //     if (row.audit_status === 1 || row.audit_status === 3) {
-        //     //         row.audit_status = '未通过'
-        //     //         console.log(row.audit_status)
-        //     //     } else {
-        //     //         row.audit_status = '通过'
-        //     //     }
-        //     //     // if (!StringUtils.hasEmpty(row.exact_date)) {
-        //     //     //     row.audit_status = new Date(row.audit_status * 1000)
-        //     //     // }
-        //     // }
-        // }
-        // {
-        //     title: '审核',
-        //     key: 'audit_status',
-        //     sortable: true,
-        //     search: { disabled: false },
-        //     valueBuilder(row, key) {
-        //         if (row.audit_status === 1 || row.audit_status === 3) {
-        //             row.audit_status = false
-        //             console.log(row.audit_status)
-        //         } else {
-        //             row.audit_status = true
-        //         }
-        //         // if (!StringUtils.hasEmpty(row.exact_date)) {
-        //         //     row.audit_status = new Date(row.audit_status * 1000)
-        //         // }
-        //     },
-        //     type: 'dict-switch',
-        //     dict: { data: [{ value: true, label: '通过' }, { value: false, label: '未通过' }] },
-        //     form: {
-        //         component: {
-        //             span: 24,
-        //             events: {
-        //                 blur: () => {
-        //                     console.log('on blur')
-        //                 }
-        //             }
-        //         },
-        //         valueChange(key, value, form) {
-        //             console.log('您选中了：', value)
-        //         }
-        //     },
-        //     minWidth: 200
-
-        //     // valueResolve(row, key) {
-        //     //     if (row.exact_date != null && !StringUtils.hasEmpty(row.exact_date)) {
-        //     //         row.exact_date = row.exact_date.getTime() / 1000
-        //     //     } else {
-        //     //         row.exact_date = (new Date()).getTime() / 1000
-        //     //     }
-        //     // }
-        // }
     ]
 }
