@@ -2,6 +2,7 @@ import layoutHeaderAside from '@/layout/header-aside'
 import test from './modules/dom-test'
 import adminEmp from './modules/admin-employee'
 import adminGoods from './modules/admin-goods'
+import adminPerformance from './modules/admin-performance'
 
 import employeePerformance from './modules/emp-performance'
 import employeeActivity from './modules/emp-activity'
@@ -97,6 +98,7 @@ const frameIn = [
     test,
     adminEmp,
     adminGoods,
+    adminPerformance,
     employeePerformance,
     employeeActivity,
     employeeFeedback

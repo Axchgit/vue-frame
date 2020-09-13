@@ -1,8 +1,8 @@
 /*
  * @Author: xch
  * @Date: 2020-08-12 13:29:07
- * @LastEditTime: 2020-09-04 22:32:36
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-13 18:04:44
+ * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\modules\admin-goods.js
  * @Description:
  */
@@ -11,7 +11,7 @@ import layoutHeaderAside from '@/layout/header-aside'
 // 由于懒加载页面太多的话会造成webpack热更新太慢，所以开发环境不使用懒加载，只有生产环境使用懒加载
 const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
 
-const meta = { auth: true, rules: 1, cache: true }
+const meta = { auth: true, roles: 1, cache: true }
 
 export default {
     path: '/admin/goods',

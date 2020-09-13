@@ -1,16 +1,16 @@
 /*
  * @Author: xch
  * @Date: 2020-09-02 23:54:36
- * @LastEditTime: 2020-09-13 16:52:41
+ * @LastEditTime: 2020-09-13 18:07:58
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\employee\performance\submit\api.js
  * @Description:
  */
 // import request from '@/business/api/request.mock'
 import { request } from '@/api/service'
-export function GetPerformanceList(query) {
+export function GetList(query) {
     return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceByUuid',
+        url: process.env.VUE_APP_AJAX_URL + '/admin/selectPerformance',
         method: 'get',
         params: query
     })
@@ -24,24 +24,24 @@ export function SelectPerformanceByUuid({ key, value }) {
     })
 }
 
-export function AddPerformance(goods) {
+export function AddObj(data) {
     return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/submitPerformancByUuid',
+        url: process.env.VUE_APP_AJAX_URL + '/employee/addEmployeeLeave',
         method: 'post',
-        data: goods
+        data: data
     })
 }
 
-export function UpdatePerformance(room) {
+export function UpdateObj(data) {
     return request({
         url: '/hotel/room/update',
         method: 'post',
-        data: room
+        data: data
     })
 }
-export function DelPerformance(id) {
+export function DelObj(id) {
     return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/deletePerformanceByUuuid',
+        url: process.env.VUE_APP_AJAX_URL + '/employee/recallEmployeeLeave',
         method: 'post',
         params: { id }
     })
