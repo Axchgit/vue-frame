@@ -1,7 +1,7 @@
 <!--
  * @Author: xch
  * @Date: 2020-09-02 23:54:37
- * @LastEditTime: 2020-09-14 12:37:53
+ * @LastEditTime: 2020-09-14 15:17:22
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\employee\info\index.vue
  * @Description:
@@ -13,9 +13,9 @@
     <d2-crud-x ref="d2Crud"  v-bind="_crudProps" v-on="_crudListeners">
       <div slot="header">
         <!-- <crud-search ref="search" :options="crud.searchOptions" @submit="handleSearch" /> -->
-        <el-button size="small" type="success" @click="addRow">
+        <!-- <el-button size="small" type="success" @click="addRow">
           <i class="el-icon-plus" /> 添加
-        </el-button>
+        </el-button> -->
         <crud-toolbar
           :search.sync="crud.searchOptions.show"
           :compact.sync="crud.pageOptions.compact"
@@ -34,10 +34,10 @@
 import { crudOptions } from './crud'
 import { d2CrudPlus } from 'd2-crud-plus'
 import {
-    AddPerformance,
-    GetPerformanceList,
-    UpdatePerformance,
-    DelPerformance
+    AddObj,
+    GetList,
+    UpdateObj,
+    DelObj
     // selectPerformanceGoodsByUuid
 } from './api'
 export default {
@@ -54,18 +54,18 @@ export default {
             return crudOptions
         },
         pageRequest(query) {
-            console.log(GetPerformanceList(query))
+            // console.log(GetList(query))
 
-            return GetPerformanceList(query)
+            return GetList(query)
         },
         addRequest(row) {
-            return AddPerformance(row)
+            return AddObj(row)
         },
         updateRequest(row) {
-            return UpdatePerformance(row)
+            return UpdateObj(row)
         },
         delRequest(row) {
-            return DelPerformance(row.id)
+            return DelObj(row.id)
         }
 
     // handleSearch(val) {

@@ -24,9 +24,9 @@ export const crudOptions = {
         edit: {
             // disabled: true,
             thin: true,
-            type: 'primary',
+            type: 'warning',
             // circle: true,
-            text: '编辑'
+            text: '修改权限'
             // show: false // 是否显示按钮
 
         },
@@ -91,6 +91,8 @@ export const crudOptions = {
                 title: '工号'
             },
             form: {
+                addDisabled: true,
+                editDisabled: true,
                 rules: [{ required: true, message: '请输入工号' }]
             },
             component: {
@@ -109,6 +111,8 @@ export const crudOptions = {
                 title: '姓名'
             },
             form: {
+                addDisabled: true,
+                editDisabled: true,
                 rules: [{ required: true, message: '请输入名字' }]
             },
             component: {
@@ -128,6 +132,8 @@ export const crudOptions = {
                 title: '邮箱'
             },
             form: {
+                addDisabled: true,
+                editDisabled: true,
                 rules: [{ required: true, message: '请输入邮箱' }]
             },
             component: {
@@ -147,6 +153,8 @@ export const crudOptions = {
                 title: '身份证号'
             },
             form: {
+                addDisabled: true,
+                editDisabled: true,
                 rules: [{ required: true, message: '请输入身份证号' }]
             },
             component: {
@@ -211,7 +219,7 @@ export const crudOptions = {
             },
             form: {
                 addDisabled: true,
-                editDisabled: false
+                editDisabled: true
                 // rules: [{ required: true, message: '请输入商品UUID' }]
             },
             component: {
@@ -233,6 +241,7 @@ export const crudOptions = {
             align: 'center',
             width: '100',
             sortable: true,
+            type: 'select',
             search: {
                 name: 'role',
                 disabled: false,
@@ -241,7 +250,7 @@ export const crudOptions = {
             form: {
                 // addDisabled: true,
                 // editDisabled: true,
-                // rules: [{ required: true, message: '请输入商品UUID' }]
+                rules: [{ required: true, message: '请选择权限' }]
             },
             component: {
                 props: {
@@ -272,11 +281,11 @@ export const crudOptions = {
                 title: '激活状态',
                 disabled: true
             },
-            // form: {
-            //   addDisabled: true,
-            //   editDisabled: true,
-            //   rules: [{ required: true, message: '请输入商品名称' }]
-            // },
+            form: {
+                addDisabled: true,
+                editDisabled: true,
+                rules: [{ required: true, message: '请输入商品名称' }]
+            },
             component: {
                 props: {
                     clearable: true
