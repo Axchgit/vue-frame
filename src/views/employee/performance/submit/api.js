@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-09-02 23:54:36
- * @LastEditTime: 2020-09-13 16:52:41
+ * @LastEditTime: 2020-09-14 12:18:53
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\employee\performance\submit\api.js
  * @Description:
@@ -41,7 +41,7 @@ export function UpdatePerformance(room) {
 }
 export function DelPerformance(id) {
     return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/deletePerformanceByUuuid',
+        url: process.env.VUE_APP_AJAX_URL + '/employee/deletePerformanceByUuid',
         method: 'post',
         params: { id }
     })

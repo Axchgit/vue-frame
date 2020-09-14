@@ -20,17 +20,18 @@ export const crudOptions = {
         //   // text: null
         // },
         edit: {
-            disabled: true
+            disabled: true,
+            show: false // 是否显示按钮
+
             // thin: true,
             // type: 'primary'
             // circle: true,
             // text: null
+        },
+        remove: {
+            thin: true,
+            text: '撤回'
         }
-    // remove: {
-    //   thin: true
-    //   // text: null
-    // },
-    // width: 140
     },
     columns: [
 

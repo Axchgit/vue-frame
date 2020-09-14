@@ -1,7 +1,7 @@
 <!--
  * @Author: xch
  * @Date: 2020-09-02 23:54:37
- * @LastEditTime: 2020-09-12 10:01:41
+ * @LastEditTime: 2020-09-14 12:37:03
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\employee\info\index.vue
  * @Description:
@@ -41,7 +41,7 @@ import {
     // selectPerformanceGoodsByUuid
 } from './api'
 export default {
-    name: 'EmployeePerformanceSubmitIndex',
+    name: 'AdminEmployeeAccount',
     mixins: [d2CrudPlus.crud],
     data() {
         return {

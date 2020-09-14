@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-09-02 23:54:36
- * @LastEditTime: 2020-09-11 22:27:28
+ * @LastEditTime: 2020-09-14 14:04:16
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\employee\performance\goods\api.js
  * @Description:
@@ -15,13 +15,13 @@ export function GetPerformanceList(query) {
         params: query
     })
 }
-export function selectPerformanceGoodsByUuid({ key, value }) {
-    return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceGoodsByUuid',
-        method: 'get',
-        params: { key, value }
-    })
-}
+// export function selectPerformanceGoodsByUuid({ key, value }) {
+//     return request({
+//         url: process.env.VUE_APP_AJAX_URL + '/employee/selectPerformanceGoodsByUuid',
+//         method: 'get',
+//         params: { key, value }
+//     })
+// }
 export function AddPerformance(goods) {
     return request({
         url: process.env.VUE_APP_AJAX_URL + '/employee/submitPerformanc',
@@ -39,7 +39,7 @@ export function UpdatePerformance(room) {
 }
 export function DelPerformance(id) {
     return request({
-        url: process.env.VUE_APP_AJAX_URL + '/employee/deletePerformanceByUuuid',
+        url: process.env.VUE_APP_AJAX_URL + '/admin/deleteEmployeeInfo',
         method: 'post',
         params: { id }
     })

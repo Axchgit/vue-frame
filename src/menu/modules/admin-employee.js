@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-12 02:20:42
+ * @LastEditTime: 2020-09-14 12:36:49
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-employee.js
  * @Description:
@@ -12,7 +12,7 @@ export default {
     roles: 1,
     icon: 'users',
     children: (pre => [
-        { path: `${pre}index`, title: '示例', icon: 'home' },
+        // { path: `${pre}index`, title: '示例', icon: 'home' },
         {
             title: '个人资料',
             icon: 'table',

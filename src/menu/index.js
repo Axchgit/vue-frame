@@ -1,8 +1,8 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-09-02 22:53:35
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-14 03:03:57
+ * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\index.js
  * @Description:
  */
@@ -11,8 +11,8 @@ import util from '@/libs/util.js'
 // import store from '@/store/index'
 // import { mapState, mapActions } from 'vuex'
 
-import pagsDomTest from './modules/dom-test'
-import domPages from './modules/dom-pages'
+// import pagsDomTest from './modules/dom-test'
+// import domPages from './modules/dom-pages'
 
 import adminEmpData from './modules/admin-employee'
 import adminEmpActivity from './modules/admin-emp-activity'
@@ -68,7 +68,7 @@ function supplementPath(menu) {
 
 // 所有的需要判断权限的菜单项
 const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback,
-    empPerformance, empActivity, empMsgFeedback, domPages, pagsDomTest]
+    empPerformance, empActivity, empMsgFeedback]
 // 加入到顶部菜单数组中的菜单项
 const addMenu = []
 

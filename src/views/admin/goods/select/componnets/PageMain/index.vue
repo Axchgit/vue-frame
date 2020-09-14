@@ -82,6 +82,9 @@
           <el-tag size="mini" type="success">{{scope.row.expec_commission/100}}</el-tag>
         </template>
       </el-table-column>
+            <el-table-column label="电商平台" align="center">
+        <template slot-scope="scope">{{scope.row.platform | platformFilters}}</template>
+      </el-table-column>
       <el-table-column label="支付时间" width="150" align="center">
         <template slot-scope="scope">{{scope.row.payment_time | formatDate}}</template>
       </el-table-column>
@@ -159,6 +162,15 @@ export default {
        */
             createTime = moment.unix(createTime).utc().format('YYYY-MM-DD HH:mm:ss')
             return createTime
+        },
+        platformFilters(val) {
+            let platform = ''
+            if (val === 'jd') {
+                platform = '京东'
+            } else if (val === 'pdd') {
+                platform = '拼多多'
+            }
+            return platform
         }
     },
     components: {
@@ -182,11 +194,13 @@ export default {
                 { label: '订单号', prop: 'order_id' },
                 { label: '商品ID', prop: 'goods_id' },
                 { label: '商品名', prop: 'goods_name' },
-                { label: '店铺名', prop: 'shop_name' },
-                { label: '账户状态', prop: 'user_review_status}' },
+                { label: '店铺名|ID', prop: 'shop_name' },
+                { label: '预估金额', prop: 'expec_amount' },
+                { label: '佣金', prop: 'expec_commission' },
+
+                { label: '预估佣金', prop: 'user_review_status}' },
+                { label: '电商平台', prop: 'platform}' },
                 { label: '创建时间', prop: 'create_time' }
-                // { label: '使用状态', prop: 'used' },
-                // { label: '使用时间', prop: 'dateTimeUse' }
             ]
         }
     },

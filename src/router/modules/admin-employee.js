@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-12 13:29:07
- * @LastEditTime: 2020-09-12 02:20:15
+ * @LastEditTime: 2020-09-14 12:36:34
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\modules\admin-employee.js
  * @Description:
@@ -50,7 +50,7 @@ export default {
         },
         {
             path: 'account',
-            name: `${pre}account`,
+            name: `${pre}Account`,
             component: _import('admin/employee/account'),
             meta: {
                 ...meta,
