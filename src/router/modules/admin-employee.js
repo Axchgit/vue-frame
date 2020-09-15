@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-12 13:29:07
- * @LastEditTime: 2020-09-14 12:36:34
+ * @LastEditTime: 2020-09-14 19:14:09
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\router\modules\admin-employee.js
  * @Description:
@@ -31,12 +31,12 @@ export default {
         },
         // TODO:删除
         {
-            path: 'info/select',
-            name: `${pre}InfoSelect`,
-            component: _import('admin/employee/info/select'),
+            path: 'upload',
+            name: `${pre}Upload`,
+            component: _import('admin/employee/upload'),
             meta: {
                 ...meta,
-                title: '员工信息查询'
+                title: '更新员工信息'
             }
         },
         {

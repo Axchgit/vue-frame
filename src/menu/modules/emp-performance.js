@@ -1,8 +1,8 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-04 13:09:47
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-15 17:57:10
+ * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\emp-performance.js
  * @Description:
  */
@@ -12,8 +12,8 @@ export default {
     roles: 5,
     icon: 'area-chart',
     children: (pre => [
-        { path: `${pre}submit/index`, title: '提交业绩', icon: 'home' },
-        { path: `${pre}goods/index`, title: '已推商品', icon: 'home' }
+        { path: `${pre}submit/index`, title: '提交业绩', icon: 'external-link-square' },
+        { path: `${pre}goods/index`, title: '已推商品', icon: 'table' }
 
     // {
     //   title: '提交',

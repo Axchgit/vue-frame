@@ -1,8 +1,8 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-29 22:44:20
- * @LastEditTime: 2020-09-04 22:33:11
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-15 14:05:59
+ * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\update\page.vue
  * @Description:
 -->
@@ -30,7 +30,10 @@
         <!-- <d2-icon name="file-o" />选择要导入的 .xlsx 表格 -->
       </el-button>
     </el-row>
+
     <!-- </div> -->
+    <el-progress v-if='isUpload ==true' :format="format" :percentage="percentage" :color="customColors"/>
+
     <div>
       <span class="tip" style="font-weight:bold;color:rgb(103, 194, 58);font-size:20px;">示例数据:</span>
     </div>
@@ -57,6 +60,16 @@ export default {
     name: 'AdminGoodsUpdateIndex',
     data() {
         return {
+            isUpload: false,
+            percentage: 0,
+            customColors: [
+                { color: '#f56c6c', percentage: 20 },
+                { color: '#e6a23c', percentage: 40 },
+                { color: '#5cb87a', percentage: 60 },
+                { color: '#1989fa', percentage: 80 },
+                { color: '#6f7ad3', percentage: 100 }
+            ],
+            speed: '',
             results: '',
             fileType: '',
             isLoad: false,
@@ -71,8 +84,11 @@ export default {
     },
     methods: {
         async uploadExcelData(results) {
-            const res = await api.GOODS_UPLOAD_EXCEL(results)
+            const res = await api.UPLOAD_EMPLOYEE_EXCEL(results)
             return res
+        },
+        format(percentage) {
+            return percentage === 100 ? '完成' : (percentage === -1 ? '失败' : `${percentage}%`)
         },
         // loading() {
         //   this.isLoad = !this.isLoad
@@ -88,6 +104,8 @@ export default {
                 title: '提示',
                 message: '正在读取数据,请稍后~~~'
             })
+            // 隐藏进度条
+            this.isUpload = false
 
             // this.isLoad = !this.isLoad
             // 限定上传的文件为.xlsx
@@ -98,7 +116,7 @@ export default {
 
             // substring(first + 1, namelength)
             // const isLt2M = file.size / 1024 / 1024 < 2
-            console.log(file.type)
+            // console.log(file.type)
             if (!isExcel) {
                 this.$message.error(' 上传的文件只能是 .xls或.csv 格式!')
                 return false
@@ -117,7 +135,7 @@ export default {
                     // this.fileType = 'xls'
 
                     // console.log(results)
-                    // console.info(JSON.stringify(this.table.data))
+                    // console.info(JSON.stringify(this.results))
                 })
                 setTimeout(() => {
                     this.$notify({
@@ -152,18 +170,31 @@ export default {
                 // console.log(isEmpty)
                 return false
             }
+            // 设置进度条
+            this.isUpload = true
+            this.percentage = 0
+            this.speed = setInterval(() => {
+                this.percentage += 1
+                if (this.percentage > 95) {
+                    this.percentage = 95
+                }
+            }, 500)
             this.uploadExcelData(this.results).then((res) => {
                 if (res === undefined) {
+                    clearInterval(this.speed)
+                    this.percentage = -1
                     this.$message.error('失败')
                 } else {
+                    clearInterval(this.speed)
+                    this.percentage = 100
                     this.$message.success('插入成功')
                     // console.info(JSON.stringify(res))
                 }
             })
-        },
-        download() {
-            this.$open('https://cdn.d2.pub/files/d2-admin/demo-table.xlsx')
         }
+        // download() {
+        //     this.$open('https://cdn.d2.pub/files/d2-admin/demo-table.xlsx')
+        // }
     }
 }
 </script>

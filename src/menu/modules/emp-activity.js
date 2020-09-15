@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-13 15:38:51
+ * @LastEditTime: 2020-09-15 17:58:54
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\emp-activity.js
  * @Description:
@@ -15,7 +15,7 @@ export default {
         // { path: `${pre}index`, title: '示例', icon: 'home' },
         {
             title: '请假',
-            icon: 'table',
+            icon: 'wheelchair-alt',
             children: [
                 // D2项目逻辑:menupath是项目所在目录,自动路由到index
                 { path: `${pre}leave`, title: '请假申请' }
@@ -24,7 +24,7 @@ export default {
         },
         {
             title: '离职申请',
-            icon: 'github',
+            icon: 'blind',
             children: [
                 { path: `${pre}quit`, title: '离职申请' }
                 // { path: `${pre}quit/history`, title: '申请结果' }

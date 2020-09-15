@@ -1,7 +1,7 @@
 <!--
  * @Author: xch
  * @Date: 2020-09-02 23:54:37
- * @LastEditTime: 2020-09-14 15:17:22
+ * @LastEditTime: 2020-09-14 19:07:41
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\employee\info\index.vue
  * @Description:
@@ -34,7 +34,7 @@
 import { crudOptions } from './crud'
 import { d2CrudPlus } from 'd2-crud-plus'
 import {
-    AddObj,
+    // AddObj,
     GetList,
     UpdateObj,
     DelObj
@@ -58,9 +58,9 @@ export default {
 
             return GetList(query)
         },
-        addRequest(row) {
-            return AddObj(row)
-        },
+        // addRequest(row) {
+        //     return AddObj(row)
+        // },
         updateRequest(row) {
             return UpdateObj(row)
         },

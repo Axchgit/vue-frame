@@ -1,8 +1,8 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2020-08-30 01:22:25
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-14 18:51:33
+ * @LastEditors: Chenhao Xing
  * @Description:
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\employee.js
  */
@@ -10,7 +10,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
     /**
              * @description:对员工个人资料的操作
              */
-    // 查询请按不员工个人资料
+    // 查询请员工个人资料
     // var prefix = ''
     EMPLOYEE_SELECT_ALL(params = {}) {
     // 接口请求

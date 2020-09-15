@@ -1,8 +1,8 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2020-08-23 23:33:06
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-14 20:46:27
+ * @LastEditors: Chenhao Xing
  * @Description: 员工登录api
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\sys.emp.js
  */
@@ -13,7 +13,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
      */
     SYS_EMP_LOGIN(data = {}) {
         return request({
-            url: process.env.VUE_APP_AJAX_URL + 'login/checkEmpLogin',
+            url: process.env.VUE_APP_AJAX_URL + '/login/checkEmpLogin',
             method: 'post',
             data
         })

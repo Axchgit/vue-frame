@@ -1,8 +1,8 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-29 22:44:20
- * @LastEditTime: 2020-09-04 22:33:11
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-15 14:09:22
+ * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\update\page.vue
  * @Description:
 -->
@@ -30,6 +30,7 @@
         <!-- <d2-icon name="file-o" />选择要导入的 .xlsx 表格 -->
       </el-button>
     </el-row>
+    <el-progress v-if='isUpload ==true' :format="format" :percentage="percentage" :color="customColors"/>
     <!-- </div> -->
     <div>
       <span class="tip" style="font-weight:bold;color:rgb(103, 194, 58);font-size:20px;">示例数据:</span>
@@ -57,6 +58,17 @@ export default {
     name: 'AdminGoodsUpdateIndex',
     data() {
         return {
+            // progressStatus: '',
+            isUpload: false,
+            percentage: 0,
+            customColors: [
+                { color: '#f56c6c', percentage: 20 },
+                { color: '#e6a23c', percentage: 40 },
+                { color: '#5cb87a', percentage: 60 },
+                { color: '#1989fa', percentage: 80 },
+                { color: '#6f7ad3', percentage: 100 }
+            ],
+            speed: '',
             results: '',
             fileType: '',
             isLoad: false,
@@ -69,10 +81,36 @@ export default {
             }
         }
     },
+
+    created() {
+        // this.isUpload = true
+        // window.setInterval(() => {
+        //     setTimeout(() => {
+        //         this.percentage += 1
+        //         if (this.percentage > 20) {
+        //             this.percentage = 20
+        //         }
+        //     }, 1000)
+        // }, 1000)
+        // window.setInterval(() => {
+        //     setTimeout(() => {
+        //         this.getSpeed().then((res) => {
+        //             console.log(res)
+        //         })
+        //     }, 0)
+        // }, 1000)
+    },
     methods: {
         async uploadExcelData(results) {
             const res = await api.GOODS_UPLOAD_EXCEL(results)
             return res
+        },
+        // async getSpeed() {
+        //     const res = await api.GOODS_GET_SPEED()
+        //     return res
+        // },
+        format(percentage) {
+            return percentage === 100 ? '完成' : (percentage === -1 ? '失败' : `${percentage}%`)
         },
         // loading() {
         //   this.isLoad = !this.isLoad
@@ -88,6 +126,7 @@ export default {
                 title: '提示',
                 message: '正在读取数据,请稍后~~~'
             })
+            this.isUpload = false
 
             // this.isLoad = !this.isLoad
             // 限定上传的文件为.xlsx
@@ -138,8 +177,15 @@ export default {
                         this.table.data = [res.data[0]]
                         this.results = res.data
                         // this.fileType = 'csv'
-                        // console.info(JSON.stringify(this.table.data))
+                        // console.info(JSON.stringify(this.results))
                     })
+                setTimeout(() => {
+                    this.$notify({
+                        title: '提示',
+                        message: '读取完毕,正在准备展示数据,请稍后~~~',
+                        type: 'success'
+                    })
+                }, 1000)
                 return false
             }
         },
@@ -152,18 +198,40 @@ export default {
                 // console.log(isEmpty)
                 return false
             }
+            this.isUpload = true
+            this.percentage = 0
+            this.speed = setInterval(() => {
+                this.percentage += 1
+                if (this.percentage > 95) {
+                    this.percentage = 95
+                }
+            }, 500)
+            // this.speed = setInterval(this.getSpeed().then((res) => { console.log(res) }), 100)
             this.uploadExcelData(this.results).then((res) => {
+                console.log(res)
                 if (res === undefined) {
+                    // this.getSpeed().then((res) => {
+                    //     console.log(res)
+                    // })
+                    clearInterval(this.speed)
+                    this.percentage = -1
                     this.$message.error('失败')
+                    // clearInterval(this.speed)
                 } else {
+                    // this.getSpeed().then((res) => {
+                    //     console.log(res)
+                    // })
+                    clearInterval(this.speed)
+                    this.percentage = 100
                     this.$message.success('插入成功')
+
                     // console.info(JSON.stringify(res))
                 }
             })
-        },
-        download() {
-            this.$open('https://cdn.d2.pub/files/d2-admin/demo-table.xlsx')
         }
+        // download() {
+        //     this.$open('https://cdn.d2.pub/files/d2-admin/demo-table.xlsx')
+        // }
     }
 }
 </script>

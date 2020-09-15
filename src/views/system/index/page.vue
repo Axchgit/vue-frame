@@ -1,7 +1,7 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-09-11 22:30:17
+ * @LastEditTime: 2020-09-14 21:19:14
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\system\index\page.vue
  * @Description:
@@ -9,11 +9,10 @@
 <template>
   <d2-container class="page">
     <d2-page-cover>
-            <!-- <img src="./image/icon.png" style="width: 500px;" /> -->
+      <!-- <img src="./image/icon.png" style="width: 500px;" /> -->
 
-      <d2-icon-svg class="logo" name="logo" style="width:625px;height:167px"/>
-      <br>
-      <br>
+      <d2-icon-svg class="logo" name="logo" style />
+
       <template slot="footer">
         <div class="btn-group">
           <!-- <span class="btn-group__btn" @click="$open('https://github.com/d2-projects')">开源组织</span> |
@@ -25,7 +24,7 @@
           <span
             class="btn-group__btn"
             @click="$open('https://juejin.im/user/57a48b632e958a006691b946/posts')"
-          >掘金</span> | -->
+          >掘金</span> |-->
           <el-popover :width="172" trigger="hover">
             <!-- <p class="d2-mt-0 d2-mb-10">今日前端</p> -->
             <img src="./image/weixin_light.png" style="width: 172px;" >
@@ -34,7 +33,7 @@
             </span>
             <!-- <p
               style="font-size: 12px; margin-top: 0px; margin-bottom: 0px;"
-            >官方公众号，主要推送前端技术类文章、框架资源、学习教程，以及 D2 系列项目更新信息</p> -->
+            >官方公众号，主要推送前端技术类文章、框架资源、学习教程，以及 D2 系列项目更新信息</p>-->
           </el-popover>
         </div>
         <!-- <d2-badge/> -->
@@ -50,7 +49,7 @@
 import D2PageCover from './components/d2-page-cover'
 export default {
     components: {
-    // D2Badge,
+        // D2Badge,
         // D2Help,
         D2PageCover
     }
@@ -60,14 +59,22 @@ export default {
 <style lang="scss" scoped>
 .page {
   .logo {
-    width: 120px;
+    top: 30%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 625px;
+    height: 167px;
+    // width: 120px;
   }
+
   .btn-group {
     color: $color-text-placehoder;
     font-size: 12px;
     line-height: 12px;
     margin-top: 0px;
     margin-bottom: 20px;
+
     .btn-group__btn {
       color: $color-text-sub;
       &:hover {

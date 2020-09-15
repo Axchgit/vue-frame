@@ -1,8 +1,8 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-04 22:35:43
- * @LastEditors: xch
+ * @LastEditTime: 2020-09-15 15:02:45
+ * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-goods.js
  * @Description:
  */
@@ -12,8 +12,8 @@ export default {
     roles: 1,
     icon: 'bar-chart',
     children: (pre => [
-        { path: `${pre}update`, title: '更新数据', icon: 'home' },
-        { path: `${pre}select`, title: '数据查询', icon: 'home' }
+        { path: `${pre}update`, title: '更新数据', icon: 'upload' },
+        { path: `${pre}select`, title: '数据查询', icon: 'search' }
 
     // {
     //   title: '更新数据',

@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-13 18:03:17
+ * @LastEditTime: 2020-09-15 17:51:16
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-performance.js
  * @Description:
@@ -10,9 +10,9 @@ export default {
     path: '/admin/performance',
     title: ' 业绩审核',
     roles: 1,
-    icon: 'flask',
+    icon: 'filter',
     children: (pre => [
-        { path: `${pre}index`, title: '业绩审核', icon: 'home' }
+        { path: `${pre}index`, title: '业绩审核', icon: 'minus-circle' }
         // {
         //     title: '审核业绩',
         //     icon: 'table',

@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-13 14:44:07
+ * @LastEditTime: 2020-09-15 18:00:25
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\emp-msg-feedback.js
  * @Description:
@@ -12,7 +12,7 @@ export default {
     roles: 5,
     icon: 'commenting',
     children: (pre => [
-        { path: `${pre}index`, title: '信息反馈', icon: 'home' }
+        { path: `${pre}index`, title: '信息反馈', icon: 'envelope' }
         // {
         //     title: '系统问题反馈',
         //     icon: 'table',

@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-14 12:36:49
+ * @LastEditTime: 2020-09-15 15:08:42
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-employee.js
  * @Description:
@@ -13,9 +13,11 @@ export default {
     icon: 'users',
     children: (pre => [
         // { path: `${pre}index`, title: '示例', icon: 'home' },
+        { path: `${pre}upload`, title: '上传数据', icon: 'upload' },
+
         {
             title: '个人资料',
-            icon: 'table',
+            icon: 'user-circle',
             children: [
                 // D2项目逻辑:menupath是项目所在目录,自动路由到index
                 { path: `${pre}info`, title: '管理' }
