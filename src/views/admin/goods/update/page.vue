@@ -1,7 +1,7 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-29 22:44:20
- * @LastEditTime: 2020-09-15 14:09:22
+ * @LastEditTime: 2020-09-16 01:58:19
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\update\page.vue
  * @Description:
@@ -153,10 +153,6 @@ export default {
                     })
                     this.table.data = [results[0]]
                     this.results = results
-                    // this.fileType = 'xls'
-
-                    // console.log(results)
-                    // console.info(JSON.stringify(this.table.data))
                 })
                 setTimeout(() => {
                     this.$notify({
@@ -176,8 +172,6 @@ export default {
                         }))
                         this.table.data = [res.data[0]]
                         this.results = res.data
-                        // this.fileType = 'csv'
-                        // console.info(JSON.stringify(this.results))
                     })
                 setTimeout(() => {
                     this.$notify({
@@ -190,12 +184,8 @@ export default {
             }
         },
         confirmUpload() {
-            // const isEmpty = !!this.table.data
             if (!this.results) {
                 this.$message.error('数据为空')
-                // console.log(this.results)
-                // console.log(!this.results)
-                // console.log(isEmpty)
                 return false
             }
             this.isUpload = true
