@@ -1,7 +1,7 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-29 22:44:20
- * @LastEditTime: 2020-09-16 01:58:19
+ * @LastEditTime: 2020-09-20 02:08:33
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\update\page.vue
  * @Description:
@@ -137,7 +137,7 @@ export default {
 
             // substring(first + 1, namelength)
             // const isLt2M = file.size / 1024 / 1024 < 2
-            console.log(file.type)
+            // console.log(file.type)
             if (!isExcel) {
                 this.$message.error(' 上传的文件只能是 .xls或.csv 格式!')
                 return false
@@ -198,7 +198,7 @@ export default {
             }, 500)
             // this.speed = setInterval(this.getSpeed().then((res) => { console.log(res) }), 100)
             this.uploadExcelData(this.results).then((res) => {
-                console.log(res)
+                // console.log(res)
                 if (res === undefined) {
                     // this.getSpeed().then((res) => {
                     //     console.log(res)

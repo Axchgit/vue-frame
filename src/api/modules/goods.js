@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-30 01:22:39
- * @LastEditTime: 2020-09-15 03:08:39
+ * @LastEditTime: 2020-09-20 02:06:58
  * @LastEditors: Chenhao Xing
  * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\goods.js
  * @Description:推广商品API
@@ -13,6 +13,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
         return request({
             url: process.env.VUE_APP_AJAX_URL + '/goods/uploadExcel',
             method: 'post',
+            timeout: 200000,
             data
         })
     },
