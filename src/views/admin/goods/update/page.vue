@@ -1,9 +1,9 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-29 22:44:20
- * @LastEditTime: 2020-09-20 02:08:33
- * @LastEditors: Chenhao Xing
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\admin\goods\update\page.vue
+ * @LastEditTime: 2020-10-14 16:40:26
+ * @LastEditors: 罗曼
+ * @FilePath: \testd:\wamp64\www\vue-frame\src\views\admin\goods\update\page.vue
  * @Description:
 -->
 <template>
@@ -214,7 +214,7 @@ export default {
                     clearInterval(this.speed)
                     this.percentage = 100
                     this.$message.success('插入成功')
-
+                    // 知识点:打印json数据
                     // console.info(JSON.stringify(res))
                 }
             })

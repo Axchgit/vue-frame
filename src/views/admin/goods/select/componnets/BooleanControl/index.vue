@@ -72,7 +72,7 @@ export default {
     },
     methods: {
         handleChange(val) {
-            // 知识点:控制元素disabled属性
+            // 控制元素disabled属性
             this.disabled = true
             this.$message({
                 message: '正在发送请求',

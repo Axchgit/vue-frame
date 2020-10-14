@@ -1,9 +1,9 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 23:45:05
- * @LastEditTime: 2020-08-17 20:08:16
- * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\dom\table\componnets\BooleanControl\index.vue
+ * @LastEditTime: 2020-10-14 16:38:38
+ * @LastEditors: 罗曼
+ * @FilePath: \testd:\wamp64\www\vue-frame\src\views\dom\table\componnets\BooleanControl\index.vue
  * @Description: 改变用户状态的模态按钮
 -->
 <template>
@@ -72,7 +72,7 @@ export default {
     },
     methods: {
         handleChange(val) {
-            // 知识点:控制元素disabled属性
+            // 控制元素disabled属性
             this.disabled = true
             this.$message({
                 message: '正在发送请求',
