@@ -1,10 +1,10 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2020-09-14 20:46:27
- * @LastEditors: Chenhao Xing
+ * @LastEditTime: 2021-01-02 02:45:58
+ * @LastEditors: 罗曼
  * @Description: 员工登录api
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\sys.emp.js
+ * @FilePath: \testd:\wamp64\www\vue-frame\src\api\modules\sys.emp.js
  */
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
     /**
@@ -12,6 +12,7 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
      * @param {Object} data 登录携带的信息
      */
     SYS_EMP_LOGIN(data = {}) {
+        // console.log(process.env.VUE_APP_AJAX_URL)
         return request({
             url: process.env.VUE_APP_AJAX_URL + '/login/checkEmpLogin',
             method: 'post',

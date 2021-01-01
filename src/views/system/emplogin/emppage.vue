@@ -16,50 +16,7 @@
           <img class="page-login--logo" src="./image/logo-login-03.png" >
           <!-- form -->
           <div class="page-login--form">
-            <el-card shadow="never">
-              <el-form
-                ref="loginForm"
-                label-position="top"
-                :rules="rules"
-                :model="formLogin"
-                size="default"
-              >
-                <el-form-item prop="username">
-                  <el-input type="text" v-model="formLogin.username" placeholder="用户名">
-                    <i slot="prepend" class="fa fa-user-circle-o"/>
-                  </el-input>
-                </el-form-item>
-                <el-form-item prop="password">
-                  <el-input type="password" v-model="formLogin.password" placeholder="密码">
-                    <i slot="prepend" class="fa fa-keyboard-o"/>
-                  </el-input>
-                </el-form-item>
-                <el-form-item prop="code">
-                  <!-- <el-input type="text" v-model="formLogin.code" placeholder="验证码"> -->
-                  <!-- <template style="width:70px" slot="append"></template> -->
-                  <!-- </el-input> -->
-                  <!-- <div style="width:70px;height:38px;" @click="refreshCode">
-                    <Sidentify :identifyCode="identifyCode"></Sidentify>
-                  </div>-->
-                  <el-row>
-                    <el-col :span="14">
-                      <div class="grid-content bg-purple">
-                        <el-input type="text" v-model="formLogin.code" placeholder="验证码">
-                          <!-- <template style="width:70px" slot="append"></template> -->
-                        </el-input>
-                      </div>
-                    </el-col>
-                    <el-col :span="10">
-                      <div @click="refreshCode" class="grid-content bg-purple-light">
-                        <div>
-                          <Sidentify :identifyCode="identifyCode"/>
-                        </div>
-                      </div>
-                    </el-col>
-                  </el-row>
-                </el-form-item>
-                <el-button size="default" @click="submit" type="primary" class="button-login">登录</el-button>
-              </el-form>
+            <el-card shadow="never"> -->
             </el-card>
             <p class="page-login--options" flex="main:justify cross:center">
 
@@ -72,6 +29,12 @@
               <!-- <span>注册用户</span> -->
             </p>
           </div>
+<!-- <div class="page-login--form">
+        <auth-login/>
+
+</div> -->
+<component :is="comName"/>
+
         </div>
         <div class="page-login--content-footer">
           <p class="page-login--content-footer-locales">
@@ -109,110 +72,30 @@
 
 <script>
 import dayjs from 'dayjs'
-import { mapActions } from 'vuex'
+// import { mapActions } from 'vuex'
 import localeMixin from '@/locales/mixin.js'
 export default {
     mixins: [localeMixin],
+    components: {
+        AuthLogin: () => import('./components/Auth'),
+        InputLogin: () => import('./components/Input')
+        // DemoPageFooter: () => import('./componnets/PageFooter')
+    },
     data() {
         return {
-            identifyCode: ' ',
-            identifyCodeKey: 'qwertyuiopasdfghjklzxcvbnm1234567890',
-            timeInterval: null,
-            time: dayjs().format('HH:mm:ss'),
-            // 表单
-            formLogin: {
-                username: '',
-                password: '',
-                code: ''
-            },
-            // 表单校验
-            rules: {
-                username: [
-                    {
-                        required: true,
-                        message: '请输入用户名',
-                        trigger: 'blur'
-                    }
-                ],
-                password: [
-                    {
-                        required: true,
-                        message: '请输入密码',
-                        trigger: 'blur'
-                    }
-                ],
-                code: [
-                    {
-                        required: true,
-                        message: '请输入验证码',
-                        trigger: 'blur'
-                    }
-                ]
-            }
+            comName: 'InputLogin',
+            time: dayjs().format('HH:mm:ss')
         }
     },
-    mounted() {
-        this.timeInterval = setInterval(() => {
-            this.refreshTime()
-        }, 1000)
-    },
-    beforeDestroy() {
-        clearInterval(this.timeInterval)
-    },
     methods: {
-    /** 验证码**** */
-        randomNum(min, max) {
-            return Math.floor(Math.random() * (max - min) + min)
-        },
-        refreshCode() {
-            // 刷新验证码前清空之前的
-            this.identifyCode = ''
-            this.makeCode(4)
-            console.log('当前验证码==' + this.identifyCode)
-        },
-        makeCode(l) {
-            for (let i = 0; i < l; i++) {
-                this.identifyCode += this.identifyCodeKey[
-                    this.randomNum(0, this.identifyCodeKey.length)
-                ]
-            }
-        },
-        ...mapActions('d2admin/account', ['empLogin']),
         refreshTime() {
             this.time = dayjs().format('HH:mm:ss')
         },
-        /**
-     * @description 提交表单
-     */
-        // 提交登录信息
-        submit() {
-            this.$refs.loginForm.validate((valid) => {
-                if (valid) {
-                    if (this.formLogin.code === this.identifyCode) {
-                        this.$message.success('表单验证成功,正在登录')
-
-                        // 登录
-                        this.empLogin({
-                            username: this.formLogin.username,
-                            password: this.formLogin.password
-                        }).then(() => {
-                            // 重定向对象不存在则返回顶层路径
-                            this.$router.replace(this.$route.query.redirect || '/')
-                        })
-                    } else {
-                        this.$message.error('验证码错误,请重新输入')
-                    }
-                } else {
-                    // 登录表单校验失败
-                    this.$message.error('表单校验失败，请检查')
-                }
-                this.refreshCode()
-            })
+        changeComponents(name) {
+            this.comName = name
         }
-    },
-    created() {
-        this.refreshCode()
     }
+
 }
 </script>
 
@@ -288,44 +171,6 @@ export default {
     width: 240px;
     margin-bottom: 2em;
     margin-top: -2em;
-  }
-  // 登录表单
-  .page-login--form {
-    width: 280px;
-    // 卡片
-    .el-card {
-      margin-bottom: 15px;
-    }
-    // 登录按钮
-    .button-login {
-      width: 100%;
-      // width: 100%;
-      background: #4d3d3e;
-      border: #4d3d3e;
-    }
-    // 输入框左边的图表区域缩窄
-    .el-input-group__prepend {
-      padding: 0px 14px;
-    }
-    .login-code {
-      height: 40px - 2px;
-      display: block;
-      margin: 0px -20px;
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
-    }
-    // 登陆选项
-    .page-login--options {
-      margin: 0px;
-      padding: 0px;
-      font-size: 14px;
-      color: $color-primary;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
-    .page-login--quick {
-      width: 100%;
-    }
   }
   // 快速选择用户面板
   .page-login--quick-user {

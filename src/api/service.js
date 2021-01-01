@@ -149,6 +149,8 @@ function createRequestFunction(service) {
             },
             timeout: 10000,
             baseURL: process.env.VUE_APP_API,
+            // baseURL: 'http://api.xchtzon.top:8088/',
+
             data: {}
         }
         return service(Object.assign(configDefault, config))

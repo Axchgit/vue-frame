@@ -1,9 +1,9 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-09-02 22:41:07
- * @LastEditors: xch
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\main.js
+ * @LastEditTime: 2021-01-02 01:14:41
+ * @LastEditors: 罗曼
+ * @FilePath: \testd:\wamp64\www\vue-frame\src\main.js
  * @Description:
  */
 // Vue
@@ -17,6 +17,7 @@ import store from '@/store/index'
 // 引入公共方法
 // import commonFunction from './assets/js/commonFunction.js'
 import moment from 'moment'
+import SlideVerify from 'vue-monoplasty-slide-verify'
 // 浏览器警告
 import 'default-passive-events'
 import './business'
@@ -25,6 +26,8 @@ import './business'
 import router from './router'
 import { menuHeader, menuAside } from '@/menu'
 import { frameInRoutes } from '@/router/routes'
+
+Vue.use(SlideVerify)
 
 // 核心插件
 Vue.use(d2Admin)
