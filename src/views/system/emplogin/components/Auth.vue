@@ -50,6 +50,7 @@ export default {
             userId: '', // 扫码登录的用户ID
             userAvatar: '', // 扫码登录的用户头像
             userName: '', // 扫码登录的用户名
+            timeCount: '',
             tokenApi: 'http://localhost/auth/token', // 获取口令
             tokenImgApi: 'http://localhost/auth/img/', // 获取口令对应的登录码
             tokenInfoApi: 'http://localhost/auth/info/', // 获取口令信息
@@ -75,7 +76,7 @@ export default {
             const res = await api.SYS_EMP_GETQRUID()
             return res
         },
-        async getQruidInfo({ url = '/login/' + this.qrUid } = {}) {
+        async getQruidInfo({ url = '/login/getAuthInfo/' + this.qrUid } = {}) {
             const res = await api.SYS_EMP_GETQRUIDINFO(url)
             return res
         },
@@ -95,12 +96,14 @@ export default {
         // },
 
         changeToInput(name) {
+            clearInterval(this.timeCount)
+
             this.$parent.changeComponents(name)
         },
         bindQRCode() {
             // eslint-disable-next-line no-new
             new QRCode(this.$refs.qrCodeDiv, {
-                text: this.qrUrl,
+                text: this.qrUid,
                 width: 240,
                 height: 240,
                 colorDark: '#333333', // 二维码颜色
@@ -109,6 +112,7 @@ export default {
             })
         },
         refQrcode() {
+            clearInterval(this.timeCount)
             this.$refs.qrCodeDiv.innerHTML = ''
             this.getToken()
         },
@@ -117,18 +121,18 @@ export default {
             console.log('开始获取')
             // 所有参数重置
             this.state = 0 // 场景为无二维码
-            // this.qrUrl = ''
+            this.qrUrl = ''
             // new QRCode().clear()
             // this.qrcode.clean()
             this.tip = '正在获取登录码，请稍等'
             this.count = 30
-            clearInterval(this.timeCount)
+            // clearInterval(this.timeCount)
             this.getQruid().then((res) => {
                 if (res.status === 0) {
                     this.qrUid = res.qruid
                     this.state = 1 // 场景为有登录码
                     this.qrUrl = process.env.VUE_APP_API + 'login/' + res.qruid
-                    console.log(this.qrUrl)
+                    // console.log(this.qrUrl)
                     this.$nextTick(function() {
                         this.bindQRCode()
                     })
