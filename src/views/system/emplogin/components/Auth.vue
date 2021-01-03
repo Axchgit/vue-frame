@@ -72,6 +72,10 @@ export default {
             const res = await api.INDEX_GET_JSONDATA({ json_file_name })
             return res
         },
+        async getUserInfoByWorkNum({ userId = '' } = {}) {
+            const res = await api.SYS_EMP_GETUSERINFO({ userId })
+            return res
+        },
         async getQruid() {
             const res = await api.SYS_EMP_GETQRUID()
             return res
@@ -137,7 +141,6 @@ export default {
                         this.bindQRCode()
                     })
                     this.tip = '请使用手机口令扫码登录'
-                    // this.getTokenInfo()
                     this.timeCount = setInterval(this.getTokenInfo, 1000) // 开启每隔1S的轮询，向服务器请求口令信息
                 } else {
                     this.getToken()
@@ -190,8 +193,9 @@ export default {
                     clearInterval(this.timeCount) // 关闭轮询，溜了
                     // token状态为正在登陆，改变场景，请求扫码用户信息
                 } else if (auth.auth_state === 2) {
+                    // console.log(auth.user_uuid)
                     this.userId = auth.user_uuid
-                    // this.getUserInfo()
+                    this.getUserInfo()
                     this.state = 2
                     this.tip = '扫码成功，请在手机上确认'
                     // token状态为过期（服务器），改变场景
@@ -205,22 +209,25 @@ export default {
             // })
         },
         getUserInfo() {
-            this.$ajax({
-                method: 'post',
-                url: this.userInfoApi,
-                data: this.qs.stringify({
-                    userId: this.userId
-                })
-            })
-                .then((response) => {
+            // this.$ajax({
+            //     method: 'post',
+            //     url: this.userInfoApi,
+            //     data: this.qs.stringify({
+            //         userId: this.userId
+            //     })
+            // })
+            console.log(this.userId)
+
+            this.getUserInfoByWorkNum({ userId: this.userId })
+                .then((res) => {
                     // 获取用户信息，并进行显示
-                    this.userName = response.data.data.userName
-                    this.userAvatar = response.data.data.userAvatar
-                    console.log(response.data.data)
+                    this.userName = res.nick_name
+                    this.userAvatar = res.avatar
+                    // console.log(response.data.data)
                 })
-                .catch((error) => {
-                    console.log(error)
-                })
+                // .catch((error) => {
+                //     console.log(error)
+                // })
         }
     }
 }

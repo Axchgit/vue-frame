@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2021-01-02 17:56:38
+ * @LastEditTime: 2021-01-04 03:22:58
  * @LastEditors: xch
  * @Description: 员工登录api
  * @FilePath: \testd:\wamp64\www\vue-frame\src\api\modules\sys.emp.js
@@ -94,6 +94,13 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
             baseURL: process.env.VUE_APP_API,
             url,
             method: 'get'
+        })
+    },
+    SYS_EMP_GETUSERINFO(data = {}) {
+        return request({
+            url: process.env.VUE_APP_AJAX_URL + '/login/getUserInfo',
+            method: 'post',
+            data
         })
     }
 
