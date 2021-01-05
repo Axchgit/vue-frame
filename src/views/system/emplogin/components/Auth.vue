@@ -34,6 +34,7 @@
 
 <script>
 import api from '@/api'
+import { mapActions } from 'vuex'
 
 import QRCode from 'qrcodejs2' // 在指定页面引入，也可以在main.js里面全局引用
 // let qrcode = ''
@@ -68,6 +69,8 @@ export default {
     methods: {
 
         /** ****异步函数 */
+        ...mapActions('d2admin/account', ['qrLogin']),
+
         async getJsonDataByFileName({ json_file_name = '' } = {}) {
             const res = await api.INDEX_GET_JSONDATA({ json_file_name })
             return res
@@ -183,23 +186,32 @@ export default {
             //     url: this.tokenInfoApi + this.authToken // 拼装获得口令信息API
             // })
             this.getQruidInfo(this.qrUid).then((res) => {
-                const auth = res
+                // const auth = res
                 // token状态为登录成功
-                if (auth.auth_state === 1) {
+                if (res.auth_state === 1) {
                     this.$message({
                         message: '登录成功！',
                         type: 'success'
                     })
                     clearInterval(this.timeCount) // 关闭轮询，溜了
+                    // 登录成功,根据token和uuid获取用户信息
+                    this.qrLogin({
+                        token: res.token,
+                        role: res.role,
+                        uuid: res.uuid
+                    }).then(() => {
+                        // 重定向对象不存在则返回顶层路径
+                        this.$router.replace(this.$route.query.redirect || '/')
+                    })
                     // token状态为正在登陆，改变场景，请求扫码用户信息
-                } else if (auth.auth_state === 2) {
+                } else if (res.auth_state === 2) {
                     // console.log(auth.user_uuid)
-                    this.userId = auth.user_uuid
+                    this.userId = res.user_uuid
                     this.getUserInfo()
                     this.state = 2
                     this.tip = '扫码成功，请在手机上确认'
                     // token状态为过期（服务器），改变场景
-                } else if (auth.auth_state === 3) {
+                } else if (res.auth_state === 3) {
                     this.state = 3
                     this.tip = '二维码已过期，请刷新'
                 }

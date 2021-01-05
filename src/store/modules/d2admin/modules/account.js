@@ -111,6 +111,36 @@ export default {
             NProgress.done()
         },
         /**
+         * @description 员工登录
+         * @param {Object} context
+         * @param {Object} payload token,role,uuid {String}
+         * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
+         */
+        async qrLogin({ dispatch }, {
+            token = '',
+            role = '',
+            uuid = ''
+        } = {}) {
+            NProgress.start()
+
+            // const resToken = await api.SYS_EMP_LOGIN({ username, password })
+            util.cookies.set('uuid', uuid)
+            util.cookies.set('token', token)
+            util.cookies.set('roles', role)
+
+            const resInfo = await api.SYS_EMP_EMPINFO()
+
+            // util.cookies.set('roles', resInfo.role)
+            // console.log('cookies中存储的roles是' + resToken.role)
+
+            // 设置 vuex 用户信息
+            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, roles: role }, { root: true })
+            // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
+            // 用户登录后从持久化数据加载一系列的设置
+            await dispatch('load')
+            NProgress.done()
+        },
+        /**
          * @description 注销用户并返回登录页面
          * @param {Object} context
          * @param {Object} payload confirm {Boolean} 是否需要确认
