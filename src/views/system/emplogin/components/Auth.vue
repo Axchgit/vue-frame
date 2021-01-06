@@ -48,7 +48,7 @@ export default {
             tip: '正在获取登录码，请稍等', // 提示
             imgURL: '', // 登录码路径
             authToken: '', // 验证口令
-            userId: '', // 扫码登录的用户ID
+            workNum: '', // 扫码登录的用户ID
             userAvatar: '', // 扫码登录的用户头像
             userName: '', // 扫码登录的用户名
             timeCount: '',
@@ -75,8 +75,8 @@ export default {
             const res = await api.INDEX_GET_JSONDATA({ json_file_name })
             return res
         },
-        async getUserInfoByWorkNum({ userId = '' } = {}) {
-            const res = await api.SYS_EMP_GETUSERINFO({ userId })
+        async getUserInfoByWorkNum({ workNum = '' } = {}) {
+            const res = await api.SYS_EMP_GETUSERINFO({ workNum })
             return res
         },
         async getQruid() {
@@ -228,9 +228,9 @@ export default {
             //         userId: this.userId
             //     })
             // })
-            console.log(this.userId)
+            console.log(this.workNum)
 
-            this.getUserInfoByWorkNum({ userId: this.userId })
+            this.getUserInfoByWorkNum({ workNum: this.workNum })
                 .then((res) => {
                     // 获取用户信息，并进行显示
                     this.userName = res.nick_name
