@@ -206,7 +206,7 @@ export default {
                     // token状态为正在登陆，改变场景，请求扫码用户信息
                 } else if (res.auth_state === 2) {
                     // console.log(auth.user_uuid)
-                    this.userId = res.user_uuid
+                    this.workNum = res.work_num
                     this.getUserInfo()
                     this.state = 2
                     this.tip = '扫码成功，请在手机上确认'
