@@ -143,7 +143,7 @@ export default {
                     this.$nextTick(function() {
                         this.bindQRCode()
                     })
-                    this.tip = '请使用手机口令扫码登录'
+                    this.tip = '请使用手机客户端扫码登录'
                     this.timeCount = setInterval(this.getTokenInfo, 1000) // 开启每隔1S的轮询，向服务器请求口令信息
                 } else {
                     this.getToken()
