@@ -22,7 +22,7 @@
         <div class="avatar-wrapper">
     <!-- VueAdmin项目逻辑:用户头像div -->
 
-          <img :src="info.avatar" class="user-avatar">
+          <img :src="newavatar" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -55,7 +55,10 @@ export default {
     // D2项目逻辑:主框架显示用户name
         ...mapState('d2admin/user', [
             'info'
-        ])
+        ]),
+        newavatar: function() {
+            return process.env.VUE_APP_API + '/images/' + this.info.avatar
+        }
     },
     methods: {
         ...mapActions('d2admin/account', [
