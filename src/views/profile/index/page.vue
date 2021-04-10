@@ -4,7 +4,7 @@
 
  * @Date: 2020-11-11 22:02:08
  * @FilePath: \vue-frame\src\views\profile\index\page.vue
- * @LastEditTime: 2021-04-10 22:35:07
+ * @LastEditTime: 2021-04-11 00:42:33
  * @LastEditors: xch
 -->
 
@@ -40,7 +40,7 @@
         <span class="person-name">{{ info.name }}</span>
       </p>
       <p class="font-center">
-        <span class="person-role">{{ info.roles|personRole }}</span>
+        <span class="person-role">{{ info.roles | personRole }}</span>
       </p>
 
       <br >
@@ -176,6 +176,7 @@
         width="30%"
         center
         append-to-body
+        @close="resetDialogForms"
       >
         <span />
         <el-alert
@@ -389,19 +390,19 @@ export default {
             return res
         },
 
-        async sendEmailCode({ msg = '' } = {}) {
-            const res = await api.INDEX_GET_SENDEMAILCODE({ msg })
+        async sendEmployeeEmailCode({ msg = '' } = {}) {
+            const res = await api.PUBLIC_EMPLOYEE_SEND_EMAILCODE({ msg })
             return res
         },
         async updatePasswordByEmailCode({ password = '', email_code = '' } = {}) {
-            const res = await api.PERSON_POST_UPDATEPASSWORDBYEMAILCODE({
+            const res = await api.EMPLOYEE_UPDATE_PASSWORD({
                 password,
                 email_code
             })
             return res
         },
         async changeProfileByToken({ profile = '' } = {}) {
-            const res = await api.PERSON_POST_CHANGEPROFILEBYTOKEN({ profile })
+            const res = await api.EMPLOYEE_UPDATE_INFO({ profile })
             return res
         },
 
@@ -485,7 +486,7 @@ export default {
                 this.timer = null
             }, this.timer * 1000)
             // 发送验证码
-            this.sendEmailCode({
+            this.sendEmployeeEmailCode({
                 msg: '修改密码'
                 // number: util.cookies.get('uuid')
                 // email: this.formRecover.email
@@ -520,7 +521,6 @@ export default {
                 Authorization: token,
                 Accept: 'application/json, text/javascript, */*;'
                 // 'Content-Type': 'multipart/form-data'
-
             }
             // this.uploadHeaders.push({ Authorization: token })
             // this.uploadHeaders.Authorization = token
@@ -593,6 +593,9 @@ export default {
                     done()
                 })
                 .catch((_) => {})
+        },
+        resetDialogForms() {
+            this.$refs.activateForm.resetFields() // form是绑定数据,一定记得加prop参数，不加的话无法重置弹框表单数据
         }
     },
     filters: {

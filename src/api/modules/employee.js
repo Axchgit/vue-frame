@@ -1,10 +1,10 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2020-09-14 18:51:33
- * @LastEditors: Chenhao Xing
+ * @LastEditTime: 2021-04-11 00:08:15
+ * @LastEditors: xch
  * @Description:
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\api\modules\employee.js
+ * @FilePath: \vue-frame\src\api\modules\employee.js
  */
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({
     /**
@@ -37,9 +37,24 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
         })
     },
     // 修改员工个人资料
-    EMPLOYEE_UPDATE_ALL(params = {}) {
+    // EMPLOYEE_UPDATE_ALL(params = {}) {
+    //     return request({
+    //         url: process.env.VUE_APP_AJAX_URL + '/employee/updateInfoAll',
+    //         method: 'post',
+    //         params
+    //     })
+    // },
+
+    EMPLOYEE_UPDATE_INFO(params = {}) {
         return request({
-            url: process.env.VUE_APP_AJAX_URL + '/employee/updateInfoAll',
+            url: process.env.VUE_APP_AJAX_URL + '/employee/updateEmployeeAccountInfo',
+            method: 'post',
+            params
+        })
+    },
+    EMPLOYEE_UPDATE_PASSWORD(params = {}) {
+        return request({
+            url: process.env.VUE_APP_AJAX_URL + '/employee/updateEmployeeAccountPassword',
             method: 'post',
             params
         })
