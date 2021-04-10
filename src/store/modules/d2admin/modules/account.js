@@ -8,7 +8,34 @@ import api from '@/api'
 export default {
     namespaced: true,
     actions: {
-    /**
+        /**
+         * @description 刷新用户信息
+         * @param {Object} context
+         * @param {Object} payload username {String} 用户账号
+         * @param {Object} payload password {String} 密码
+         * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
+         */
+        async refPersonInfo({ dispatch }) {
+        // const res = await api.SYS_SA_SENDCODE({ username })
+            const resInfo = await api.SYS_EMP_EMPINFO()
+            // util.cookies.set('faculty', resInfo.faculty)
+            // console.log(resInfo)
+            const role = util.cookies.get('roles')
+            console.log('cookies:' + role)
+
+            // console.log('cookies中存储的roles是' + resToken.role)
+            // const role = util.cookies.get('roles')
+
+            // 设置 vuex 用户信息
+            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, profile: resInfo.profile, roles: role }, { root: true })
+
+            // await dispatch('d2admin/user/set', { name: resInfo.name, avatar: resInfo.id_photo, roles: role, profile: resInfo.profile, faculty: resInfo.faculty }, { root: true })
+            // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
+            // 用户登录后从持久化数据加载一系列的设置
+            await dispatch('load')
+        // return res
+        },
+        /**
          * @description 登录
          * @param {Object} context
          * @param {Object} payload username {String} 用户账号

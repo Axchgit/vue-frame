@@ -1,9 +1,10 @@
 <!--
  * @Description:
  * @Author: xch
+
  * @Date: 2020-11-11 22:02:08
  * @FilePath: \vue-frame\src\views\profile\index\page.vue
- * @LastEditTime: 2021-04-05 15:00:27
+ * @LastEditTime: 2021-04-10 22:35:07
  * @LastEditors: xch
 -->
 
@@ -24,7 +25,7 @@
         @crop-success="cropSuccess"
         @crop-upload-success="cropUploadSuccess"
         @crop-upload-fail="cropUploadFail"
-        v-model="show"
+        v-model="uploadAvatarShow"
         :width="300"
         :height="300"
         :url="uploadUrl"
@@ -360,13 +361,13 @@ export default {
             formLabelWidth: '120px',
             avatar: '',
             // 头像上传
-            show: false,
+            uploadAvatarShow: false,
             params: {
                 // token: '123456798',
                 // name: 'avatar'
             },
             uploadHeaders: {
-                smail: '*_~'
+                // smail: '*_~'
             },
             uploadUrl: ''
         }
@@ -374,7 +375,7 @@ export default {
     computed: {
         ...mapState('d2admin/user', ['info']),
         newavatar: function() {
-            return process.env.VUE_APP_AJAX_URL + '/images/' + this.info.avatar
+            return process.env.VUE_APP_API + '/images/' + this.info.avatar
         }
     },
 
@@ -503,7 +504,7 @@ export default {
                     this.$message.error('获取失败')
                 } else {
                     // console.log(res.pa_info.profile)
-                    this.profile = res.pa_info.profile
+                    this.profile = res.el_info.profile
                     // this.$message.success('激活成功')
                     // console.log(res.login_record)
                     this.loginRecords = res.login_record
@@ -512,12 +513,20 @@ export default {
         },
         /** **头像上传 */
         toggleShow() {
-            this.show = !this.show
+            this.uploadAvatarShow = !this.uploadAvatarShow
             const token = util.cookies.get('token')
+            console.log(token)
             this.uploadHeaders = {
-                Authorization: token
+                Authorization: token,
+                Accept: 'application/json, text/javascript, */*;'
+                // 'Content-Type': 'multipart/form-data'
+
             }
-            this.uploadUrl = process.env.VUE_APP_AJAX_URL + '/index/uploadAvatar'
+            // this.uploadHeaders.push({ Authorization: token })
+            // this.uploadHeaders.Authorization = token
+            // console.log(this.uploadHeaders)
+            this.uploadUrl = process.env.VUE_APP_API + 'index/uploadAvatar'
+            // this.uploadUrl = 'http://127.0.0.1:8088/index/uploadAvatar'
         },
         /**
      * crop success
@@ -542,6 +551,12 @@ export default {
             console.log(jsonData)
             console.log('field: ' + field)
             this.refPersonInfo()
+            this.uploadAvatarShow = !this.uploadAvatarShow
+            this.$notify({
+                title: '成功',
+                message: '修改成功',
+                type: 'success'
+            })
             // async function refAvatar() {
             //   //   // 删除cookie
             //   //   util.cookies.remove('token')
