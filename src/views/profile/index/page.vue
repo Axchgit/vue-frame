@@ -4,7 +4,7 @@
 
  * @Date: 2020-11-11 22:02:08
  * @FilePath: \vue-frame\src\views\profile\index\page.vue
- * @LastEditTime: 2021-04-11 00:42:33
+ * @LastEditTime: 2021-04-11 19:08:53
  * @LastEditors: xch
 -->
 
@@ -361,6 +361,7 @@ export default {
             },
             formLabelWidth: '120px',
             avatar: '',
+            // newavatar: '',
             // 头像上传
             uploadAvatarShow: false,
             params: {
@@ -376,8 +377,11 @@ export default {
     computed: {
         ...mapState('d2admin/user', ['info']),
         newavatar: function() {
+            // console.log('info:', this.info)
+            // console.log(process.env.VUE_APP_API + 'images/' + this.info.avatar)
             return process.env.VUE_APP_API + '/images/' + this.info.avatar
         }
+
     },
 
     mounted() {
@@ -525,7 +529,7 @@ export default {
             // this.uploadHeaders.push({ Authorization: token })
             // this.uploadHeaders.Authorization = token
             // console.log(this.uploadHeaders)
-            this.uploadUrl = process.env.VUE_APP_API + 'index/uploadAvatar'
+            this.uploadUrl = process.env.VUE_APP_API + '/index/uploadAvatar'
             // this.uploadUrl = 'http://127.0.0.1:8088/index/uploadAvatar'
         },
         /**

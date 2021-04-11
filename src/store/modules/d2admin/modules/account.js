@@ -21,7 +21,7 @@ export default {
             // util.cookies.set('faculty', resInfo.faculty)
             // console.log(resInfo)
             const role = util.cookies.get('roles')
-            console.log('cookies:' + role)
+            console.log('cookies:' + resInfo.avatar)
 
             // console.log('cookies中存储的roles是' + resToken.role)
             // const role = util.cookies.get('roles')
@@ -131,7 +131,7 @@ export default {
             console.log('cookies中存储的roles是' + resToken.role)
 
             // 设置 vuex 用户信息
-            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, roles: resToken.role }, { root: true })
+            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, roles: resToken.role, profile: resInfo.profile }, { root: true })
             // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
@@ -161,7 +161,7 @@ export default {
             // console.log('cookies中存储的roles是' + resToken.role)
 
             // 设置 vuex 用户信息
-            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, roles: role }, { root: true })
+            await dispatch('d2admin/user/set', { name: resInfo.nick_name, avatar: resInfo.avatar, roles: role, profile: resInfo.profile }, { root: true })
             // await dispatch('d2admin/user/set', { avatar: resToken.avatar }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
