@@ -5,6 +5,7 @@ import adminGoods from './modules/admin-goods'
 import adminPerformance from './modules/admin-performance'
 import adminEmpActivity from './modules/admin-activity'
 import adminFeedback from './modules/admin-feedback'
+import adminBackupsql from './modules/admin-backupsql'
 
 import employeePerformance from './modules/emp-performance'
 import employeeActivity from './modules/emp-activity'
@@ -113,6 +114,7 @@ const frameIn = [
     adminPerformance,
     adminEmpActivity,
     adminFeedback,
+    adminBackupsql,
     employeePerformance,
     employeeActivity,
     employeeFeedback

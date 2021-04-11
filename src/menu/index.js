@@ -1,9 +1,9 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-09-14 03:03:57
- * @LastEditors: Chenhao Xing
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\index.js
+ * @LastEditTime: 2021-04-11 23:17:49
+ * @LastEditors: xch
+ * @FilePath: \vue-frame\src\menu\index.js
  * @Description:
  */
 import { uniqueId } from 'lodash'
@@ -17,11 +17,14 @@ import util from '@/libs/util.js'
 import adminEmpData from './modules/admin-employee'
 import adminEmpActivity from './modules/admin-emp-activity'
 import adminFeedback from './modules/admin-feedback'
+import adminBackupsql from './modules/admin-backupsql'
+
 import adminGoods from './modules/admin-goods'
 import adminPerformance from './modules/admin-performance'
 
 import empActivity from './modules/emp-activity'
 import empMsgFeedback from './modules/emp-msg-feedback'
+
 import empPerformance from './modules/emp-performance'
 
 /**
@@ -67,7 +70,7 @@ function supplementPath(menu) {
 // console.log(adminEmpData.roles)
 
 // 所有的需要判断权限的菜单项
-const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback,
+const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback, adminBackupsql,
     empPerformance, empActivity, empMsgFeedback]
 // 加入到顶部菜单数组中的菜单项
 const addMenu = []
