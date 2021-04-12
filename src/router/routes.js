@@ -91,6 +91,16 @@ const frameIn = [
                 },
                 component: _import('system/log')
             },
+            // 通告系统
+            {
+                path: 'bulletin',
+                name: 'bulletin',
+                meta: {
+                    title: '消息通知',
+                    auth: true
+                },
+                component: _import('system/bulletin/view')
+            },
             // 刷新页面 必须保留
             {
                 path: 'refresh',

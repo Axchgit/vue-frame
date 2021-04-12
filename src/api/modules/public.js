@@ -3,7 +3,7 @@
  * @Author: xch
  * @Date: 2021-04-09 17:09:14
  * @FilePath: \vue-frame\src\api\modules\public.js
- * @LastEditTime: 2021-04-10 23:52:04
+ * @LastEditTime: 2021-04-13 00:44:31
  * @LastEditors: xch
  */
 export default ({ service, request, serviceForMock, requestForMock, mock, faker, tools }) => ({

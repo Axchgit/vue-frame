@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2021-04-11 00:08:15
+ * @LastEditTime: 2021-04-13 00:52:05
  * @LastEditors: xch
  * @Description:
  * @FilePath: \vue-frame\src\api\modules\employee.js
@@ -117,6 +117,29 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
             url: process.env.VUE_APP_AJAX_URL + '/employee/updateAcPW',
             method: 'post',
             params
+        })
+    },
+    /** ***通告 */
+    // 获取通告信息
+    EMP_VIEW_BULLETIN(params = {}) {
+        return request({
+            url: process.env.VUE_APP_AJAX_URL + '/employee/viewBulletin',
+            method: 'get',
+            params
+        })
+    },
+    // 阅读通告
+    EMP_READ_BULLETIN(params = {}) {
+        return request({
+            url: process.env.VUE_APP_AJAX_URL + '/employee/readBulletin',
+            method: 'get',
+            params
+        })
+    },
+    EMP_GET_COUNTBULLETINUNREAD() {
+        return request({
+            url: process.env.VUE_APP_AJAX_URL + '/employee/getCountUnreadBulletin',
+            method: 'get'
         })
     }
 

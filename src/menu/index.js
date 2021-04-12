@@ -1,7 +1,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2021-04-11 23:17:49
+ * @LastEditTime: 2021-04-13 01:42:58
  * @LastEditors: xch
  * @FilePath: \vue-frame\src\menu\index.js
  * @Description:
@@ -18,6 +18,7 @@ import adminEmpData from './modules/admin-employee'
 import adminEmpActivity from './modules/admin-emp-activity'
 import adminFeedback from './modules/admin-feedback'
 import adminBackupsql from './modules/admin-backupsql'
+import adminBulletin from './modules/admin-bulletin'
 
 import adminGoods from './modules/admin-goods'
 import adminPerformance from './modules/admin-performance'
@@ -70,7 +71,7 @@ function supplementPath(menu) {
 // console.log(adminEmpData.roles)
 
 // 所有的需要判断权限的菜单项
-const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback, adminBackupsql,
+const allMenu = [adminEmpData, adminGoods, adminPerformance, adminEmpActivity, adminFeedback, adminBulletin, adminBackupsql,
     empPerformance, empActivity, empMsgFeedback]
 // 加入到顶部菜单数组中的菜单项
 const addMenu = []
