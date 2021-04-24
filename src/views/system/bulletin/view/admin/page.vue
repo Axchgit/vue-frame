@@ -3,7 +3,7 @@
  * @Author: xch
  * @Date: 2021-04-13 01:27:59
  * @FilePath: \vue-frame\src\views\system\bulletin\view\admin\page.vue
- * @LastEditTime: 2021-04-13 01:37:22
+ * @LastEditTime: 2021-04-24 22:11:32
  * @LastEditors: xch
 -->
 <template>
@@ -25,6 +25,8 @@
       :tableData="bulletinList"
       :table_title="table_title"
       :page="page"
+      @deleteBulletin="recallBulletin"
+
     >
       <template v-slot:level="scope">
         <el-tag
@@ -365,6 +367,11 @@ export default {
             const res = await api.ADMIN_VIEW_BULLETIN({ page, list_rows })
             return res
         },
+        async deleteBulletin({ id = '' } = {}) {
+            const res = await api.ADMIN_DELETE_BULLETIN({ id })
+            return res
+        },
+
         // 发送公告
         async sendBulletin({
             title = '',
@@ -397,6 +404,17 @@ export default {
                 this.page = res
                 this.bulletinList = res.data
             })
+        },
+        // 子组件传递事件,撤回消息
+        recallBulletin(val) {
+            console.log(val.id)
+            this.deleteBulletin({
+                id: val.id
+            }).then((res) => {
+                this.refreshData(this.page)
+                this.$message.success('撤回成功')
+            })
+            // this.$message.success(val.id)
         },
         // 阅读后更新状态
         refreshData(childData) {

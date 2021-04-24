@@ -3,7 +3,7 @@
  * @Author: 罗曼
  * @Date: 2020-11-11 22:02:08
  * @FilePath: \vue-frame\src\views\system\bulletin\view\admin\components\BulletinTable.vue
- * @LastEditTime: 2021-04-13 01:35:09
+ * @LastEditTime: 2021-04-24 22:18:20
  * @LastEditors: xch
 -->
 <template>
@@ -48,9 +48,15 @@ type="primary"
 size="small"
             >查看</el-button
           >
-
+          <el-button
+@click="handleDeleteClick(scope.row)"
+type="danger"
+size="small"
+            >撤回</el-button
+          >
           <!-- <el-button type="text" size="small">编辑</el-button> -->
         </template>
+
       </el-table-column>
     </el-table>
     <div>
@@ -130,7 +136,12 @@ export default {
             //         this.$emit('updateIsRead', this.page)
             //     })
             // }
+        },
+        handleDeleteClick(val) {
+            // console.log('ccc')
+            this.$emit('deleteBulletin', val)
         }
+
     }
 }
 </script>

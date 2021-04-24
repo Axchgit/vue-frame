@@ -2,7 +2,7 @@
 /*
  * @Author: xch
  * @Date: 2020-08-13 14:29:47
- * @LastEditTime: 2021-04-13 01:23:05
+ * @LastEditTime: 2021-04-24 22:08:09
  * @LastEditors: xch
  * @Description:
  * @FilePath: \vue-frame\src\api\modules\admin.js
@@ -35,14 +35,14 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
             params
         })
     },
-    // 阅读通告
-    // PERSON_READ_BULLETIN(params = {}) {
-    //     return request({
-    //         url: process.env.VUE_APP_AJAX_URL + '/person/readBulletin',
-    //         method: 'get',
-    //         params
-    //     })
-    // },
+    // 删除通告
+    ADMIN_DELETE_BULLETIN(params = {}) {
+        return request({
+            url: process.env.VUE_APP_AJAX_URL + '/admin/deleteBulletin',
+            method: 'get',
+            params
+        })
+    },
 
     /** ****数据库备份 */
     ADMIN_GET_BACKUPFILELIST(params = {}) {
