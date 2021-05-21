@@ -2,49 +2,49 @@
   <div class="page-login">
     <div class="page-login--layer page-login--layer-area">
       <ul class="circles">
-        <li v-for="n in 10" :key="n"/>
+        <li v-for="n in 10" :key="n" />
       </ul>
     </div>
-    <div class="page-login--layer page-login--layer-time" flex="main:center cross:center">{{time}}</div>
+    <div
+      class="page-login--layer page-login--layer-time"
+      flex="main:center cross:center"
+    >
+      {{ time }}
+    </div>
     <div class="page-login--layer">
-      <div class="page-login--content" flex="dir:top main:justify cross:stretch box:justify">
+      <div
+        class="page-login--content"
+        flex="dir:top main:justify cross:stretch box:justify"
+      >
         <div class="page-login--content-header">
-          <p class="page-login--content-header-motto">时间是一切财富中最宝贵的财富</p>
+          <p class="page-login--content-header-motto">
+            时间是一切财富中最宝贵的财富
+          </p>
         </div>
-        <div class="page-login--content-main" flex="dir:top main:center cross:center">
-          <!-- logo -->
-          <img class="page-login--logo" src="./image/logo-login-03.png" >
-          <!-- form -->
-          <div class="page-login--form">
-            <el-card shadow="never"> -->
-            </el-card>
-            <p class="page-login--options" flex="main:justify cross:center">
-
-                <router-link to='emprecover'> <span><d2-icon name="question-circle" />忘记密码</span></router-link>
-                <!-- <a href="emprecover">
-                  <d2-icon name="question-circle" />忘记密码
-                </a> -->
-                <router-link to='empactivate'> <span><d2-icon name="" />激活账户</span></router-link>
-
-              <!-- <span>注册用户</span> -->
-            </p>
-          </div>
-<!-- <div class="page-login--form">
-        <auth-login/>
-
-</div> -->
-<component :is="comName"/>
-
+        <div
+          class="page-login--content-main"
+          flex="dir:top main:center cross:center"
+        >
+          <component :is="comName" />
         </div>
         <div class="page-login--content-footer">
           <p class="page-login--content-footer-locales">
-            <a href="http://www.beian.miit.gov.cn" target="_blank">互联网ICP备案：桂ICP备20004453号</a>
+            <a
+href="https://beian.miit.gov.cn/#/"
+target="_blank"
+              >互联网ICP备案：桂ICP备20004453号</a
+            >
             <a
               target="_blank"
               href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45128102451350"
-              style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"
+              style="
+                display: inline-block;
+                text-decoration: none;
+                height: 20px;
+                line-height: 20px;
+              "
             >
-              <img src="./image/beian@2x.png" style="float:left;" >
+              <img src="./image/beian@2x.png" style="float: left" >
               桂公网安备 45128102451350号
             </a>
 
@@ -79,7 +79,7 @@ export default {
     components: {
         AuthLogin: () => import('./components/Auth'),
         InputLogin: () => import('./components/Input')
-        // DemoPageFooter: () => import('./componnets/PageFooter')
+    // DemoPageFooter: () => import('./componnets/PageFooter')
     },
     data() {
         return {
@@ -95,7 +95,6 @@ export default {
             this.comName = name
         }
     }
-
 }
 </script>
 
