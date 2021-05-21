@@ -4,7 +4,7 @@
 
  * @Date: 2020-11-11 22:02:08
  * @FilePath: \vue-frame\src\views\profile\index\page.vue
- * @LastEditTime: 2021-04-11 19:08:53
+ * @LastEditTime: 2021-05-18 13:53:03
  * @LastEditors: xch
 -->
 
@@ -68,7 +68,7 @@
                 :timestamp="loginRecord.create_time"
                 color="#0bbd87"
               >
-                登录IP地址:{{ loginRecord.login_ip }}
+                登录域名:{{ loginRecord.login_ip }}
               </el-timeline-item>
             </el-timeline>
             <el-divider content-position="left" />

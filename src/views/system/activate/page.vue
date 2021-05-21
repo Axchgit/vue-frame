@@ -24,6 +24,7 @@
                 :model="formActivate"
                 size="default"
               >
+              <h1>激活员工账号</h1>
                 <el-form-item label="昵称" prop="nick_name">
                   <el-input v-model="formActivate.nick_name"/>
                 </el-form-item>
@@ -211,7 +212,7 @@ export default {
             this.$refs.activateForm.validate((valid) => {
                 if (valid) {
                     this.dialogActivateVisible = true
-                    this.dialog_title = '身份认证'
+                    this.dialog_title = '员工身份验证'
                 } else {
                     this.$message.error('表单校验失败，请检查')
                 }
@@ -362,7 +363,7 @@ export default {
   }
   // 登录表单
   .page-login--form {
-    width: 280px;
+    width: 500px;
     // 卡片
     .el-card {
       margin-bottom: 15px;
@@ -371,8 +372,8 @@ export default {
     .button-login {
       width: 100%;
       // width: 100%;
-      background: #4d3d3e;
-      border: #4d3d3e;
+      background: #2f86f6;
+      border: #2f86f6;
     }
     // 输入框左边的图表区域缩窄
     .el-input-group__prepend {

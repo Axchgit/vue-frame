@@ -40,12 +40,12 @@
           <d2-header-search @click="handleSearchClick" />
           <d2-header-bulletin v-if="!isAdmin" />
 
-          <d2-header-log v-if="$env === 'development'" />
+          <d2-header-log v-if="$env === '1'" />
           <d2-header-fullscreen />
           <d2-header-theme />
-          <d2-header-size />
-          <d2-header-locales v-if="$env === 'development'" />
-          <d2-header-color />
+          <d2-header-size v-if="$env === '1'"/>
+          <d2-header-locales v-if="$env === '1'" />
+          <d2-header-color v-if="$env === '1'"/>
           <d2-header-avatar />
 
           <!-- <d2-header-user/> -->

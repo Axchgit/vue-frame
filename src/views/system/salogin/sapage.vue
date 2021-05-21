@@ -15,7 +15,7 @@
           <!-- logo -->
           <img class="page-login--logo" src="./image/logo-login-01.png" >
           <!-- form -->
-          <div class="page-login--form">
+          <div class="page-login--form-new">
             <el-card shadow="never">
               <el-form
                 ref="loginForm"
@@ -36,7 +36,7 @@
                   </el-input>
                 </el-form-item>
                 <el-form-item prop="code">
-                  <el-input id="sendcode" type="text" v-model="formLogin.code" placeholder="登陆码">
+                  <el-input id="sendcode" type="text" v-model="formLogin.code" placeholder="登录码">
                     <i slot="prepend" class="fa fa-envelope-square"/>
                     <template  slot="append">
                       <div @click="sendCode">
@@ -295,7 +295,7 @@ export default {
     margin-top: -2em;
   }
   // 登录表单
-  .page-login--form {
+  .page-login--form-new {
     width: 280px;
     // 卡片
     .el-card {
@@ -304,8 +304,8 @@ export default {
     // 登录按钮
     .button-login {
       width: 100%;
-      // background: #4d3d3e;
-      // border: #4d3d3e;
+      background: #2f86f6;
+      border: #2f86f6;
     }
     // #sendcode{
     //   width: 30%;

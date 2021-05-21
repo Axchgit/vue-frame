@@ -24,6 +24,7 @@
                 :model="formRecover"
                 size="default"
               >
+              <h1>找回密码</h1>
                 <el-form-item prop="work_num">
                   <el-input type="text" v-model="formRecover.work_num" placeholder="工号">
                     <!-- <i slot="prepend" class="fa fa-user-circle-o"></i> -->
@@ -156,7 +157,7 @@ export default {
         ...mapActions('d2admin/account', ['empRecover']),
         // 发送验证码
         async sendRecoverCode({ work_num = '', email = '' } = {}) {
-            const res = await api.SYS_EMP_SENDRCODE({ work_num, email })
+            const res = await api.SYS_EMP_SENDRECOVERCODE({ work_num, email })
             return res
         },
         // 验证信息,返回用户标识

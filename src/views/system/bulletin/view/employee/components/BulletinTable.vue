@@ -2,8 +2,8 @@
  * @Description:
  * @Author: 罗曼
  * @Date: 2020-11-11 22:02:08
- * @FilePath: \vue-frame\src\views\system\bulletin\view\components\BulletinTable.vue
- * @LastEditTime: 2021-04-12 19:50:11
+ * @FilePath: \vue-frame\src\views\system\bulletin\view\employee\components\BulletinTable.vue
+ * @LastEditTime: 2021-05-18 13:12:13
  * @LastEditors: xch
 -->
 <template>
@@ -61,10 +61,10 @@ size="small"
         center
       >
         <div>
-          标题:<span>{{ dialogContent.title }}</span>
+          <h1>{{ dialogContent.title }}</h1>
         </div>
         <div>
-          内容:<span>{{ dialogContent.content }}</span>
+         <span>{{ dialogContent.content }}</span>
         </div>
 
         <span slot="footer" class="dialog-footer">

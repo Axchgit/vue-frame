@@ -1,9 +1,9 @@
 <!--
  * @Author: xch
  * @Date: 2020-08-10 17:43:37
- * @LastEditTime: 2020-09-14 21:02:20
- * @LastEditors: Chenhao Xing
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\views\system\index\components\d2-page-cover\index.vue
+ * @LastEditTime: 2021-05-18 11:54:03
+ * @LastEditors: xch
+ * @FilePath: \vue-frame\src\views\system\index\components\d2-page-cover\index.vue
  * @Description:
 -->
 <template>
@@ -11,9 +11,9 @@
     <div class="d2-page-cover__logo">
       <slot/>
     </div>
-    <p class="d2-page-cover__title">vue-frame {{$version}}</p>
-    <p class="d2-page-cover__sub-title">学创网络科技有限公司后台管理系统-测试项目</p>
-    <p class="d2-page-cover__build-time">最后编辑时间 {{$buildTime}}</p>
+    <!-- <p class="d2-page-cover__title">vue-frame {{$version}}</p> -->
+    <!-- <p class="d2-page-cover__sub-title">学创网络科技有限公司后台管理系统-测试项目</p>
+    <p class="d2-page-cover__build-time">最后编辑时间 {{$buildTime}}</p> -->
     <slot name="footer"/>
     <!-- <a target="blank" href="https://github.com/Axchgit/vue-frame">
       <img
