@@ -65,6 +65,11 @@ export default {
     },
     created() {
         this.getToken()
+        const api = process.env.VUE_APP_API
+        this.tokenApi = api + '/auth/token'
+        this.tokenImgApi = api + '/auth/img'
+        this.tokenInfoApi = api + '/auth/info'
+        this.userInfoApi = api + '/auth/getUser'
     },
     methods: {
 
