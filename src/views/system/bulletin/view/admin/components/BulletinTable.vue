@@ -3,7 +3,7 @@
  * @Author: 罗曼
  * @Date: 2020-11-11 22:02:08
  * @FilePath: \vue-frame\src\views\system\bulletin\view\admin\components\BulletinTable.vue
- * @LastEditTime: 2021-04-24 22:18:20
+ * @LastEditTime: 2021-05-18 21:00:55
  * @LastEditors: xch
 -->
 <template>
@@ -49,18 +49,25 @@ size="small"
             >查看</el-button
           >
           <el-button
-@click="handleDeleteClick(scope.row)"
-type="danger"
-size="small"
+            @click="handleDeleteClick(scope.row)"
+            type="danger"
+            size="small"
             >撤回</el-button
           >
           <!-- <el-button type="text" size="small">编辑</el-button> -->
         </template>
-
       </el-table-column>
     </el-table>
     <div>
-      <el-dialog
+      <el-drawer title="通告" :visible.sync="centerDialogVisible">
+        <h1 class="title-h1">
+          <span>{{ dialogContent.title }}</span>
+        </h1>
+        <div class="content-drawer">
+          <span>{{ dialogContent.content }}</span>
+        </div>
+      </el-drawer>
+      <!-- <el-dialog
         title="通告"
         :visible.sync="centerDialogVisible"
         width="30%"
@@ -81,7 +88,7 @@ type="primary"
             >确 定</el-button
           >
         </span>
-      </el-dialog>
+      </el-dialog> -->
     </div>
   </div>
 </template>
@@ -120,11 +127,11 @@ export default {
     },
     methods: {
     // 阅读通告
-        // async readBulletin({ bulletin_id = '' } = {}) {
-        //     const res = await api.EMP_READ_BULLETIN({ bulletin_id })
-        //     return res
-        // },
-        // 阅读按钮
+    // async readBulletin({ bulletin_id = '' } = {}) {
+    //     const res = await api.EMP_READ_BULLETIN({ bulletin_id })
+    //     return res
+    // },
+    // 阅读按钮
         handleClick(val) {
             this.centerDialogVisible = true
             this.dialogContent = val
@@ -141,12 +148,22 @@ export default {
             // console.log('ccc')
             this.$emit('deleteBulletin', val)
         }
-
     }
 }
 </script>
 
 <style lang="scss" >
+.title-h1 {
+  text-align: center;
+  color: rgb(9, 89, 136);
+}
+.content-drawer {
+  // text-align:center;
+  text-indent:30px;
+  margin: 20px;
+  // width: 90%;
+  color: rgba(32, 33, 34, 0.904);
+}
 //知识点:更改element ui 默认样式
 .el-tag--dark.el-tag--yellow {
   background-color: #ffd727;
