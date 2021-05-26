@@ -1,3 +1,11 @@
+<!--
+ * @Description:
+ * @Author: xch
+ * @Date: 2020-09-13 16:48:23
+ * @FilePath: \vue-frame\src\views\admin\performance\index\index.vue
+ * @LastEditTime: 2021-05-27 01:58:35
+ * @LastEditors: xch
+-->
 <template>
   <d2-container :class="{'page-compact':crud.pageOptions.compact}">
     <!-- <template slot="header">日期选择</template> -->
@@ -8,16 +16,16 @@
     >
 
       <div slot="header">
-        <!-- <crud-search ref="search" :options="crud.searchOptions" @submit="handleSearch"  /> -->
+        <crud-search ref="search" :options="crud.searchOptions" @submit="handleSearch"  />
         <el-button size="small" type="primary" @click="addRow"><i class="el-icon-plus"/> 新增</el-button>
         <!-- <el-button size="small" type="primary" @click="test"><i class="el-icon-plus"/> 新增</el-button> -->
-
-        <crud-toolbar
+<crud-toolbar v-bind="_crudToolbarProps" v-on="_crudToolbarListeners"/>
+        <!-- <crud-toolbar
 :search.sync="crud.searchOptions.show"
                       :compact.sync="crud.pageOptions.compact"
                       :columns="crud.columns"
                       @refresh="doRefresh()"
-                      @columns-filter-changed="handleColumnsFilterChanged"/>
+                      @columns-filter-changed="handleColumnsFilterChanged"/> -->
       </div>
     </d2-crud-x>
   </d2-container>
