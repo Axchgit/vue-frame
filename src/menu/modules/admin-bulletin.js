@@ -3,7 +3,7 @@
  * @Author: xch
  * @Date: 2021-04-13 01:40:50
  * @FilePath: \vue-frame\src\menu\modules\admin-bulletin.js
- * @LastEditTime: 2021-04-13 01:44:58
+ * @LastEditTime: 2021-05-27 09:21:05
  * @LastEditors: xch
  */
 export default {
@@ -37,5 +37,5 @@ export default {
         //         // { path: `${pre}account/update`, title: '修改' }
         //     ]
         // }
-    ])('bulletin')
+    ])('/bulletin')
 }
