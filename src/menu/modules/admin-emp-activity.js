@@ -1,9 +1,9 @@
 /*
  * @Author: xch
  * @Date: 2020-08-21 23:09:57
- * @LastEditTime: 2020-09-16 02:31:47
- * @LastEditors: Chenhao Xing
- * @FilePath: \epdemoc:\wamp64\www\vue-frame\src\menu\modules\admin-emp-activity.js
+ * @LastEditTime: 2021-05-27 16:42:28
+ * @LastEditors: xch
+ * @FilePath: \vue-frame\src\menu\modules\admin-emp-activity.js
  * @Description:
  */
 export default {
@@ -12,7 +12,7 @@ export default {
     roles: 1,
     icon: 'check-square',
     children: (pre => [
-        { path: `${pre}index`, title: '示例', icon: 'home' },
+        // { path: `${pre}index`, title: '示例', icon: 'home' },
         {
             title: '请假审核',
             icon: 'wheelchair-alt',

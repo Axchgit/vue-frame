@@ -3,14 +3,14 @@
  * @Author: xch
  * @Date: 2021-04-13 01:40:50
  * @FilePath: \vue-frame\src\menu\modules\admin-bulletin.js
- * @LastEditTime: 2021-05-27 09:21:05
+ * @LastEditTime: 2021-05-27 16:48:49
  * @LastEditors: xch
  */
 export default {
     path: '/bulletin',
     title: ' 通知公告',
     roles: 1,
-    icon: 'comments',
+    icon: 'window-restore',
     children: (pre => [
         { path: `${pre}`, title: '通告', icon: 'hand-paper-o' }
         // {
